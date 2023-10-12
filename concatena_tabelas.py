@@ -4,6 +4,18 @@ df_2022 = pd.read_csv("sermil2022.csv", encoding = "latin1")
 df_2021 = pd.read_csv("sermil2021.csv", encoding = "latin1")
 
 def cria_novo_df(df, ano):
+    """
+    Recebe um DataFrame e o seu ano. Calcula as medidas de resumo do "PESO" e da "ALTURA" do DataFrame 
+    escolhido e cria um novo DataFrame com essas medidas. 
+
+    Parameters:
+        df(dataframe): DataFrame a ser processado.
+        ano(ano): Ano do Dataframe escolhido.
+
+    Returns:
+        df_pronto(dataframe): DataFrame com as medidas de resumo do peso e da altura.
+    """
+
     media_peso_uf = df.groupby("UF_JSM")["PESO"].mean()
     mediana_peso_uf = df.groupby("UF_JSM")["PESO"].median()
     moda_peso_uf = df.groupby("UF_JSM")["PESO"].agg(pd.Series.mode)
@@ -24,8 +36,6 @@ def cria_novo_df(df, ano):
     df_pronto = df_geral.set_index("UF")
     return df_pronto
 
-print(cria_novo_df(df_2021, 2021))
-print(cria_novo_df(df_2022, 2022))
 
 
 
