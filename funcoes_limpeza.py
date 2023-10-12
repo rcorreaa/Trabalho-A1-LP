@@ -22,6 +22,21 @@ def limpa_SEXO(df):
     return df
 
 def exclui_colunas(df):
-    #Excluindo colunas desnecessárias
-    df = df.drop(["CABECA", "CALCADO", "CINTURA", "JSM", "MUN_JSM", "UF_JSM"])
-    return df
+    """
+    Remove colunas desnecessárias do DataFrame passado. São elas: 
+    ("CABECA", "CALCADO", "CINTURA", "JSM", "MUN_JSM", "UF_JSM", "RELIGIAO").
+
+    Parameters:
+        df(dataframe): DataFrame a ser processado.
+
+    Returns:
+        df_tratado(dataframe): DataFrame sem as colunas especificadas.
+    """
+    try:
+        # Excluindo colunas desnecessárias sem alterar o DataFrame original
+        df_tratado = df.copy()
+        df_tratado = df_tratado.drop(["CABECA", "CALCADO", "CINTURA", "JSM",
+                                      "MUN_JSM", "UF_JSM", "RELIGIAO"], axis=1)
+    except KeyError:
+        print("Alguma(s) coluna(s) não existe(m) no DataFrame.")
+    return df_tratado
