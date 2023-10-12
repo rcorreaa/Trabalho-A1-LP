@@ -17,9 +17,23 @@ def limpa_ALTURA(df):
     return df
 
 def limpa_SEXO(df):
-    #Limpando coluna SEXO
-    df = df.loc[df['SEXO'] != "F"]
-    return df
+    """
+    Remove os valores "F" da coluna SEXO do DataFrame.
+
+    Parameters:
+        df(dataframe): DataFrame a ser processado.
+
+    Returns:
+        df_tratado(dataframe): DataFrame sem as colunas especificadas.
+    """
+    try:
+        #Excluindo valores "F" da coluna SEXO
+        df_tratado = df.copy()
+        df_tratado = df_tratado.loc[df["SEXO"] != "F"]
+    except ValueError as erro_sexo:
+        print("Não há sexo feminino na coluna: ", erro_sexo)
+    return df_tratado
+
 
 def exclui_colunas(df):
     """
