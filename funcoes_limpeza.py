@@ -156,3 +156,54 @@ def exclui_colunas(df):
         print("Alguma(s) coluna(s) não existe(m) no DataFrame.")
 
     return df_tratado
+
+def nivel_escolaridade(df):
+    """
+    Cria a coluna NIVEL_ESCOLARIDADE a fim de medir em valor quantitativo o 
+    nível de escolaridade dos indivíduos.
+
+    Parameters:
+        df(dataframe): DataFrame a ser processado.
+
+    Returns:
+        df_tratado(dataframe): DataFrame com a coluna NIVEL_ESCOLARIDADE adicionada.
+    """
+
+    df_tratado = df.copy()
+    df_tratado["NIVEL_ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].replace("Analfabeto",0)
+    df_tratado["NIVEL_ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].replace("Alfabetizado", 1)
+    df_tratado["NIVEL_ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].replace("Ensino Fundamental", 2)
+    df_tratado["NIVEL_ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].replace("Ensino Fundamental Completo", 3)
+    df_tratado["NIVEL_ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].replace("Ensino Médio", 4)
+    df_tratado["NIVEL_ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].replace("Ensino Médio Completo", 5)
+    df_tratado["NIVEL_ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].replace("Ensino Superior", 6)
+    df_tratado["NIVEL_ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].replace("Ensino Superior Completo", 7)
+    df_tratado["NIVEL_ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].replace("Pós-graduação", 8)
+    return df_tratado
+
+def nivel_escolaridade(df):
+    """
+    Cria a coluna NIVEL_ESCOLARIDADE a fim de medir em valor quantitativo o
+    nível de escolaridade dos indivíduos.
+
+    Parameters:
+        df(dataframe): DataFrame a ser processado.
+
+    Returns:
+        df_tratado(dataframe): DataFrame com a coluna NIVEL_ESCOLARIDADE adicionada.
+    """
+
+    df_tratado = df.copy()
+    grau_escolaridade = {
+        "Analfabeto": 0,
+        "Alfabetizado": 1,
+        "Ensino Fundamental": 2,
+        "Ensino Fundamental Completo": 3,
+        "Ensino Médio": 4,
+        "Ensino Médio Completo": 5,
+        "Ensino Superior": 6,
+        "Ensino Superior Completo": 7,
+        "Pós-graduação": 8}
+    # Atribuindo valores de nível de escolaridade de acordo com a formação dos indivíduos.
+    df_tratado["NIVEL_ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].replace(grau_escolaridade)
+    return df_tratado
