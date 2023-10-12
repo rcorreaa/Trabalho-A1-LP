@@ -12,7 +12,9 @@ def limpa_PESO(df):
         df_tratado(dataframe): DataFrame com linhas indesejadas removidas.
     """
     # Criação de cópia do DataFrame, sem alterar o original
+
     df_tratado = df.copy()
+
     try:
         # Conversão da coluna PESO para o tipo numérico
         df_tratado["PESO"] = pd.to_numeric(df_tratado["PESO"], errors="coerce")
@@ -24,6 +26,7 @@ def limpa_PESO(df):
     df_tratado = df_tratado.dropna(subset=["PESO"])
     df_tratado = df_tratado.loc[df_tratado["PESO"] >= 40]
     df_tratado = df_tratado.loc[df_tratado["PESO"] <= 200]
+    
     return df_tratado
 
 def limpa_ALTURA(df):
@@ -38,7 +41,9 @@ def limpa_ALTURA(df):
         df_tratado(dataframe): DataFrame com linhas indesejadas removidas.
     """
     # Criação de cópia do DataFrame, sem alterar o original
+
     df_tratado = df.copy()
+
     try:
         # Conversão da coluna ALTURA para o tipo numérico
         df_tratado["ALTURA"] = pd.to_numeric(df_tratado["ALTURA"], errors="coerce")
@@ -48,8 +53,8 @@ def limpa_ALTURA(df):
         print("Impossível converter a coluna 'ALTURA' para o tipo numérico.")
     # Limpeza da coluna 'ALTURA'
     df_tratado = df_tratado.dropna(subset=['ALTURA'])
-    df_tratado = df_tratado.loc[df_tratado['ALTURA'] >= 140]
-    df_tratado = df_tratado.loc[df_tratado['ALTURA'] <= 220]
+    df_tratado = df_tratado[(df_tratado['ALTURA'] >= 140) & (df_tratado['ALTURA'] <= 220)]
+
     return df_tratado
 
 def limpa_SEXO(df):
@@ -62,19 +67,77 @@ def limpa_SEXO(df):
     Returns:
         df_tratado(dataframe): DataFrame sem as colunas especificadas.
     """
+
+    df_tratado = df.copy()
+
     try:
         #Excluindo valores "F" da coluna SEXO
-        df_tratado = df.copy()
-        df_tratado = df_tratado.loc[df["SEXO"] != "F"]
+        df_tratado = df_tratado[df["SEXO"] != "F"]
     except ValueError as erro_sexo:
         print("Não há sexo feminino na coluna: ", erro_sexo)
+
     return df_tratado
 
+def limpa_ANO_NASCIMENTO(df, ano):
+    """
+    Remove as linhas de pessoas com mais de 19 anos do DataFrame.
+
+    Parameters:
+        df(dataframe): DataFrame a ser processado.
+        ano: ano do dataframe
+
+    Returns:
+        df_tratado(dataframe): DataFrame sem as linhas especificadas.
+    """
+
+    df_tratado = df.copy()
+
+    try:
+        #Excluindo valores "F" da coluna SEXO
+        df_tratado = df_tratado[(df["ANO_NASCIMENTO"] == ano-18) | (df["ANO_NASCIMENTO"] == ano-19)]
+    except ValueError as erro_ano:
+        print("Não há coluna: ", erro_ano)
+
+    return df_tratado
+
+def renomeia_ESCOLARIDADE(df):
+    """
+    Renomeia as categorias da coluna ESCOLARIDADE, a fim de agrupar.
+
+    Parameters:
+        df(dataframe): DataFrame a ser processado.
+
+    Returns:
+        df_tratado(dataframe): DataFrame com a coluna atualizada.
+    """
+    
+    def aux_renomeia(x):
+        if x.find("Completo")!=-1:
+            return x
+        elif x.find("Ensino Médio")!=-1:
+            return "Ensino Médio"
+        elif x.find("Ensino Fundamental")!=-1:
+            return "Ensino Fundamental"
+        elif x.find("Ensino Superior")!=-1:
+            return "Ensino Superior"
+        elif x.find("Pós")!=-1 or x.find("Mestrado")!=-1 or x.find("Doutorado")!=-1:
+            return "Pós-graduação"
+        else:
+            return x
+    
+    df_tratado = df.copy()
+    
+    try:
+        df_tratado["ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].apply(lambda x: aux_renomeia(x))
+    except ValueError as erro_ano:
+        print("Não há coluna: ", erro_ano)
+    
+    return df_tratado
 
 def exclui_colunas(df):
     """
     Remove colunas desnecessárias do DataFrame passado. São elas: 
-    ("CABECA", "CALCADO", "CINTURA", "JSM", "MUN_JSM", "UF_JSM", "RELIGIAO").
+    ("CABECA", "CALCADO", "CINTURA", "JSM", "MUN_NASCIMENTO", "UF_NASCIMENTO", "RELIGIAO").
 
     Parameters:
         df(dataframe): DataFrame a ser processado.
@@ -82,11 +145,14 @@ def exclui_colunas(df):
     Returns:
         df_tratado(dataframe): DataFrame sem as colunas especificadas.
     """
+
+    df_tratado = df.copy()
+
     try:
         # Exclusão de colunas desnecessárias sem alteração no DataFrame original
-        df_tratado = df.copy()
         df_tratado = df_tratado.drop(["CABECA", "CALCADO", "CINTURA", "JSM",
-                                      "MUN_JSM", "UF_JSM", "RELIGIAO"], axis=1)
+                                      "MUN_NASCIMENTO", "UF_NASCIMENTO", "RELIGIAO"], axis=1)
     except KeyError:
         print("Alguma(s) coluna(s) não existe(m) no DataFrame.")
+
     return df_tratado
