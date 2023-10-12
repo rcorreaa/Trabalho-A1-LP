@@ -159,30 +159,6 @@ def exclui_colunas(df):
 
 def nivel_escolaridade(df):
     """
-    Cria a coluna NIVEL_ESCOLARIDADE a fim de medir em valor quantitativo o 
-    nível de escolaridade dos indivíduos.
-
-    Parameters:
-        df(dataframe): DataFrame a ser processado.
-
-    Returns:
-        df_tratado(dataframe): DataFrame com a coluna NIVEL_ESCOLARIDADE adicionada.
-    """
-
-    df_tratado = df.copy()
-    df_tratado["NIVEL_ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].replace("Analfabeto",0)
-    df_tratado["NIVEL_ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].replace("Alfabetizado", 1)
-    df_tratado["NIVEL_ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].replace("Ensino Fundamental", 2)
-    df_tratado["NIVEL_ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].replace("Ensino Fundamental Completo", 3)
-    df_tratado["NIVEL_ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].replace("Ensino Médio", 4)
-    df_tratado["NIVEL_ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].replace("Ensino Médio Completo", 5)
-    df_tratado["NIVEL_ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].replace("Ensino Superior", 6)
-    df_tratado["NIVEL_ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].replace("Ensino Superior Completo", 7)
-    df_tratado["NIVEL_ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].replace("Pós-graduação", 8)
-    return df_tratado
-
-def nivel_escolaridade(df):
-    """
     Cria a coluna NIVEL_ESCOLARIDADE a fim de medir em valor quantitativo o
     nível de escolaridade dos indivíduos.
 
