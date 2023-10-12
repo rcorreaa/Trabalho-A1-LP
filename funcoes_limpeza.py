@@ -1,11 +1,29 @@
 import pandas as pd
 
 def limpa_PESO(df):
-    #Limpando coluna PESO
-    df = df.dropna(subset=['PESO'])
-    df = df.loc[df['PESO'] >= 40]
-    df = df.loc[df['PESO'] <= 200]
-    return df
+    """
+    Realiza a remoção de linhas do DataFrame de acordo com a coluna 'PESO',
+    permanecendo apenas dados não nulos e em uma faixa de valor entre 40 e 200 kilos.
+
+    Parameters:
+        df(dataframe): DataFrame a ser processado.
+
+    Returns:
+        df_tratado(dataframe): DataFrame com linhas indesejadas removidas.
+    """
+    df_tratado = df.copy()
+    try:
+        # Conversão da coluna PESO para o tipo numérico
+        df_tratado["PESO"] = pd.to_numeric(df_tratado["PESO"], errors="coerce")
+    except KeyError:
+        print("A coluna 'PESO' não está presente no DataFrame.")
+    except ValueError:
+        print("Impossível converter a coluna 'PESO' para o tipo numérico.")
+    # Limpando a coluna PESO usando df_tratado em vez de df
+    df_tratado = df_tratado.dropna(subset=["PESO"])
+    df_tratado = df_tratado.loc[df_tratado["PESO"] >= 40]
+    df_tratado = df_tratado.loc[df_tratado["PESO"] <= 200]
+    return df_tratado
 
 def limpa_ALTURA(df):
     #Limpando coluna ALTURA
