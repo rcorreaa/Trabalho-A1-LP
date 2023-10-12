@@ -1,8 +1,5 @@
 import pandas as pd
 
-df_2022 = pd.read_csv("sermil2022.csv", encoding = "latin1")
-df_2021 = pd.read_csv("sermil2021.csv", encoding = "latin1")
-
 def cria_novo_df(df, ano):
     """
     Recebe um DataFrame e o seu ano. Calcula as medidas de resumo do "PESO" e da "ALTURA" do DataFrame 
@@ -36,10 +33,16 @@ def cria_novo_df(df, ano):
     df_pronto = df_geral.set_index("UF")
     return df_pronto
 
+def concatena_dataframes(*dataframes):
+    # Verifica se pelo menos um DataFrame foi fornecido
+    if not dataframes:
+        return None
 
+    # Usa o primeiro DataFrame como base para a concatenação
+    resultado = dataframes[0]
 
+    # Loop pelos DataFrames restantes e concatene-os verticalmente
+    for df in dataframes[1:]:
+        resultado = pd.concat([resultado, df], ignore_index=True)
 
-
-
-
-
+    return resultado
