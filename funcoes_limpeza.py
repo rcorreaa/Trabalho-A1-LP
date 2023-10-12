@@ -1,6 +1,8 @@
 import pandas as pd
 
-df = pd.read_csv("sermil2007.csv", encoding='latin-1')
+df1 = pd.read_csv("sermil2007.csv", encoding="latin-1")
+df2 = pd.read_csv("sermil2014.csv", encoding="latin-1")
+df3 = pd.read_csv("sermil2021.csv", encoding="latin-1")
 
 def limpa_PESO(df):
     #Limpando coluna PESO
