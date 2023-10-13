@@ -30,7 +30,6 @@ def limpa_PESO(df):
     >>> limpa_PESO(df)
     df_tratado
     """
-    """
     # Criação de cópia do DataFrame, sem alterar o original
 
     df_tratado = df.copy()
@@ -59,6 +58,25 @@ def limpa_ALTURA(df):
 
     Returns:
         df_tratado(dataframe): DataFrame com linhas indesejadas removidas.
+
+    Exemplos:
+    >>> df = pd.DataFrame({"ALTURA": [180, 121, 210, 200]})
+    >>> limpa_ALTURA(df)
+    df_tratado
+
+    >>> df = pd.DataFrame({"ALTURA": [pd.NA, 120, 150, 180]})
+    >>> limpa_ALTURA(df)
+    df_tratado
+
+    >>> df = pd.DataFrame({"PESO": [180, 179, 210, 167]})
+    >>> limpa_ALTURA(df)
+    Traceback (most recent call last):
+        ...
+    A coluna 'PESO' não está presente no DataFrame.
+
+    >>> df = pd.DataFrame({"ALTURA": [200, "179 cm", 140, 230]})
+    >>> limpa_ALTURA(df)
+    df_tratado
     """
     # Criação de cópia do DataFrame, sem alterar o original
 
