@@ -10,26 +10,43 @@ def limpa_PESO(df):
 
     Returns:
         df_tratado(dataframe): DataFrame com linhas indesejadas removidas.
+
+    Exemplos:
+    >>> df = pd.DataFrame({"PESO": [100, 101, 210, 35]})
+    >>> limpa_PESO(df)
+    df_tratado
+
+    >>> df = pd.DataFrame({"PESO": [pd.NA, 120, 40, 230]})
+    >>> limpa_PESO(df)
+    df_tratado
+
+    >>> df = pd.DataFrame({"ALTURA": [180, 179, 210, 167]})
+    >>> limpa_PESO(df)
+    Traceback (most recent call last):
+        ...
+    A coluna 'PESO' não está presente no DataFrame.
+
+    >>> df = pd.DataFrame({"PESO": [200, "120 kg", 40, 230]})
+    >>> limpa_PESO(df)
+    df_tratado
     """
     # Criação de cópia do DataFrame, sem alterar o original
     df_tratado = df.copy()
 
     try:
         # Conversão da coluna PESO para o tipo numérico
-        df_tratado["PESO"] = pd.to_numeric(df_tratado["PESO"], errors="coerce")
+        df_tratado["PESO"] = pd.to_numeric(df_tratado["PESO"])
     except KeyError:
         print("A coluna 'PESO' não está presente no DataFrame.")
     except ValueError:
         print("Impossível converter a coluna 'PESO' para o tipo numérico.")
-    except KeyError:
-        print("A coluna 'PESO' não está presente no DataFrame.")
     # Limpeza da coluna 'PESO'
     df_tratado = df_tratado.dropna(subset=["PESO"])
     df_tratado = df_tratado.loc[df_tratado["PESO"] >= 40]
     df_tratado = df_tratado.loc[df_tratado["PESO"] <= 200]
-
-    return df_tratado
     
+    return df_tratado
+
 def limpa_ALTURA(df):
     """
     Realiza a remoção de linhas do DataFrame de acordo com a coluna 'ALTURA',
@@ -40,17 +57,37 @@ def limpa_ALTURA(df):
 
     Returns:
         df_tratado(dataframe): DataFrame com linhas indesejadas removidas.
+
+    Exemplos:
+    >>> df = pd.DataFrame({"ALTURA": [180, 121, 210, 200]})
+    >>> limpa_ALTURA(df)
+    df_tratado
+
+    >>> df = pd.DataFrame({"ALTURA": [pd.NA, 120, 150, 180]})
+    >>> limpa_ALTURA(df)
+    df_tratado
+
+    >>> df = pd.DataFrame({"PESO": [180, 179, 210, 167]})
+    >>> limpa_ALTURA(df)
+    Traceback (most recent call last):
+        ...
+    A coluna 'PESO' não está presente no DataFrame.
+
+    >>> df = pd.DataFrame({"ALTURA": [200, "179 cm", 140, 230]})
+    >>> limpa_ALTURA(df)
+    df_tratado
     """
     # Criação de cópia do DataFrame, sem alterar o original
+
     df_tratado = df.copy()
 
     try:
         # Conversão da coluna ALTURA para o tipo numérico
-        df_tratado["ALTURA"] = pd.to_numeric(df_tratado["ALTURA"])
-    except ValueError:
-        print("Impossível converter a coluna 'ALTURA' para o tipo numérico.")
+        df_tratado["ALTURA"] = pd.to_numeric(df_tratado["ALTURA"], errors="coerce")
     except KeyError:
         print("A coluna 'ALTURA' não está presente no DataFrame.")
+    except ValueError:
+        print("Impossível converter a coluna 'ALTURA' para o tipo numérico.")
     # Limpeza da coluna 'ALTURA'
     df_tratado = df_tratado.dropna(subset=['ALTURA'])
     df_tratado = df_tratado[(df_tratado['ALTURA'] >= 140) & (df_tratado['ALTURA'] <= 220)]
@@ -65,16 +102,25 @@ def limpa_SEXO(df):
         df(dataframe): DataFrame a ser processado.
 
     Returns:
-        df_tratado(dataframe): DataFrame sem as colunas especificadas.
+        df_tratado(dataframe): DataFrame com linhas indesejadas removidas.
+
+    Exemplos:
+    >>> df = pd.DataFrame({"SEXO": ["M", "M", "F","M"]})
+    >>> limpa_PESO(df)
+    df_tratado
+
+    >>> df = pd.DataFrame({"PESO": [pd.NA, 120, 40, 230]})
+    >>> limpa_PESO(df)
+    A coluna 'SEXO' não existe.
     """
     # Criação de cópia do DataFrame, sem alterar o original
     df_tratado = df.copy()
 
     try:
-        #Excluindo valores "F" da coluna SEXO
-        df_tratado = df_tratado[df["SEXO"] != "F"]
-    except ValueError as erro_sexo:
-        print("Não há sexo feminino na coluna: ", erro_sexo)
+        # Excluindo valores "F" da coluna SEXO
+        df_tratado = df_tratado[df["SEXO"] == "M"]
+    except KeyError as erro_sexo:
+        print(f"A coluna {erro_sexo} não existe.")
 
     return df_tratado
 
