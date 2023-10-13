@@ -14,7 +14,7 @@ def distribuicao_IMC(path_data, ano1=2010, ano2=2014, ano3=2014, ano4=2022):
         ano4: ano a ser analisado. 2022 por padrão
         
     Returns:
-        void
+        None
     """
     anos = [ano1, ano2, ano3, ano4]
     cores = ['b', 'g', 'y', 'r']

@@ -12,7 +12,7 @@ def plot_grafico_imc_violin(path_data, ini_ano=2013, fim_ano=2022):
         ini_ano(int): ano de inicio. 2013 por padrão
         fim_ano(int): ano do final. 2022 por padrão
     Returns:
-        void
+        None
     """
      
     v_df = []

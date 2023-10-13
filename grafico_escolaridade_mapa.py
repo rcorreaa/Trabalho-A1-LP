@@ -12,7 +12,7 @@ def plot_grafico_mapa(pathdata="tabela_escolaridade.csv", pathgeografia="BR_UF_2
         path_data(string): diretório dos arquivos .csv
         pathgeografia(string): diretório do arquivo .zip dos dados geográficos do Brasil
     Returns:
-        void
+        None
     """
     # Carregar dados geoespaciais do Brasil
     brasil = gpd.read_file(pathgeografia, compression="zip", encoding="utf-8")
