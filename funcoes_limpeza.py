@@ -10,34 +10,15 @@ def limpa_PESO(df):
 
     Returns:
         df_tratado(dataframe): DataFrame com linhas indesejadas removidas.
-
-    Exemplos:
-    >>> df = pd.DataFrame({"PESO": [100, 101, 210, 35]})
-    >>> limpa_PESO(df)
-    df_tratado
-
-    >>> df = pd.DataFrame({"PESO": [pd.NA, 120, 40, 230]})
-    >>> limpa_PESO(df)
-    df_tratado
-
-    >>> df = pd.DataFrame({"ALTURA": [180, 179, 210, 167]})
-    >>> limpa_PESO(df)
-    Traceback (most recent call last):
-        ...
-    A coluna 'PESO' não está presente no DataFrame.
-
-    >>> df = pd.DataFrame({"PESO": [200, "120 kg", 40, 230]})
-    >>> limpa_PESO(df)
-    Traceback (most recent call last):
-        ...
-    Impossível converter a coluna 'PESO' para o tipo numérico.
     """
     # Criação de cópia do DataFrame, sem alterar o original
     df_tratado = df.copy()
 
     try:
         # Conversão da coluna PESO para o tipo numérico
-        df_tratado["PESO"] = pd.to_numeric(df_tratado["PESO"])
+        df_tratado["PESO"] = pd.to_numeric(df_tratado["PESO"], errors="coerce")
+    except KeyError:
+        print("A coluna 'PESO' não está presente no DataFrame.")
     except ValueError:
         print("Impossível converter a coluna 'PESO' para o tipo numérico.")
     except KeyError:
@@ -59,27 +40,6 @@ def limpa_ALTURA(df):
 
     Returns:
         df_tratado(dataframe): DataFrame com linhas indesejadas removidas.
-
-    Exemplos:
-    >>> df = pd.DataFrame({"ALTURA": [120, 230, 180, 170]})
-    >>> limpa_ALTURA(df)
-    df_tratado
-
-    >>> df = pd.DataFrame({"ALTURA": [pd.NA, 181, 195, 167]})
-    >>> limpa_ALTURA(df)
-    df_tratado
-
-    >>> df = pd.DataFrame({"PESO": [160, 179, 215, 167]})
-    >>> limpa_ALTURA(df)
-    Traceback (most recent call last):
-        ...
-    A coluna 'ALTURA' não está presente no DataFrame.
-
-    >>> df = pd.DataFrame({"ALTURA": [200, "150 cm", 120, 230]})
-    >>> limpa_PESO(df)
-    Traceback (most recent call last):
-        ...
-    Impossível converter a coluna 'ALTURA' para o tipo numérico.
     """
     # Criação de cópia do DataFrame, sem alterar o original
     df_tratado = df.copy()
@@ -105,29 +65,16 @@ def limpa_SEXO(df):
         df(dataframe): DataFrame a ser processado.
 
     Returns:
-        df_tratado(dataframe): DataFrame apenas com as linhas da coluna 'SEXO' igual a 'M'
-
-    Exemplos:
-    >>> df = pd.DataFrame({"SEXO": ["M","M","F","M","F","M"]})
-    >>> limpa_SEXO(df)
-    df_tratado
-
-    >>> df = pd.DataFrame({"SEXO": ["M","M","M","M","M","M"]})
-    >>> limpa_SEXO(df)
-    df_tratado
-
-    >>> df = pd.DataFrame({"NOME": ["JOSÉ", "JOÃO", "PEDRO"]})
-    >>> limpa_SEXO(df)
-    A coluna 'SEXO' não está presente na tabela
+        df_tratado(dataframe): DataFrame sem as colunas especificadas.
     """
     # Criação de cópia do DataFrame, sem alterar o original
     df_tratado = df.copy()
 
     try:
         #Excluindo valores "F" da coluna SEXO
-        df_tratado = df_tratado[df["SEXO"] == "M"]
-    except KeyError as erro_sexo:
-        print(f"A coluna {erro_sexo} não está presente na tabela")
+        df_tratado = df_tratado[df["SEXO"] != "F"]
+    except ValueError as erro_sexo:
+        print("Não há sexo feminino na coluna: ", erro_sexo)
 
     return df_tratado
 
@@ -141,15 +88,25 @@ def limpa_ANO_NASCIMENTO(df, ano):
 
     Returns:
         df_tratado(dataframe): DataFrame sem as linhas especificadas.
+
+    Exemplos:
+    >>> df = pd.DataFrame({"ANO_NASCIMENTO": [2004, 2003, 2005, 2000]})
+    >>> limpa_ANO_NASCIMENTO(df, 2022)
+    df_tratado
+
+    >>> df = pd.DataFrame({"PESO": [pd.NA, 120, 40, 230]})
+    >>> limpa_ANO_NASCIMENTO(df, 2019)
+    A coluna 'ANO_NASCIMENTO' não existe.
+    >>>
     """
 
     df_tratado = df.copy()
 
     try:
-        #Excluindo valores "F" da coluna SEXO
+        # Filtrando indivíduos com a idade correta de alistamento.
         df_tratado = df_tratado[(df["ANO_NASCIMENTO"] == ano-18) | (df["ANO_NASCIMENTO"] == ano-19)]
-    except ValueError as erro_ano:
-        print("Não há coluna: ", erro_ano)
+    except KeyError as erro_ano:
+        print(f"A coluna {erro_ano} não existe.")
 
     return df_tratado
 
@@ -187,13 +144,14 @@ def renomeia_ESCOLARIDADE(df):
     
     return df_tratado
 
-def exclui_colunas(df):
+def exclui_colunas(df, cols_del=["CABECA", "CALCADO", "CINTURA", "JSM", "MUN_NASCIMENTO", "UF_NASCIMENTO", "RELIGIAO"]):
     """
-    Remove colunas desnecessárias do DataFrame passado. São elas: 
+    Remove colunas desnecessárias do DataFrame passado. Por padrão são as colunas: 
     ("CABECA", "CALCADO", "CINTURA", "JSM", "MUN_NASCIMENTO", "UF_NASCIMENTO", "RELIGIAO").
 
     Parameters:
         df(dataframe): DataFrame a ser processado.
+        cols_del(list): Lista de colunas a serem deletadas. (Opcional)
 
     Returns:
         df_tratado(dataframe): DataFrame sem as colunas especificadas.
@@ -201,16 +159,16 @@ def exclui_colunas(df):
 
     df_tratado = df.copy()
 
-    try:
-        # Exclusão de colunas desnecessárias sem alteração no DataFrame original
-        df_tratado = df_tratado.drop(["CABECA", "CALCADO", "CINTURA", "JSM",
-                                      "MUN_NASCIMENTO", "UF_NASCIMENTO", "RELIGIAO"], axis=1)
-    except KeyError:
-        print("Alguma(s) coluna(s) não existe(m) no DataFrame.")
+    for col in cols_del:
+        try:
+            # Exclusão de colunas desnecessárias sem alteração no DataFrame original
+            df_tratado = df_tratado.drop(col, axis=1)
+        except KeyError:
+            print("Coluna não existente no DataFrame:", col)
 
     return df_tratado
 
-def nivel_escolaridade(df):
+def nivel_ESCOLARIDADE(df):
     """
     Cria a coluna NIVEL_ESCOLARIDADE a fim de medir em valor quantitativo o
     nível de escolaridade dos indivíduos.
@@ -221,18 +179,21 @@ def nivel_escolaridade(df):
     Returns:
         df_tratado(dataframe): DataFrame com a coluna NIVEL_ESCOLARIDADE adicionada.
     """
-
     df_tratado = df.copy()
     grau_escolaridade = {
         "Analfabeto": 0,
         "Alfabetizado": 1,
         "Ensino Fundamental": 2,
-        "Ensino Fundamental Completo": 3,
-        "Ensino Médio": 4,
-        "Ensino Médio Completo": 5,
-        "Ensino Superior": 6,
-        "Ensino Superior Completo": 7,
-        "Pós-graduação": 8}
-    # Atribuindo valores de nível de escolaridade de acordo com a formação dos indivíduos.
-    df_tratado["NIVEL_ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].replace(grau_escolaridade)
+        "Ensino Fundamental Completo": 4,
+        "Ensino Médio": 5,
+        "Ensino Médio Completo": 7,
+        "Ensino Superior": 9,
+        "Ensino Superior Completo": 12,
+        "Pós-graduação": 15}
+    try:
+        # Atribuindo valores de nível de escolaridade de acordo com a formação dos indivíduos.
+        df_tratado["NIVEL_ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].replace(grau_escolaridade)
+    except KeyError as coluna:
+        print(f"Erro: A coluna {coluna} não foi encontrada no DataFrame.")
+        return None
     return df_tratado
