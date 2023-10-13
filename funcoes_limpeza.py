@@ -158,7 +158,7 @@ def exclui_colunas(df, cols_del=["CABECA", "CALCADO", "CINTURA", "JSM", "MUN_NAS
 
     return df_tratado
 
-def nivel_escolaridade(df):
+def nivel_ESCOLARIDADE(df):
     """
     Cria a coluna NIVEL_ESCOLARIDADE a fim de medir em valor quantitativo o
     nível de escolaridade dos indivíduos.
@@ -169,18 +169,21 @@ def nivel_escolaridade(df):
     Returns:
         df_tratado(dataframe): DataFrame com a coluna NIVEL_ESCOLARIDADE adicionada.
     """
-
     df_tratado = df.copy()
     grau_escolaridade = {
         "Analfabeto": 0,
         "Alfabetizado": 1,
         "Ensino Fundamental": 2,
-        "Ensino Fundamental Completo": 3,
-        "Ensino Médio": 4,
-        "Ensino Médio Completo": 5,
-        "Ensino Superior": 6,
-        "Ensino Superior Completo": 7,
-        "Pós-graduação": 8}
-    # Atribuindo valores de nível de escolaridade de acordo com a formação dos indivíduos.
-    df_tratado["NIVEL_ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].replace(grau_escolaridade)
+        "Ensino Fundamental Completo": 4,
+        "Ensino Médio": 5,
+        "Ensino Médio Completo": 7,
+        "Ensino Superior": 9,
+        "Ensino Superior Completo": 12,
+        "Pós-graduação": 15}
+    try:
+        # Atribuindo valores de nível de escolaridade de acordo com a formação dos indivíduos.
+        df_tratado["NIVEL_ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].replace(grau_escolaridade)
+    except KeyError as coluna:
+        print(f"Erro: A coluna {coluna} não foi encontrada no DataFrame.")
+        return None
     return df_tratado
