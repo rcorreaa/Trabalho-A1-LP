@@ -105,16 +105,29 @@ def limpa_SEXO(df):
         df(dataframe): DataFrame a ser processado.
 
     Returns:
-        df_tratado(dataframe): DataFrame sem as colunas especificadas.
-    """
+        df_tratado(dataframe): DataFrame apenas com as linhas da coluna 'SEXO' igual a 'M'
 
+    Exemplos:
+    >>> df = pd.DataFrame({"SEXO": ["M","M","F","M","F","M"]})
+    >>> limpa_SEXO(df)
+    df_tratado
+
+    >>> df = pd.DataFrame({"SEXO": ["M","M","M","M","M","M"]})
+    >>> limpa_SEXO(df)
+    df_tratado
+
+    >>> df = pd.DataFrame({"NOME": ["JOSÉ", "JOÃO", "PEDRO"]})
+    >>> limpa_SEXO(df)
+    A coluna 'SEXO' não está presente na tabela
+    """
+    # Criação de cópia do DataFrame, sem alterar o original
     df_tratado = df.copy()
 
     try:
         #Excluindo valores "F" da coluna SEXO
-        df_tratado = df_tratado[df["SEXO"] != "F"]
-    except ValueError as erro_sexo:
-        print("Não há sexo feminino na coluna: ", erro_sexo)
+        df_tratado = df_tratado[df["SEXO"] == "M"]
+    except KeyError as erro_sexo:
+        print(f"A coluna {erro_sexo} não está presente na tabela")
 
     return df_tratado
 
