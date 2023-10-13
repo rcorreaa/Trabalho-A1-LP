@@ -1,7 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from concatena_tabelas import concatena_dataframes
-from funcoes_limpeza import exclui_colunas
+from matplotlib import gridspec
 
 df_2022 = pd.read_csv("sermil2022.csv", encoding = "latin1")
 df_2021 = pd.read_csv("sermil2021.csv", encoding = "latin1")
@@ -9,20 +8,15 @@ df_2020 = pd.read_csv("sermil2020.csv", encoding = "latin1")
 df_2019 = pd.read_csv("sermil2019.csv", encoding = "latin1")
 df_2018 = pd.read_csv("sermil2018.csv", encoding = "latin1")
 
-df_2022_limpo = exclui_colunas(df_2022)
-df_2021_limpo = exclui_colunas(df_2021)
-df_2020_limpo = exclui_colunas(df_2020)
-df_2019_limpo = exclui_colunas(df_2019)
-df_2018_limpo = exclui_colunas(df_2018)
+# Filtrando os DataFrames por colunas necessárias
+df_2022 = df_2022[["UF_JSM", "DISPENSA", "VINCULACAO_ANO"]]
+df_2021 = df_2021[["UF_JSM", "DISPENSA", "VINCULACAO_ANO"]]
+df_2020 = df_2020[["UF_JSM", "DISPENSA", "VINCULACAO_ANO"]]
+df_2019 = df_2019[["UF_JSM", "DISPENSA", "VINCULACAO_ANO"]]
+df_2018 = df_2018[["UF_JSM", "DISPENSA", "VINCULACAO_ANO"]]
 
-# Filtrando os DataFrames por colunas desejadas
-df_2022_limpo = df_2022_limpo[["UF_JSM", "DISPENSA"]]
-df_2021_limpo = df_2021_limpo[["UF_JSM", "DISPENSA"]]
-df_2020_limpo = df_2020_limpo[["UF_JSM", "DISPENSA"]]
-df_2019_limpo = df_2019_limpo[["UF_JSM", "DISPENSA"]]
-df_2018_limpo = df_2018_limpo[["UF_JSM", "DISPENSA"]]
-
-df_completo = concatena_dataframes(df_2022_limpo, df_2021_limpo, df_2020_limpo, df_2019_limpo, df_2018_limpo)
+# Juntando todos os DataFrames
+df_completo = pd.concat([df_2022, df_2021, df_2020, df_2019, df_2018], ignore_index=True)
 
 mapeamento_regioes = {
     'AC': 'Norte',
@@ -54,6 +48,7 @@ mapeamento_regioes = {
     'TO': 'Norte'
 }
 
+'''
 def cria_regiao(df):
     df["REGIAO"] = df["UF_JSM"].map(mapeamento_regioes)
     return df
@@ -61,45 +56,61 @@ def cria_regiao(df):
 def agrupa_por_regiao(df, coluna):
     novo_df = df.groupby("REGIAO")[coluna].value_counts().reset_index()
     return novo_df
+'''
 
-df_com_regiao = cria_regiao(df_completo)
-df_agrupado = agrupa_por_regiao(df_com_regiao, "DISPENSA")
+# Cria novo DataFrame com a coluna REGIAO e conta a quantidade dos valores da DISPENSA
+df_completo["REGIAO"] = df_completo["UF_JSM"].map(mapeamento_regioes)
+df_agrupado = df_completo.groupby("REGIAO")["DISPENSA"].value_counts().reset_index()
+df_organizado = df_agrupado.pivot(index="REGIAO", columns="DISPENSA", values="count")
 
-# Reorganiza os dados para criar um único DataFrame com "Com dispensa" e "Sem dispensa"
-df_organizado = df_agrupado.pivot(index='REGIAO', columns='DISPENSA', values='count')
+# Cria novo DataFrame com as proporções dos valores da DISPENSA
+somas = df_agrupado.groupby(["REGIAO", "DISPENSA"])["count"].sum()
+soma_total = df_agrupado.groupby("REGIAO")["count"].sum()
+proporcoes = somas.unstack().div(soma_total, axis=0).reset_index()
+proporcoes.columns = ["REGIAO", "Com dispensa", "Sem dispensa"]
 
-# Define cores para as barras
+# Crie um grid 1x2
+fig = plt.figure(figsize=(16, 6))
+gs = gridspec.GridSpec(1, 2, width_ratios=[2, 1])  # 2 colunas e a primeira com o dobro da largura
+
+# Visualização 1: Gráfico de barras lado a lado
+ax0 = plt.subplot(gs[0])  # Célula da primeira coluna
 cores = ["#A50030", "#1A3071"]
-
-# Cria um gráfico de barras com o matplotlib
-plt.figure(figsize=(10, 6))
-bar_width = 0.35  # Largura das barras
-
-# Adicione linhas de grade
-plt.grid(True, axis='y', linestyle='--', color='gray', zorder=0)
-
-# Posições para as barras
+bar_width = 0.35
 posicao = range(len(df_organizado.index))
 
-# Barra para "Com dispensa"
-plt.bar(posicao, df_organizado["Com dispensa"], width=bar_width, 
+ax0.grid(True, axis="y", linestyle="--", color="gray", zorder=0)
+
+ax0.bar(posicao, df_organizado["Com dispensa"], width=bar_width, 
         label="Com dispensa", color=cores[0], edgecolor="black")
 
-# Barra para "Sem dispensa"
-plt.bar([i + bar_width for i in posicao], df_organizado["Sem dispensa"], 
+ax0.bar([i + bar_width for i in posicao], df_organizado["Sem dispensa"], 
         width=bar_width, label="Sem dispensa", color=cores[1], edgecolor="black")
 
-plt.ylabel("Contagem")
-plt.title('Contagem de "Com dispensa" e "Sem dispensa" por Região')
-plt.xticks([i + bar_width / 2 for i in posicao], df_organizado.index)
-plt.legend()
+ax0.set_ylabel("Contagem")
+ax0.set_title('Contagem de "Com dispensa" e "Sem dispensa" por Região')
+ax0.set_xticks([i + bar_width / 2 for i in posicao])
+ax0.set_xticklabels(df_organizado.index)
+ax0.legend()
+
+# Visualização 2: Gráfico de barras empilhadas horizontal
+ax1 = plt.subplot(gs[1])  # Célula da segunda coluna
+cores = ["#A50030", "#1A3071"]
+
+proporcoes["Com_dispensa_percent"] = proporcoes["Com dispensa"] * 100
+proporcoes["Sem_dispensa_percent"] = proporcoes["Sem dispensa"] * 100
+
+bar1 = ax1.barh(proporcoes["REGIAO"], proporcoes["Com_dispensa_percent"], label="Com dispensa", color="#A50030")
+bar2 = ax1.barh(proporcoes["REGIAO"], proporcoes["Sem_dispensa_percent"], left=proporcoes["Com_dispensa_percent"], label="Sem dispensa", color="#1A3071")
+
+ax1.bar_label(bar1, fmt='%.2f%%', label_type="center", fontsize=10)
+ax1.bar_label(bar2, fmt='%.2f%%', label_type="center", fontsize=10)
+
+ax1.set_title("Proporção de Com Dispensa e Sem Dispensa por Região")
+ax1.set_xlabel("Proporção")
+ax1.set_ylabel("Região")
+ax1.legend()
+
+# Ajuste o layout para melhor visualização
 plt.tight_layout()
-
 plt.show()
-
-
-
-
-
-
-
