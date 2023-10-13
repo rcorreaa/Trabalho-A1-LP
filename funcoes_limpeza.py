@@ -126,28 +126,6 @@ def limpa_ANO_NASCIMENTO(df, ano):
 
     return df_tratado
 
-def limpa_ANO_NASCIMENTO(df, ano):
-    """
-    Remove as linhas de pessoas com mais de 19 anos do DataFrame.
-
-    Parameters:
-        df(dataframe): DataFrame a ser processado.
-        ano: ano do dataframe
-
-    Returns:
-        df_tratado(dataframe): DataFrame sem as linhas especificadas.
-    """
-
-    df_tratado = df.copy()
-
-    try:
-        #Excluindo valores "F" da coluna SEXO
-        df_tratado = df_tratado[(df["ANO_NASCIMENTO"] == ano-18) | (df["ANO_NASCIMENTO"] == ano-19)]
-    except ValueError as erro_ano:
-        print("Não há coluna: ", erro_ano)
-
-    return df_tratado
-
 def renomeia_ESCOLARIDADE(df):
     """
     Renomeia as categorias da coluna ESCOLARIDADE, a fim de agrupar.
