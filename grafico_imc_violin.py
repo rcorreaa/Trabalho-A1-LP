@@ -34,6 +34,8 @@ def plot_grafico_imc_violin(path_data, ini_ano=2013, fim_ano=2022):
         print(df.describe())
         print()
 
+    #define o estilo
+    plt.style.use("seaborn-v0_8-notebook")
 
     fig, axs = plt.subplots(nrows=1, ncols=2, figsize=(14, 6))
 
@@ -51,10 +53,10 @@ def plot_grafico_imc_violin(path_data, ini_ano=2013, fim_ano=2022):
         ax.yaxis.grid(True)
         
         ax.set_xticks([y + 1 for y in range(len(v_df))], labels=[ano for ano in range(ini_ano, fim_ano+1)])
-        
+
         ax.set_xlabel('Ano')
         ax.set_ylabel('IMC')
 
     plt.show()
 
-plot_grafico_imc_violin("../lp/data/")
+plot_grafico_imc_violin("../lp/data/", 2018)
