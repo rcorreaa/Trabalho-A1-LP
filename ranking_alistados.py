@@ -1,11 +1,28 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+from concatena_tabelas import concatena_dataframes
+from funcoes_limpeza import exclui_colunas
 
 df_2022 = pd.read_csv("sermil2022.csv", encoding = "latin1")
 df_2021 = pd.read_csv("sermil2021.csv", encoding = "latin1")
 df_2020 = pd.read_csv("sermil2020.csv", encoding = "latin1")
 df_2019 = pd.read_csv("sermil2019.csv", encoding = "latin1")
 df_2018 = pd.read_csv("sermil2018.csv", encoding = "latin1")
+
+df_2022_limpo = exclui_colunas(df_2022)
+df_2021_limpo = exclui_colunas(df_2021)
+df_2020_limpo = exclui_colunas(df_2020)
+df_2019_limpo = exclui_colunas(df_2019)
+df_2018_limpo = exclui_colunas(df_2018)
+
+# Filtrando os DataFrames por colunas desejadas
+df_2022_limpo = df_2022_limpo[["UF_JSM", "DISPENSA"]]
+df_2021_limpo = df_2021_limpo[["UF_JSM", "DISPENSA"]]
+df_2020_limpo = df_2020_limpo[["UF_JSM", "DISPENSA"]]
+df_2019_limpo = df_2019_limpo[["UF_JSM", "DISPENSA"]]
+df_2018_limpo = df_2018_limpo[["UF_JSM", "DISPENSA"]]
+
+df_completo = concatena_dataframes(df_2022_limpo, df_2021_limpo, df_2020_limpo, df_2019_limpo, df_2018_limpo)
 
 mapeamento_regioes = {
     'AC': 'Norte',
@@ -45,7 +62,7 @@ def agrupa_por_regiao(df, coluna):
     novo_df = df.groupby("REGIAO")[coluna].value_counts().reset_index()
     return novo_df
 
-df_com_regiao = cria_regiao(df_2022)
+df_com_regiao = cria_regiao(df_completo)
 df_agrupado = agrupa_por_regiao(df_com_regiao, "DISPENSA")
 
 # Reorganiza os dados para criar um único DataFrame com "Com dispensa" e "Sem dispensa"
@@ -79,9 +96,6 @@ plt.legend()
 plt.tight_layout()
 
 plt.show()
-
-
-
 
 
 
