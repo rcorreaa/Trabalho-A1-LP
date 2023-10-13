@@ -150,8 +150,8 @@ def exclui_colunas(df):
 
     try:
         # Exclusão de colunas desnecessárias sem alteração no DataFrame original
-        df_tratado = df_tratado.drop(["CABECA", "CALCADO", "CINTURA", "JSM",
-                                      "MUN_NASCIMENTO", "UF_NASCIMENTO", "RELIGIAO"], axis=1)
+        df_tratado = df_tratado.drop(["CABECA", "CALCADO", "CINTURA", "JSM", "MUN_NASCIMENTO", 
+                                      "UF_NASCIMENTO", "RELIGIAO", "ANO_NASCIMENTO"], axis=1)
     except KeyError:
         print("Alguma(s) coluna(s) não existe(m) no DataFrame.")
 
