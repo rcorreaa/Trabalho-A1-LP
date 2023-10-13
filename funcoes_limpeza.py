@@ -94,6 +94,36 @@ def limpa_ALTURA(df):
 
     return df_tratado
 
+def limpa_SEXO(df):
+    """
+    Remove os valores "F" da coluna SEXO do DataFrame.
+
+    Parameters:
+        df(dataframe): DataFrame a ser processado.
+
+    Returns:
+        df_tratado(dataframe): DataFrame com linhas indesejadas removidas.
+
+    Exemplos:
+    >>> df = pd.DataFrame({"SEXO": ["M", "M", "F","M"]})
+    >>> limpa_PESO(df)
+    df_tratado
+
+    >>> df = pd.DataFrame({"PESO": [pd.NA, 120, 40, 230]})
+    >>> limpa_PESO(df)
+    A coluna 'SEXO' não existe.
+    """
+    # Criação de cópia do DataFrame, sem alterar o original
+    df_tratado = df.copy()
+
+    try:
+        # Excluindo valores "F" da coluna SEXO
+        df_tratado = df_tratado[df["SEXO"] == "M"]
+    except KeyError as erro_sexo:
+        print(f"A coluna {erro_sexo} não existe.")
+
+    return df_tratado
+
 def limpa_ANO_NASCIMENTO(df, ano):
     """
     Remove as linhas de pessoas com mais de 19 anos do DataFrame.
