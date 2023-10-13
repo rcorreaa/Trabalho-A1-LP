@@ -94,33 +94,35 @@ def limpa_ALTURA(df):
 
     return df_tratado
 
-def limpa_SEXO(df):
+def limpa_ANO_NASCIMENTO(df, ano):
     """
-    Remove os valores "F" da coluna SEXO do DataFrame.
+    Remove as linhas de pessoas com mais de 19 anos do DataFrame.
 
     Parameters:
         df(dataframe): DataFrame a ser processado.
+        ano: ano do dataframe
 
     Returns:
-        df_tratado(dataframe): DataFrame com linhas indesejadas removidas.
+        df_tratado(dataframe): DataFrame sem as linhas especificadas.
 
     Exemplos:
-    >>> df = pd.DataFrame({"SEXO": ["M", "M", "F","M"]})
-    >>> limpa_PESO(df)
+    >>> df = pd.DataFrame({"ANO_NASCIMENTO": [2004, 2003, 2005, 2000]})
+    >>> limpa_ANO_NASCIMENTO(df, 2022)
     df_tratado
 
     >>> df = pd.DataFrame({"PESO": [pd.NA, 120, 40, 230]})
-    >>> limpa_PESO(df)
-    A coluna 'SEXO' não existe.
+    >>> limpa_ANO_NASCIMENTO(df, 2019)
+    A coluna 'ANO_NASCIMENTO' não existe.
+    >>>
     """
-    # Criação de cópia do DataFrame, sem alterar o original
+
     df_tratado = df.copy()
 
     try:
-        # Excluindo valores "F" da coluna SEXO
-        df_tratado = df_tratado[df["SEXO"] == "M"]
-    except KeyError as erro_sexo:
-        print(f"A coluna {erro_sexo} não existe.")
+        # Filtrando indivíduos com a idade correta de alistamento.
+        df_tratado = df_tratado[(df["ANO_NASCIMENTO"] == ano-18) | (df["ANO_NASCIMENTO"] == ano-19)]
+    except KeyError as erro_ano:
+        print(f"A coluna {erro_ano} não existe.")
 
     return df_tratado
 
