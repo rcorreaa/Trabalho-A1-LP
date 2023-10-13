@@ -10,7 +10,7 @@ brasil = gpd.read_file("BR_UF_2021.zip", compression="zip", encoding="utf-8")
 df_mapa = pd.read_csv("tabela_escolaridade.csv")
 df_mapa = df_mapa.rename(columns={"UF_RESIDENCIA": "SIGLA"})
 
-# Mesclar dados geoespaciais com dados da tabela
+# Reoordenando o DataFrame de acordo com o nível de escolaridade
 df_mapa = df_mapa.sort_values(by="NIVEL_ESCOLARIDADE")
 
 # Normalização dos valores do nível de escolaridade
