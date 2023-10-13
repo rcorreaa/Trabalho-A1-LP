@@ -134,13 +134,14 @@ def renomeia_ESCOLARIDADE(df):
     
     return df_tratado
 
-def exclui_colunas(df):
+def exclui_colunas(df, cols_del=["CABECA", "CALCADO", "CINTURA", "JSM", "MUN_NASCIMENTO", "UF_NASCIMENTO", "RELIGIAO"]):
     """
-    Remove colunas desnecessárias do DataFrame passado. São elas: 
+    Remove colunas desnecessárias do DataFrame passado. Por padrão são as colunas: 
     ("CABECA", "CALCADO", "CINTURA", "JSM", "MUN_NASCIMENTO", "UF_NASCIMENTO", "RELIGIAO").
 
     Parameters:
         df(dataframe): DataFrame a ser processado.
+        cols_del(list): Lista de colunas a serem deletadas. (Opcional)
 
     Returns:
         df_tratado(dataframe): DataFrame sem as colunas especificadas.
@@ -148,12 +149,12 @@ def exclui_colunas(df):
 
     df_tratado = df.copy()
 
-    try:
-        # Exclusão de colunas desnecessárias sem alteração no DataFrame original
-        df_tratado = df_tratado.drop(["CABECA", "CALCADO", "CINTURA", "JSM", "MUN_NASCIMENTO", 
-                                      "UF_NASCIMENTO", "RELIGIAO", "ANO_NASCIMENTO"], axis=1)
-    except KeyError:
-        print("Alguma(s) coluna(s) não existe(m) no DataFrame.")
+    for col in cols_del:
+        try:
+            # Exclusão de colunas desnecessárias sem alteração no DataFrame original
+            df_tratado = df_tratado.drop(col, axis=1)
+        except KeyError:
+            print("Coluna não existente no DataFrame:", col)
 
     return df_tratado
 
