@@ -2,6 +2,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 df_2022 = pd.read_csv("sermil2022.csv", encoding = "latin1")
+df_2021 = pd.read_csv("sermil2021.csv", encoding = "latin1")
+df_2020 = pd.read_csv("sermil2020.csv", encoding = "latin1")
+df_2019 = pd.read_csv("sermil2019.csv", encoding = "latin1")
+df_2018 = pd.read_csv("sermil2018.csv", encoding = "latin1")
 
 mapeamento_regioes = {
     'AC': 'Norte',
@@ -44,26 +48,33 @@ def agrupa_por_regiao(df, coluna):
 df_com_regiao = cria_regiao(df_2022)
 df_agrupado = agrupa_por_regiao(df_com_regiao, "DISPENSA")
 
-# Reorganize os dados para criar um único DataFrame com "Com dispensa" e "Sem dispensa"
-df_pivot = df_agrupado.pivot(index='REGIAO', columns='DISPENSA', values='count')
+# Reorganiza os dados para criar um único DataFrame com "Com dispensa" e "Sem dispensa"
+df_organizado = df_agrupado.pivot(index='REGIAO', columns='DISPENSA', values='count')
 
-# Crie um gráfico de barras com o matplotlib
+# Define cores para as barras
+cores = ["#A50030", "#1A3071"]
+
+# Cria um gráfico de barras com o matplotlib
 plt.figure(figsize=(10, 6))
 bar_width = 0.35  # Largura das barras
 
+# Adicione linhas de grade
+plt.grid(True, axis='y', linestyle='--', color='gray', zorder=0)
+
 # Posições para as barras
-x = range(len(df_pivot.index))
+posicao = range(len(df_organizado.index))
 
 # Barra para "Com dispensa"
-plt.bar(x, df_pivot['Com dispensa'], width=bar_width, label='Com dispensa')
+plt.bar(posicao, df_organizado["Com dispensa"], width=bar_width, 
+        label="Com dispensa", color=cores[0], edgecolor="black")
 
 # Barra para "Sem dispensa"
-plt.bar([i + bar_width for i in x], df_pivot['Sem dispensa'], width=bar_width, label='Sem dispensa')
+plt.bar([i + bar_width for i in posicao], df_organizado["Sem dispensa"], 
+        width=bar_width, label="Sem dispensa", color=cores[1], edgecolor="black")
 
-plt.xlabel('Região')
-plt.ylabel('Contagem')
+plt.ylabel("Contagem")
 plt.title('Contagem de "Com dispensa" e "Sem dispensa" por Região')
-plt.xticks([i + bar_width / 2 for i in x], df_pivot.index)
+plt.xticks([i + bar_width / 2 for i in posicao], df_organizado.index)
 plt.legend()
 plt.tight_layout()
 
