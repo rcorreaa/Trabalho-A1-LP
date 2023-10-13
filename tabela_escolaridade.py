@@ -21,11 +21,11 @@ df_2019 = renomeia_ESCOLARIDADE(df_2022)
 df_2018 = renomeia_ESCOLARIDADE(df_2022)
 
 # Adição da da coluna NIVEL DE ESCOLARIDADE nos DATAFRAMES
-df_2022 = nivel_escolaridade(df_2022)
-df_2021 = nivel_escolaridade(df_2021)
-df_2020 = nivel_escolaridade(df_2020)
-df_2019 = nivel_escolaridade(df_2019)
-df_2018 = nivel_escolaridade(df_2018)
+df_2022 = nivel_ESCOLARIDADE(df_2022)
+df_2021 = nivel_ESCOLARIDADE(df_2021)
+df_2020 = nivel_ESCOLARIDADE(df_2020)
+df_2019 = nivel_ESCOLARIDADE(df_2019)
+df_2018 = nivel_ESCOLARIDADE(df_2018)
 
 # Junção dos DataFrames verticalmente
 df_concatenado = pd.concat([df_2022, df_2021, df_2020, df_2019, df_2018], ignore_index=True)
