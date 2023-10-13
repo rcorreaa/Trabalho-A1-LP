@@ -7,6 +7,7 @@ def plot_grafico_imc_violin(path_data, ini_ano=2013, fim_ano=2022):
     v_df = []
 
     for ano in range(ini_ano, fim_ano+1):
+        #leitura do database com tratamento de erro
         try:
             df = pd.read_csv(path_data + "sermil{}.csv".format(ano), usecols=["PESO", "ALTURA", "SEXO", "ANO_NASCIMENTO"])
         except UnicodeDecodeError:
@@ -15,16 +16,20 @@ def plot_grafico_imc_violin(path_data, ini_ano=2013, fim_ano=2022):
             print("Erro de leitura no database do ano", ano)
             return
 
+        #limpeza de valores nulos e filtro no publico alvo
         df = limpa_PESO(df)
         df = limpa_ALTURA(df)
         df = limpa_SEXO(df)
         df = limpa_ANO_NASCIMENTO(df, ano)
         
+        #calculo do imc com base na culuna PESO e ALTURA
         df["IMC"] = df["PESO"] / ((df["ALTURA"]/100)**2)
         df = df["IMC"]
 
+        #adicionado a serie filtrada em um array
         v_df.append(df)
         
+        #Imprime algumas estatisticas de resumo
         print(ano)
         print(df.describe())
         print()
@@ -32,9 +37,16 @@ def plot_grafico_imc_violin(path_data, ini_ano=2013, fim_ano=2022):
 
     fig, axs = plt.subplots(nrows=1, ncols=2, figsize=(14, 6))
 
+    #plot violin
     axs[0].violinplot(v_df, showmedians=True)
+    
+    #plot boxplot
     axs[1].boxplot(v_df, sym="")
 
+    #personalizacao do plot
+    axs[0].set_title('Violin plot do IMC por ano')
+    axs[1].set_title('Boxplot do IMC por ano')
+                     
     for ax in axs:
         ax.yaxis.grid(True)
         
