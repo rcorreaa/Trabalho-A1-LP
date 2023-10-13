@@ -16,7 +16,6 @@ df_mapa = df_mapa.sort_values(by="NIVEL_ESCOLARIDADE")
 # Normalização dos valores do nível de escolaridade
 df_mapa["NIVEL_ESCOLARIDADE"] = df_mapa["NIVEL_ESCOLARIDADE"] / 100
 
-print(df_mapa)
 # Criação de tabela de cor gradiente dos níveis de escolaridade
 df_mapa["COR_GRADIENTE"] = [to_rgba(plt.cm.Reds(value)) for value in df_mapa["NIVEL_ESCOLARIDADE"]]
 df_mapa = df_mapa.set_index("SIGLA").reindex(brasil["SIGLA"]).reset_index()
@@ -24,7 +23,13 @@ df_mapa = df_mapa.set_index("SIGLA").reindex(brasil["SIGLA"]).reset_index()
 # Personalização do mapa
 janela, graf_mapa = plt.subplots(1, 1, figsize=(10, 10))
 brasil.plot(ax=graf_mapa, color=df_mapa["COR_GRADIENTE"], edgecolor="black", linewidth=0.7)
-graf_mapa.set_title("Nível de Escolaridade por Estado", fontdict={"fontsize": "15"})
+graf_mapa.set_title("Nível de Escolaridade por Estado", fontdict={"fontsize": "15", "fontname": "Arial"})
+
+# Rótulos nos eixos
+graf_mapa.set_xlabel("Latitude", fontdict={"fontsize": "12", "fontname": "Arial"})
+graf_mapa.set_ylabel("Longitude", fontdict={"fontsize": "12", "fontname": "Arial"})
+
+# Cores dos paineis
 graf_mapa.set_facecolor("#8CBCDB")
 janela.set_facecolor("gray")
 
