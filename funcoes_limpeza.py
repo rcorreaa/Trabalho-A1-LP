@@ -59,18 +59,38 @@ def limpa_ALTURA(df):
 
     Returns:
         df_tratado(dataframe): DataFrame com linhas indesejadas removidas.
+
+    Exemplos:
+    >>> df = pd.DataFrame({"ALTURA": [120, 230, 180, 170]})
+    >>> limpa_ALTURA(df)
+    df_tratado
+
+    >>> df = pd.DataFrame({"ALTURA": [pd.NA, 181, 195, 167]})
+    >>> limpa_ALTURA(df)
+    df_tratado
+
+    >>> df = pd.DataFrame({"PESO": [160, 179, 215, 167]})
+    >>> limpa_ALTURA(df)
+    Traceback (most recent call last):
+        ...
+    A coluna 'ALTURA' não está presente no DataFrame.
+
+    >>> df = pd.DataFrame({"ALTURA": [200, "150 cm", 120, 230]})
+    >>> limpa_PESO(df)
+    Traceback (most recent call last):
+        ...
+    Impossível converter a coluna 'ALTURA' para o tipo numérico.
     """
     # Criação de cópia do DataFrame, sem alterar o original
-
     df_tratado = df.copy()
 
     try:
         # Conversão da coluna ALTURA para o tipo numérico
-        df_tratado["ALTURA"] = pd.to_numeric(df_tratado["ALTURA"], errors="coerce")
-    except KeyError:
-        print("A coluna 'ALTURA' não está presente no DataFrame.")
+        df_tratado["ALTURA"] = pd.to_numeric(df_tratado["ALTURA"])
     except ValueError:
         print("Impossível converter a coluna 'ALTURA' para o tipo numérico.")
+    except KeyError:
+        print("A coluna 'ALTURA' não está presente no DataFrame.")
     # Limpeza da coluna 'ALTURA'
     df_tratado = df_tratado.dropna(subset=['ALTURA'])
     df_tratado = df_tratado[(df_tratado['ALTURA'] >= 140) & (df_tratado['ALTURA'] <= 220)]
