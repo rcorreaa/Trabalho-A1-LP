@@ -31,7 +31,6 @@ def limpa_PESO(df):
     df_tratado
     """
     # Criação de cópia do DataFrame, sem alterar o original
-
     df_tratado = df.copy()
 
     try:
@@ -103,16 +102,25 @@ def limpa_SEXO(df):
         df(dataframe): DataFrame a ser processado.
 
     Returns:
-        df_tratado(dataframe): DataFrame sem as colunas especificadas.
-    """
+        df_tratado(dataframe): DataFrame com linhas indesejadas removidas.
 
+    Exemplos:
+    >>> df = pd.DataFrame({"SEXO": ["M", "M", "F","M"]})
+    >>> limpa_PESO(df)
+    df_tratado
+
+    >>> df = pd.DataFrame({"PESO": [pd.NA, 120, 40, 230]})
+    >>> limpa_PESO(df)
+    A coluna 'SEXO' não existe.
+    """
+    # Criação de cópia do DataFrame, sem alterar o original
     df_tratado = df.copy()
 
     try:
-        #Excluindo valores "F" da coluna SEXO
-        df_tratado = df_tratado[df["SEXO"] != "F"]
-    except ValueError as erro_sexo:
-        print("Não há sexo feminino na coluna: ", erro_sexo)
+        # Excluindo valores "F" da coluna SEXO
+        df_tratado = df_tratado[df["SEXO"] == "M"]
+    except KeyError as erro_sexo:
+        print(f"A coluna {erro_sexo} não existe.")
 
     return df_tratado
 
