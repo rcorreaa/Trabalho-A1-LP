@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib import gridspec
 
-def plot_grafico_ranking(path_data, ini_ano=2018, fim_ano=2022):
+def plot_grafico_barras(path_data, ini_ano=2018, fim_ano=2022):
     """
     Cria um gráfico de ranking junto com um stacked bar que analisam a quantidade de valores 
     "Sem dispensa" e "Com dispensa" da coluna DISPENSA e a proporção de cada um com relação 
@@ -121,5 +121,5 @@ def plot_grafico_ranking(path_data, ini_ano=2018, fim_ano=2022):
     plt.show()
     return None 
 
-plot_grafico_ranking("C:\\Users\\samue\\OneDrive\\Documentos\\Dados\\")
+plot_grafico_barras("C:\\Users\\samue\\OneDrive\\Documentos\\Dados\\")
 
