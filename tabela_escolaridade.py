@@ -1,7 +1,7 @@
 from funcoes_limpeza import *
 import pandas as pd
 
-def tabela_escolaridade(pathdata, ini_ano=2018, fim_ano=2022):
+def gera_tabela_escolaridade(pathdata, ini_ano=2018, fim_ano=2022):
     """
     A função tem por objetivo gerar um arquivo csv dos dados da média dos estados de
     escolaridade do Brasil do período passado. Por padrão, de 2018 até 2022.
