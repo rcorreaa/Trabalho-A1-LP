@@ -10,6 +10,26 @@ def limpa_PESO(df):
 
     Returns:
         df_tratado(dataframe): DataFrame com linhas indesejadas removidas.
+
+    Exemplos:
+    >>> df = pd.DataFrame({"PESO": [100, 101, 210, 35]})
+    >>> limpa_PESO(df)
+    df_tratado
+
+    >>> df = pd.DataFrame({"PESO": [pd.NA, 120, 40, 230]})
+    >>> limpa_PESO(df)
+    df_tratado
+
+    >>> df = pd.DataFrame({"ALTURA": [180, 179, 210, 167]})
+    >>> limpa_PESO(df)
+    Traceback (most recent call last):
+        ...
+    A coluna 'PESO' não está presente no DataFrame.
+
+    >>> df = pd.DataFrame({"PESO": [200, "120 kg", 40, 230]})
+    >>> limpa_PESO(df)
+    df_tratado
+    """
     """
     # Criação de cópia do DataFrame, sem alterar o original
 
@@ -17,7 +37,7 @@ def limpa_PESO(df):
 
     try:
         # Conversão da coluna PESO para o tipo numérico
-        df_tratado["PESO"] = pd.to_numeric(df_tratado["PESO"], errors="coerce")
+        df_tratado["PESO"] = pd.to_numeric(df_tratado["PESO"])
     except KeyError:
         print("A coluna 'PESO' não está presente no DataFrame.")
     except ValueError:
