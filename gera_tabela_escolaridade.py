@@ -1,7 +1,7 @@
 from funcoes_limpeza import *
 import pandas as pd
 
-def gera_tabela_escolaridade(pathdata, ini_ano=2018, fim_ano=2022):
+def gera_tabela_escolaridade(path_data="", ini_ano=2018, fim_ano=2022):
     """
     A função tem por objetivo gerar um arquivo csv dos dados da média dos estados de
     escolaridade do Brasil do período passado. Por padrão, de 2018 até 2022.
@@ -10,13 +10,12 @@ def gera_tabela_escolaridade(pathdata, ini_ano=2018, fim_ano=2022):
         path_data(string): diretório dos arquivos dos arquivos .csv
         ini_ano(int): ano de inicio. 2018 por padrão
         fim_ano(int): ano do final. 2022 por padrão
-    Returns:
-        tabela_escolaridade_csv(csv): csv utilizado para o mapa.
     """
-    v_df = []
+    # Lista a ser preenchida dos DataFrames utilizados
+    lista_df = []
 
     for ano in range(ini_ano, fim_ano + 1):
-        # leitura do database com tratamento de erro
+        # Leitura do database com tratamento de erro
         try:
             df = pd.read_csv(path_data + "sermil{}.csv".format(ano), usecols=["UF_RESIDENCIA", "ESCOLARIDADE"])
         except UnicodeDecodeError:
@@ -29,10 +28,10 @@ def gera_tabela_escolaridade(pathdata, ini_ano=2018, fim_ano=2022):
         df = renomeia_ESCOLARIDADE(df)
         df = nivel_ESCOLARIDADE(df)
 
-        v_df.append(df)
+        lista_df.append(df)
 
     # Junção dos DataFrames verticalmente
-    df_concatenado = pd.concat(v_df, ignore_index=True)
+    df_concatenado = pd.concat(lista_df, ignore_index=True)
 
     # Remoção da coluna de escolaridade
     df_concatenado.drop("ESCOLARIDADE", axis=1, inplace=True)
@@ -44,16 +43,15 @@ def gera_tabela_escolaridade(pathdata, ini_ano=2018, fim_ano=2022):
     media_escolaridade_estados = media_escolaridade_estados.loc[media_escolaridade_estados["UF_RESIDENCIA"] != "KK"]
     media_escolaridade_estados = media_escolaridade_estados.reset_index(drop=True)
 
-    # Adição de proporção proporção no nível de escolaridade através da função exponencial
+    # Mudança de escala no nível de escolaridade
     media_escolaridade_estados["NIVEL_ESCOLARIDADE"] = 2.5**media_escolaridade_estados["NIVEL_ESCOLARIDADE"]
 
-    # Extração de máximo e mínimo do Data
+    # Extração de máximo e mínimo do DataFrame
     escolaridade_maxima = media_escolaridade_estados["NIVEL_ESCOLARIDADE"].max()
     escolaridade_minima = media_escolaridade_estados["NIVEL_ESCOLARIDADE"].min()
 
     # Normalização do nível de escolaridade na escala de 0 a 100
     media_escolaridade_estados["NIVEL_ESCOLARIDADE"] = (media_escolaridade_estados["NIVEL_ESCOLARIDADE"] - escolaridade_minima)/(escolaridade_maxima-escolaridade_minima)*100
 
-    tabela_escolaridade_csv = media_escolaridade_estados.to_csv(index=False)
-
-    return tabela_escolaridade_csv
+    # Geração do arquivo CSV utilizado para confecção da análise
+    media_escolaridade_estados.to_csv("tabela_escolaridade.csv", index=False)
