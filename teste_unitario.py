@@ -2,7 +2,6 @@ import unittest
 import pandas as pd
 import funcoes_limpeza as fl
 
-'''
 class TestLimpaPESO(unittest.TestCase):
 
     def test_dados_validos(self):
@@ -26,7 +25,6 @@ class TestLimpaPESO(unittest.TestCase):
         df = pd.DataFrame({"PESO": [200, "120 kg", 40, 230]})
         with self.assertRaises(TypeError):
             fl.limpa_PESO(df)
-'''
 
 class TestLimpaALTURA(unittest.TestCase):
     
@@ -40,7 +38,6 @@ class TestLimpaALTURA(unittest.TestCase):
         df = pd.DataFrame({"ALTURA": [pd.NA, 120, 150, 180]})
         resultado = fl.limpa_ALTURA(df)
         esperado = pd.DataFrame({"ALTURA": [150.0, 180.0]}, index = [2, 3])
-        
         self.assertTrue(resultado.equals(esperado))
 
     def test_coluna_inexistente(self):
@@ -52,6 +49,18 @@ class TestLimpaALTURA(unittest.TestCase):
         df = pd.DataFrame({"ALTURA": [200, "179 cm", 140, 230]})
         with self.assertRaises(TypeError):
             fl.limpa_ALTURA(df)
+
+class TestLimpaSEXO(unittest.TestCase):
+    def test_dados_validos(self):
+        df = pd.DataFrame({"SEXO": ["M", "M", "F", "M"]})
+        resultado = fl.limpa_SEXO(df)
+        esperado = pd.DataFrame({"SEXO": ["M", "M", "M"]}, index = [0, 1, 3])
+        self.assertTrue(resultado.equals(esperado))
+
+    def test_coluna_inexistente(self):
+        df = pd.DataFrame({"PESO": [pd.NA, 120, 40, 230]})
+        with self.assertRaises(KeyError):
+            fl.limpa_SEXO(df)
 
 
 

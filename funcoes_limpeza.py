@@ -142,7 +142,7 @@ def limpa_SEXO(df):
         # Excluindo valores "F" da coluna SEXO
         df_tratado = df_tratado[df["SEXO"] == "M"]
     except KeyError as erro_sexo:
-        print(f"A coluna {erro_sexo} não existe.")
+        raise erro_sexo
 
     return df_tratado
 
