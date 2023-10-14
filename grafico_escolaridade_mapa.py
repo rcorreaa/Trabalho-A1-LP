@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import to_rgba
 
 
-def plot_grafico_mapa(pathdata="tabela_escolaridade.csv", pathgeografia="BR_UF_2021.zip"):
+def plot_grafico_mapa(path_data="tabela_escolaridade.csv", path_geografia="BR_UF_2021.zip"):
     """
     Plota o grafico de violino do imc entre os anos ini_ano e fim_ano.
 
@@ -13,12 +13,29 @@ def plot_grafico_mapa(pathdata="tabela_escolaridade.csv", pathgeografia="BR_UF_2
         pathgeografia(string): diretório do arquivo .zip dos dados geográficos do Brasil
     Returns:
         None
-    """
-    # Carregar dados geoespaciais do Brasil
-    brasil = gpd.read_file(pathgeografia, compression="zip", encoding="utf-8")
 
-    # Carregar dados da tabela de escolaridade
-    df_mapa = pd.read_csv(pathdata)
+    Exemplos:
+    >>> plot_grafico_mapa(path_data="tabela_escolaridade.csv", path_geografia="BR_UF_2021.zip")
+
+    >>> plot_grafico_mapa(path_data="caminho_dataframes_errado")
+    O Diretório caminho_dataframes_errado não contém os arquivos de DataFrames necessários.
+
+    >>> plot_grafico_mapa(path_geografia="caminho_brasil_errado")
+    Caminho do arquivo dos dados geoespaciais do Brasil inválido.
+    """
+    try:
+        # Carregar dados geoespaciais do Brasil
+        brasil = gpd.read_file(path_geografia, compression="zip", encoding="utf-8")
+    except:
+        print("Caminho do arquivo dos dados geoespaciais do Brasil inválido.")
+        return None
+    try:
+        # Carregar dados da tabela de escolaridade
+        df_mapa = pd.read_csv(path_data)
+    except:
+        print(f"O Diretório {path_data} não contém os arquivos de DataFrames necessários.")
+        return None
+
     df_mapa = df_mapa.rename(columns={"UF_RESIDENCIA": "SIGLA"})
 
     # Reoordenando o DataFrame de acordo com o nível de escolaridade
@@ -42,7 +59,7 @@ def plot_grafico_mapa(pathdata="tabela_escolaridade.csv", pathgeografia="BR_UF_2
 
     # Cores dos paineis
     graf_mapa.set_facecolor("#8CBCDB")
-    janela.set_facecolor("gray")
+    janela.set_facecolor("white")
 
     # Demarcação do gráfico (linhas de latitude e longitude)
     graf_mapa.set_xticks([-70, -60, -50, -40, -30])
