@@ -50,7 +50,7 @@ def limpa_PESO(df):
     df_tratado = df_tratado.dropna(subset=["PESO"])
     df_tratado = df_tratado.loc[df_tratado["PESO"] >= 40]
     df_tratado = df_tratado.loc[df_tratado["PESO"] <= 200]
-
+    
     return df_tratado
 
 def limpa_ALTURA(df):
