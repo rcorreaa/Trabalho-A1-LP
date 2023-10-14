@@ -75,8 +75,47 @@ class TestLimpaANO_NASCIMENTO(unittest.TestCase):
         with self.assertRaises(KeyError):
             fl.limpa_ANO_NASCIMENTO(df, 2019)
 
+class TestRenomeiaESCOLARIDADE(unittest.TestCase):
+    def test_renomeia_categorias(self):
+        df = pd.DataFrame({"ESCOLARIDADE": ["Ensino Médio Completo", "Ensino Superior", "Mestrado", "Ensino Fundamental", "Doutorado"]})
+        resultado = fl.renomeia_ESCOLARIDADE(df)
+        esperado = pd.DataFrame({"ESCOLARIDADE": ["Ensino Médio Completo", "Ensino Superior", "Pós-graduação", "Ensino Fundamental", "Pós-graduação"]})
+        self.assertTrue(resultado.equals(esperado))
 
+    def test_coluna_inexistente(self):
+        df = pd.DataFrame({"OUTRA_COLUNA": [1, 2, 3]})
+        with self.assertRaises(KeyError):
+            fl.renomeia_ESCOLARIDADE(df)
 
+    def test_coluna_completa(self):
+        df = pd.DataFrame({"ESCOLARIDADE": ["Ensino Médio Completo", "Ensino Fundamental Completo", "Doutorado Completo"]})
+        resultado = fl.renomeia_ESCOLARIDADE(df)
+        esperado = pd.DataFrame({"ESCOLARIDADE": ["Ensino Médio Completo", "Ensino Fundamental Completo", "Doutorado Completo"]})
+        self.assertTrue(resultado.equals(esperado))
+
+class TestExcluiColunas(unittest.TestCase):
+    def test_exclui_colunas(self):
+        df = pd.DataFrame({"coluna_1": [1, 2, 3], "coluna_2": [4, 5, 6]})
+        resultado = fl.exclui_colunas(df, ["coluna_1"])
+        esperado = pd.DataFrame({"coluna_2": [4, 5, 6]})
+        self.assertTrue(resultado.equals(esperado))
+
+    def test_coluna_inexistente(self):
+        df = pd.DataFrame({"coluna_1": [1, 2, 3], "coluna_2": [4, 5, 6]})
+        resultado = fl.exclui_colunas(df, ["coluna_3"])
+        self.assertTrue(resultado.equals(df))        
+
+class TestNivelESCOLARIDADE(unittest.TestCase):
+    def test_nivel_escolaridade(self):
+        df = pd.DataFrame({"ESCOLARIDADE": ["Ensino Médio", "Alfabetizado"]})
+        resultado = fl.nivel_ESCOLARIDADE(df)
+        esperado = pd.DataFrame({"ESCOLARIDADE": ["Ensino Médio", "Alfabetizado"], "NIVEL_ESCOLARIDADE": [5, 1]})
+        self.assertTrue(resultado.equals(esperado))
+
+    def test_coluna_inexistente(self):
+        df = pd.DataFrame({"PESO": [100, 85, 115, 79], "ALTURA": [180, 169, 120, 240]})
+        resultado = fl.nivel_ESCOLARIDADE(df)
+        self.assertTrue(resultado.equals(df))
 
 '''
 print("Resultado:")

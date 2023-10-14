@@ -204,7 +204,7 @@ def renomeia_ESCOLARIDADE(df):
     3     Ensino Fundamental
     4          Pós-graduação
 
-    >>> df_vazio = pd.DataFrame({"OUTRA_COLUNA": [1, 2, 3]})
+    >>> df = pd.DataFrame({"OUTRA_COLUNA": [1, 2, 3]})
     >>> renomeia_ESCOLARIDADE(df_vazio)
     Coluna 'ESCOLARIDADE' não existente no DataFrame.
        OUTRA_COLUNA
@@ -237,8 +237,8 @@ def renomeia_ESCOLARIDADE(df):
 
     try:
         df_tratado["ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].apply(lambda registro_ESCOLARIDADE: aux_renomeia(registro_ESCOLARIDADE))
-    except KeyError as coluna:
-        print(f"Coluna {coluna} não existente no DataFrame.")
+    except KeyError as erro_coluna:
+        raise erro_coluna
 
     return df_tratado
 
