@@ -6,7 +6,7 @@ from matplotlib.colors import to_rgba
 
 def plot_grafico_mapa(path_data="tabela_escolaridade.csv", path_geografia="BR_UF_2021.zip"):
     """
-    Plota o grafico de violino do imc entre os anos ini_ano e fim_ano.
+    Plota o gráfico de mapa do nível de escolaridade por estado.
 
     Parameters:
         path_data(string): diretório dos arquivos .csv
