@@ -119,12 +119,20 @@ def limpa_SEXO(df):
 
     Exemplos:
     >>> df = pd.DataFrame({"SEXO": ["M", "M", "F","M"]})
-    >>> limpa_PESO(df)
-    df_tratado
+    >>> limpa_SEXO(df)
+      SEXO
+    0    M
+    1    M
+    3    M
 
     >>> df = pd.DataFrame({"PESO": [pd.NA, 120, 40, 230]})
-    >>> limpa_PESO(df)
+    >>> limpa_SEXO(df)
     A coluna 'SEXO' não existe.
+       PESO
+    0  <NA>
+    1   120
+    2    40
+    3   230
     """
     # Criação de cópia do DataFrame, sem alterar o original
     df_tratado = df.copy()
@@ -151,11 +159,18 @@ def limpa_ANO_NASCIMENTO(df, ano):
     Exemplos:
     >>> df = pd.DataFrame({"ANO_NASCIMENTO": [2004, 2003, 2005, 2000]})
     >>> limpa_ANO_NASCIMENTO(df, 2022)
-    df_tratado
+       ANO_NASCIMENTO
+    0            2004
+    1            2003
 
     >>> df = pd.DataFrame({"PESO": [pd.NA, 120, 40, 230]})
     >>> limpa_ANO_NASCIMENTO(df, 2019)
     A coluna 'ANO_NASCIMENTO' não existe.
+       PESO
+    0  <NA>
+    1   120
+    2    40
+    3   230
     """
 
     df_tratado = df.copy()
@@ -241,11 +256,18 @@ def exclui_colunas(df, cols_del=["CABECA", "CALCADO", "CINTURA", "JSM", "MUN_NAS
     Exemplos:
     >>> df = pd.DataFrame({"coluna_1":[1,2,3],"coluna_2":[4,5,6]})
     >>> exclui_colunas(df, ["coluna_1"])
-    df_tratado
+       coluna_2
+    0         4
+    1         5
+    2         6
 
     >>> df = pd.DataFrame({"coluna_1":[1,2,3],"coluna_2":[4,5,6]})
     >>> exclui_colunas(df, ["coluna_3"])
     Coluna coluna_3 não existente no DataFrame.
+       coluna_1  coluna_2
+    0         1         4
+    1         2         5
+    2         3         6
     """
 
     df_tratado = df.copy()
@@ -273,15 +295,22 @@ def nivel_ESCOLARIDADE(df):
     Exemplos:
     >>> df = pd.DataFrame({"ESCOLARIDADE":["Ensino Médio", "Alfabetizado"]})
     >>> nivel_ESCOLARIDADE(df)
-    df_tratado
+       ESCOLARIDADE  NIVEL_ESCOLARIDADE
+    0  Ensino Médio                   5
+    1  Alfabetizado                   1
 
-    >>> df = pd.DataFrame({"PESO":[100, 85, 115, 79], "ALTURA":[180, 169, 120]})
+    >>> df = pd.DataFrame({"PESO":[100, 85, 115, 79], "ALTURA":[180, 169, 120, 240]})
     >>> nivel_ESCOLARIDADE(df)
     A coluna 'ESCOLARIDADE' não foi encontrada no DataFrame.
+       PESO  ALTURA
+    0   100     180
+    1    85     169
+    2   115     120
+    3    79     240
     """
     # Criação de cópia do DataFrame, sem alterar o original
     df_tratado = df.copy()
-    
+
     grau_escolaridade = {
         "Analfabeto": 0,
         "Alfabetizado": 1,
@@ -297,5 +326,5 @@ def nivel_ESCOLARIDADE(df):
         df_tratado["NIVEL_ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].replace(grau_escolaridade)
     except KeyError as coluna:
         print(f"A coluna {coluna} não foi encontrada no DataFrame.")
-        
+
     return df_tratado
