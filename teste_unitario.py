@@ -1,6 +1,7 @@
 import unittest
 import pandas as pd
 import funcoes_limpeza as fl
+import os
 
 # Testes unitários para funcoes_limpeza:
 class TestLimpaPESO(unittest.TestCase):
@@ -116,6 +117,20 @@ class TestNivelESCOLARIDADE(unittest.TestCase):
         df = pd.DataFrame({"PESO": [100, 85, 115, 79], "ALTURA": [180, 169, 120, 240]})
         resultado = fl.nivel_ESCOLARIDADE(df)
         self.assertTrue(resultado.equals(df))
+
+class TestGeraTabelaEscolaridade(unittest.TestCase):
+    def test_gera_tabela_escolaridade(self):
+        # Executa a função para gerar a tabela de escolaridade
+        fl.gera_tabela_escolaridade()
+
+        # Verifica se o arquivo CSV foi gerado
+        self.assertTrue(os.path.isfile("tabela_escolaridade.csv"))
+
+        # Verifica se o arquivo CSV possui os cabeçalhos esperados
+        df = pd.read_csv("tabela_escolaridade.csv")
+        self.assertIn("UF_RESIDENCIA", df.columns)
+        self.assertIn("NIVEL_ESCOLARIDADE", df.columns)
+
 
 '''
 print("Resultado:")
