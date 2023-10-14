@@ -164,29 +164,53 @@ def renomeia_ESCOLARIDADE(df):
 
     Returns:
         df_tratado(dataframe): DataFrame com a coluna atualizada.
+
+    Exemplos:
+    >>> df_exemplo = pd.DataFrame({"ESCOLARIDADE": ["Ensino Médio Completo", "Ensino Superior", "Mestrado", "Ensino Fundamental", "Doutorado"]})
+    >>> renomeia_ESCOLARIDADE(df_exemplo)
+                ESCOLARIDADE
+    0  Ensino Médio Completo
+    1        Ensino Superior
+    2          Pós-graduação
+    3     Ensino Fundamental
+    4          Pós-graduação
+
+    >>> df_vazio = pd.DataFrame({"OUTRA_COLUNA": [1, 2, 3]})
+    >>> renomeia_ESCOLARIDADE(df_vazio)
+    Coluna 'ESCOLARIDADE' não existente no DataFrame.
+       OUTRA_COLUNA
+    0             1
+    1             2
+    2             3
+
+    >>> df_completo = pd.DataFrame({"ESCOLARIDADE": ["Ensino Médio Completo", "Ensino Fundamental Completo", "Doutorado Completo"]})
+    >>> renomeia_ESCOLARIDADE(df_completo)
+                      ESCOLARIDADE
+    0        Ensino Médio Completo
+    1  Ensino Fundamental Completo
+    2           Doutorado Completo
     """
-    
-    def aux_renomeia(x):
-        if x.find("Completo")!=-1:
-            return x
-        elif x.find("Ensino Médio")!=-1:
+    def aux_renomeia(registro_ESCOLARIDADE):
+        if registro_ESCOLARIDADE.find("Completo") != -1:
+            return registro_ESCOLARIDADE
+        elif registro_ESCOLARIDADE.find("Ensino Médio") != -1:
             return "Ensino Médio"
-        elif x.find("Ensino Fundamental")!=-1:
+        elif registro_ESCOLARIDADE.find("Ensino Fundamental") != -1:
             return "Ensino Fundamental"
-        elif x.find("Ensino Superior")!=-1:
+        elif registro_ESCOLARIDADE.find("Ensino Superior") != -1:
             return "Ensino Superior"
-        elif x.find("Pós")!=-1 or x.find("Mestrado")!=-1 or x.find("Doutorado")!=-1:
+        elif registro_ESCOLARIDADE.find("Pós") != -1 or registro_ESCOLARIDADE.find("Mestrado") != -1 or registro_ESCOLARIDADE.find("Doutorado") != -1:
             return "Pós-graduação"
         else:
-            return x
-    
+            return registro_ESCOLARIDADE
+
     df_tratado = df.copy()
-    
+
     try:
-        df_tratado["ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].apply(lambda x: aux_renomeia(x))
-    except ValueError as erro_ano:
-        print("Não há coluna: ", erro_ano)
-    
+        df_tratado["ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].apply(lambda registro_ESCOLARIDADE: aux_renomeia(registro_ESCOLARIDADE))
+    except KeyError as coluna:
+        print(f"Coluna {coluna} não existente no DataFrame.")
+
     return df_tratado
 
 def exclui_colunas(df, cols_del=["CABECA", "CALCADO", "CINTURA", "JSM", "MUN_NASCIMENTO", "UF_NASCIMENTO", "RELIGIAO"]):
