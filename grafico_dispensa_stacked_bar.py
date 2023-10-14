@@ -1,7 +1,23 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-def plot_grafico_stacked_bar(path_data, ini_ano=2018, fim_ano=2022):
+def plot_grafico_stacked_bar(path_data, ini_ano=2018, fim_ano=2022, ax=None):
+    """
+    Cria um stacked bar com as proporções dos valores "Sem dispensa" e "Com dispensa" 
+    da coluna DISPENSA em relação as regiões brasileiras dos anos de 2018 a 2022.
+
+    Parameters:
+        path_data(caminho): Caminho dos DataFrames.
+        ini_ano(int): Ano de início. 2018 por padrão
+        fim_ano(int): Ano de término. 2022 por padrão
+
+    Returns:
+        None:
+    """
+
+    if ax is None:
+        fig, ax = plt.subplots()
+
     v_df = []
     for ano in range(ini_ano, fim_ano+1):
         # Leitura do database com tratamento de erro
@@ -64,12 +80,10 @@ def plot_grafico_stacked_bar(path_data, ini_ano=2018, fim_ano=2022):
     bar1 = plt.barh(proporcoes["REGIAO"], proporcoes["Com_dispensa_percent"], label="Com dispensa", color="#A50030")
     bar2 = plt.barh(proporcoes["REGIAO"], proporcoes["Sem_dispensa_percent"], left=proporcoes["Com_dispensa_percent"], label="Sem dispensa", color="#1A3071")
 
-    plt.bar_label(bar1, fmt='%.2f%%', label_type="center", fontsize=10)
-    plt.bar_label(bar2, fmt='%.2f%%', label_type="center", fontsize=10)
+    ax.bar_label(bar1, fmt='%.2f%%', label_type="center", fontsize=10)
+    ax.bar_label(bar2, fmt='%.2f%%', label_type="center", fontsize=10)
 
-    plt.suptitle("Proporção de Com Dispensa e Sem Dispensa por Região")
-    plt.suptitle("Proporção")
-    plt.suptitle("Região")
+    ax.set_title("Proporção de alistados com e sem dispensas por Região")
     plt.legend()
     plt.show()
     return None

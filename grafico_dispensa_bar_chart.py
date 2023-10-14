@@ -1,12 +1,10 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from matplotlib import gridspec
 
-def plot_grafico_barras(path_data, ini_ano=2018, fim_ano=2022):
+def plot_grafico_barras(path_data, ini_ano=2018, fim_ano=2022, ax=None):
     """
-    Cria um gráfico de ranking junto com um stacked bar que analisam a quantidade de valores 
-    "Sem dispensa" e "Com dispensa" da coluna DISPENSA e a proporção de cada um com relação 
-    ao alistamento militar dos anos de 2018 a 2022.
+    Cria um gráfico de ranking que analisa a quantidade de valores "Sem dispensa" e "Com dispensa" 
+    da coluna DISPENSA em relação as regiões brasileiras dos anos de 2018 a 2022.
 
     Parameters:
         path_data(caminho): Caminho dos DataFrames.
@@ -17,6 +15,9 @@ def plot_grafico_barras(path_data, ini_ano=2018, fim_ano=2022):
         None:
     """
     
+    if ax is None:
+        fig, ax = plt.subplots()
+
     v_df = []
     for ano in range(ini_ano, fim_ano+1):
         # Leitura do database com tratamento de erro
@@ -68,58 +69,24 @@ def plot_grafico_barras(path_data, ini_ano=2018, fim_ano=2022):
     df_agrupado = df_completo.groupby("REGIAO")["DISPENSA"].value_counts().reset_index()
     df_organizado = df_agrupado.pivot(index="REGIAO", columns="DISPENSA", values="count")
 
-    # Cria novo DataFrame com as proporções dos valores da DISPENSA
-    somas = df_agrupado.groupby(["REGIAO", "DISPENSA"])["count"].sum()
-    soma_total = df_agrupado.groupby("REGIAO")["count"].sum()
-    proporcoes = somas.unstack().div(soma_total, axis=0).reset_index()
-    proporcoes.columns = ["REGIAO", "Com dispensa", "Sem dispensa"]
-
-    # Crie um grid 1x2
-    fig = plt.figure(figsize=(16, 6))
-    gs = gridspec.GridSpec(1, 2, width_ratios=[2, 1])  # 2 colunas e a primeira com o dobro da largura
-
-    # Visualização 1: Gráfico de barras lado a lado
-    ax0 = plt.subplot(gs[0])  # Célula da primeira coluna
-    cores = ["#A50030", "#1A3071"]
     bar_width = 0.35
     posicao = range(len(df_organizado.index))
 
-    ax0.grid(True, axis="y", linestyle="--", color="gray", zorder=0)
+    ax.grid(True, axis="y", linestyle="--", color="gray", zorder=0)
 
-    ax0.bar(posicao, df_organizado["Com dispensa"], width=bar_width, 
-            label="Com dispensa", color=cores[0], edgecolor="black")
+    ax.bar(posicao, df_organizado["Com dispensa"], width=bar_width, 
+            label="Com dispensa", color="#A50030", edgecolor="black")
 
-    ax0.bar([i + bar_width for i in posicao], df_organizado["Sem dispensa"], 
-            width=bar_width, label="Sem dispensa", color=cores[1], edgecolor="black")
+    ax.bar([i + bar_width for i in posicao], df_organizado["Sem dispensa"], 
+            width=bar_width, label="Sem dispensa", color="#1A3071", edgecolor="black")
 
-    ax0.set_ylabel("Contagem")
-    ax0.set_title('Contagem de "Com dispensa" e "Sem dispensa" por Região')
-    ax0.set_xticks([i + bar_width / 2 for i in posicao])
-    ax0.set_xticklabels(df_organizado.index)
-    ax0.legend()
-
-    # Visualização 2: Gráfico de barras empilhadas horizontal
-    ax1 = plt.subplot(gs[1])  # Célula da segunda coluna
-    cores = ["#A50030", "#1A3071"]
-
-    proporcoes["Com_dispensa_percent"] = proporcoes["Com dispensa"] * 100
-    proporcoes["Sem_dispensa_percent"] = proporcoes["Sem dispensa"] * 100
-
-    bar1 = ax1.barh(proporcoes["REGIAO"], proporcoes["Com_dispensa_percent"], label="Com dispensa", color="#A50030")
-    bar2 = ax1.barh(proporcoes["REGIAO"], proporcoes["Sem_dispensa_percent"], left=proporcoes["Com_dispensa_percent"], label="Sem dispensa", color="#1A3071")
-
-    ax1.bar_label(bar1, fmt='%.2f%%', label_type="center", fontsize=10)
-    ax1.bar_label(bar2, fmt='%.2f%%', label_type="center", fontsize=10)
-
-    ax1.set_title("Proporção de Com Dispensa e Sem Dispensa por Região")
-    ax1.set_xlabel("Proporção")
-    ax1.set_ylabel("Região")
-    ax1.legend()
-
-    # Ajuste o layout para melhor visualização
-    plt.tight_layout()
+    ax.set_ylabel("Contagem por milhão")
+    ax.set_title("Quantidade de alistados com e sem dispensas por Região")
+    ax.set_xticks([i + bar_width / 2 for i in posicao])
+    ax.set_xticklabels(df_organizado.index)
+    plt.legend()
     plt.show()
-    return None 
-
+    return None
+    
 plot_grafico_barras("C:\\Users\\samue\\OneDrive\\Documentos\\Dados\\")
 
