@@ -2,6 +2,7 @@ import unittest
 import pandas as pd
 import funcoes_limpeza as fl
 
+# Testes unitários para funcoes_limpeza:
 class TestLimpaPESO(unittest.TestCase):
 
     def test_dados_validos(self):
@@ -62,6 +63,17 @@ class TestLimpaSEXO(unittest.TestCase):
         with self.assertRaises(KeyError):
             fl.limpa_SEXO(df)
 
+class TestLimpaANO_NASCIMENTO(unittest.TestCase):
+    def test_idade_correta(self):
+        df = pd.DataFrame({"ANO_NASCIMENTO": [2004, 2003, 2005, 2000]})
+        resultado = fl.limpa_ANO_NASCIMENTO(df, 2022)
+        esperado = pd.DataFrame({"ANO_NASCIMENTO": [2004, 2003]})
+        self.assertTrue(resultado.equals(esperado))
+
+    def test_coluna_inexistente(self):
+        df = pd.DataFrame({"PESO": [pd.NA, 120, 40, 230]})
+        with self.assertRaises(KeyError):
+            fl.limpa_ANO_NASCIMENTO(df, 2019)
 
 
 

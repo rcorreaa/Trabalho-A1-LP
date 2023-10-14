@@ -180,7 +180,7 @@ def limpa_ANO_NASCIMENTO(df, ano):
         # Filtrando indivíduos com a idade correta de alistamento.
         df_tratado = df_tratado[(df["ANO_NASCIMENTO"] == ano-18) | (df["ANO_NASCIMENTO"] == ano-19)]
     except KeyError as erro_ano:
-        print(f"A coluna {erro_ano} não existe.")
+        raise erro_ano
 
     return df_tratado
 
