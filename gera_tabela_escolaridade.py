@@ -10,6 +10,14 @@ def gera_tabela_escolaridade(path_data="", ini_ano=2018, fim_ano=2022):
         path_data(string): diretório dos arquivos dos arquivos .csv
         ini_ano(int): ano de inicio. 2018 por padrão
         fim_ano(int): ano do final. 2022 por padrão
+
+    Exemplos:
+    Exemplo válido, realizando o download do arquivo csv obtido
+    >>> gera_tabela_escolaridade(path_data="", ini_ano=2018, fim_ano=2022)
+
+    Exemplo inválido, o ano 1997 não está disponível para análise
+    >>> gera_tabela_escolaridade(path_data="", ini_ano=1997, fim_ano=2004)
+    Erro de leitura no database do ano 1997
     """
     # Lista a ser preenchida dos DataFrames utilizados
     lista_df = []
