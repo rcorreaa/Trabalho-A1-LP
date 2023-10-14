@@ -46,6 +46,7 @@ def limpa_PESO(df):
         print("A coluna 'PESO' não está presente no DataFrame.")
     except ValueError:
         print("Impossível converter a coluna 'PESO' para o tipo numérico.")
+    
     # Limpeza da coluna 'PESO'
     df_tratado = df_tratado.dropna(subset=["PESO"])
     df_tratado = df_tratado.loc[df_tratado["PESO"] >= 40]
