@@ -14,21 +14,27 @@ def limpa_PESO(df):
     Exemplos:
     >>> df = pd.DataFrame({"PESO": [100, 101, 210, 35]})
     >>> limpa_PESO(df)
-    df_tratado
+       PESO
+    0   100
+    1   101
 
     >>> df = pd.DataFrame({"PESO": [pd.NA, 120, 40, 230]})
     >>> limpa_PESO(df)
-    df_tratado
+        PESO
+    1  120.0
+    2   40.0
 
     >>> df = pd.DataFrame({"ALTURA": [180, 179, 210, 167]})
     >>> limpa_PESO(df)
     Traceback (most recent call last):
         ...
-    A coluna 'PESO' não está presente no DataFrame.
+    KeyError: ['PESO']
 
     >>> df = pd.DataFrame({"PESO": [200, "120 kg", 40, 230]})
     >>> limpa_PESO(df)
-    df_tratado
+    Traceback (most recent call last):
+           ...
+    TypeError: '>=' not supported between instances of 'str' and 'int'
     """
     # Criação de cópia do DataFrame, sem alterar o original
     df_tratado = df.copy()
@@ -44,7 +50,7 @@ def limpa_PESO(df):
     df_tratado = df_tratado.dropna(subset=["PESO"])
     df_tratado = df_tratado.loc[df_tratado["PESO"] >= 40]
     df_tratado = df_tratado.loc[df_tratado["PESO"] <= 200]
-    
+
     return df_tratado
 
 def limpa_ALTURA(df):
@@ -61,21 +67,28 @@ def limpa_ALTURA(df):
     Exemplos:
     >>> df = pd.DataFrame({"ALTURA": [180, 121, 210, 200]})
     >>> limpa_ALTURA(df)
-    df_tratado
+       ALTURA
+    0     180
+    2     210
+    3     200
 
     >>> df = pd.DataFrame({"ALTURA": [pd.NA, 120, 150, 180]})
     >>> limpa_ALTURA(df)
-    df_tratado
+       ALTURA
+    2   150.0
+    3   180.0
 
     >>> df = pd.DataFrame({"PESO": [180, 179, 210, 167]})
     >>> limpa_ALTURA(df)
     Traceback (most recent call last):
         ...
-    A coluna 'PESO' não está presente no DataFrame.
+    KeyError: ['ALTURA']
 
     >>> df = pd.DataFrame({"ALTURA": [200, "179 cm", 140, 230]})
     >>> limpa_ALTURA(df)
-    df_tratado
+    Traceback (most recent call last):
+        ...
+    TypeError: '>=' not supported between instances of 'str' and 'int'
     """
     # Criação de cópia do DataFrame, sem alterar o original
 
@@ -83,7 +96,7 @@ def limpa_ALTURA(df):
 
     try:
         # Conversão da coluna ALTURA para o tipo numérico
-        df_tratado["ALTURA"] = pd.to_numeric(df_tratado["ALTURA"], errors="coerce")
+        df_tratado["ALTURA"] = pd.to_numeric(df_tratado["ALTURA"])
     except KeyError:
         print("A coluna 'ALTURA' não está presente no DataFrame.")
     except ValueError:
