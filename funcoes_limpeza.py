@@ -143,7 +143,6 @@ def limpa_ANO_NASCIMENTO(df, ano):
     >>> df = pd.DataFrame({"PESO": [pd.NA, 120, 40, 230]})
     >>> limpa_ANO_NASCIMENTO(df, 2019)
     A coluna 'ANO_NASCIMENTO' não existe.
-    >>>
     """
 
     df_tratado = df.copy()
@@ -233,8 +232,19 @@ def nivel_ESCOLARIDADE(df):
 
     Returns:
         df_tratado(dataframe): DataFrame com a coluna NIVEL_ESCOLARIDADE adicionada.
+
+    Exemplos:
+    >>> df = pd.DataFrame({"ESCOLARIDADE":["Ensino Médio", "Alfabetizado"]})
+    >>> nivel_ESCOLARIDADE(df)
+    df_tratado
+
+    >>> df = pd.DataFrame({"PESO":[100, 85, 115, 79], "ALTURA":[180, 169, 120]})
+    >>> nivel_ESCOLARIDADE(df)
+    A coluna 'ESCOLARIDADE' não foi encontrada no DataFrame.
     """
+    # Criação de cópia do DataFrame, sem alterar o original
     df_tratado = df.copy()
+    
     grau_escolaridade = {
         "Analfabeto": 0,
         "Alfabetizado": 1,
@@ -246,9 +256,9 @@ def nivel_ESCOLARIDADE(df):
         "Ensino Superior Completo": 12,
         "Pós-graduação": 15}
     try:
-        # Atribuindo valores de nível de escolaridade de acordo com a formação dos indivíduos.
+        # Atribuindo valores de nível de escolaridade de acordo com a formação dos indivíduos
         df_tratado["NIVEL_ESCOLARIDADE"] = df_tratado["ESCOLARIDADE"].replace(grau_escolaridade)
     except KeyError as coluna:
-        print(f"Erro: A coluna {coluna} não foi encontrada no DataFrame.")
-        return None
+        print(f"A coluna {coluna} não foi encontrada no DataFrame.")
+        
     return df_tratado
