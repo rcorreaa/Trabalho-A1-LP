@@ -29,7 +29,7 @@ def plot_grafico_histograma(path_data, ano1=2010, ano2=2014, ano3=2014, ano4=202
             df = pd.read_csv(path_data + "\\sermil{}.csv".format(ano), usecols=["PESO", "ALTURA", "SEXO", "ANO_NASCIMENTO"], encoding="latin1")
         except:
             print("Erro de leitura do database do ano", ano)
-            continue
+            return
         
         #Limpeza dos valores nulos e filtro no público a ser analisado
         df = limpa_SEXO(df)
