@@ -290,12 +290,6 @@ class TestPlotGraficoHistograma(unittest.TestCase):
         # Verifica se a mensagem de erro esperada está na saída capturada
         self.assertIn("Erro de leitura no database do ano", output)        
 
-'''
-print("Resultado:")
-print(resultado)
-print("Esperado:")
-print(esperado).
-'''
 
 if __name__ == '__main__':
     unittest.main()
