@@ -121,7 +121,7 @@ def limpa_ALTURA(df):
 
 def limpa_SEXO(df):
     """
-    Remove os valores "F" da coluna SEXO do DataFrame.
+    Permanece apenas os valores 'M' da coluna SEXO do DataFrame.
 
     Parameters:
         df(dataframe): DataFrame a ser processado.
@@ -263,7 +263,7 @@ def exclui_colunas(df, cols_del=["CABECA", "CALCADO", "CINTURA", "JSM", "MUN_NAS
         df_tratado(dataframe): DataFrame sem as colunas especificadas.
 
     Exemplos:
-    # Exemplo válido, excluindo a coluna 'coluna_1' existente no DataFrame
+    Exemplo válido, excluindo a coluna 'coluna_1' existente no DataFrame
     >>> df = pd.DataFrame({"coluna_1":[1,2,3],"coluna_2":[4,5,6]})
     >>> exclui_colunas(df, ["coluna_1"])
        coluna_2
