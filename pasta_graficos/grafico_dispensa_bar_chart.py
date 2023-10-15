@@ -13,7 +13,15 @@ def plot_grafico_barras(path_data, ini_ano=2018, fim_ano=2022, ax=None):
         fim_ano(int): Ano de término. 2022 por padrão
 
     Returns:
-        None:
+        None
+
+    Exemplos:
+    Exemplo válido para um caminho com os anos corretos
+    >>> plot_grafico_barras("C:/Users/samue/OneDrive/Documentos/Dados/", ini_ano=2018, fim_ano=2022)
+
+    Exemplo inválido para um intervalo de anos onde não há dados
+    >>> plot_grafico_barras("C:/Users/samue/OneDrive/Documentos/Dados/", ini_ano=2010, fim_ano=2018)
+    Erro de leitura no database do ano 2010: [Errno 2] No such file or directory: 'C:/Users/samue/OneDrive/Documentos/Dados/sermil2010.csv'
     """
     
     if ax is None:
@@ -23,12 +31,11 @@ def plot_grafico_barras(path_data, ini_ano=2018, fim_ano=2022, ax=None):
     for ano in range(ini_ano, fim_ano+1):
         # Leitura do database com tratamento de erro
         try:
-            df = pd.read_csv(path_data + "sermil{}.csv".format(ano), usecols=["UF_JSM", "DISPENSA", "VINCULACAO_ANO"])
-        except UnicodeDecodeError:
             df = pd.read_csv(path_data + "sermil{}.csv".format(ano), usecols=["UF_JSM", "DISPENSA", "VINCULACAO_ANO"], encoding="latin1")
-        except:
-            print("Erro de leitura no database do ano", ano)
-            return    
+        except Exception as e:
+            print(f"Erro de leitura no database do ano {ano}: {e}")
+            return
+
         v_df.append(df)
         
     # Juntando todos os DataFrames
@@ -91,6 +98,5 @@ def plot_grafico_barras(path_data, ini_ano=2018, fim_ano=2022, ax=None):
 
 if __name__ == "__main__":
     doctest.testmod()
-    
-plot_grafico_barras("C:\\Users\\samue\\OneDrive\\Documentos\\Dados\\")
+
 
