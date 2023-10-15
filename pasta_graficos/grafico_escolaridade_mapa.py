@@ -11,7 +11,7 @@ def plot_grafico_mapa(path_data="tabela_escolaridade.csv", path_geografia="BR_UF
 
     Parameters:
         path_data(string): diretório dos arquivos .csv
-        pathgeografia(string): diretório do arquivo .zip dos dados geográficos do Brasil
+        path_geografia(string): diretório do arquivo .zip dos dados geográficos do Brasil
     
     Returns:
         None
