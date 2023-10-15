@@ -344,7 +344,7 @@ def nivel_ESCOLARIDADE(df):
     return df_tratado
 
 
-def gera_tabela_escolaridade(path_data="", ini_ano=2018, fim_ano=2022):
+def gera_tabela_escolaridade(path_data, ini_ano=2018, fim_ano=2022):
     """
     A função tem por objetivo gerar um arquivo csv dos dados da média dos estados de
     escolaridade do Brasil do período passado. Por padrão, de 2018 até 2022.
@@ -359,10 +359,10 @@ def gera_tabela_escolaridade(path_data="", ini_ano=2018, fim_ano=2022):
 
     Exemplos:
     Exemplo válido, realizando o download do arquivo csv obtido
-    >>> gera_tabela_escolaridade(path_data="", ini_ano=2018, fim_ano=2022)
+    >>> gera_tabela_escolaridade(path_data="../../pasta_dados/", ini_ano=2018, fim_ano=2022)
 
     Exemplo inválido, o ano 1997 não está disponível para análise
-    >>> gera_tabela_escolaridade(path_data="", ini_ano=1997, fim_ano=2004)
+    >>> gera_tabela_escolaridade(path_data="../../pasta_dados/", ini_ano=1997, fim_ano=2004)
     Erro de leitura no database do ano 1997
     """
     # Lista a ser preenchida dos DataFrames utilizados
@@ -408,8 +408,10 @@ def gera_tabela_escolaridade(path_data="", ini_ano=2018, fim_ano=2022):
     media_escolaridade_estados["NIVEL_ESCOLARIDADE"] = (media_escolaridade_estados["NIVEL_ESCOLARIDADE"] - escolaridade_minima)/(escolaridade_maxima-escolaridade_minima)*100
 
     # Geração do arquivo CSV utilizado para confecção da análise
-    media_escolaridade_estados.to_csv("tabela_escolaridade.csv", index=False)
+    media_escolaridade_estados.to_csv("../../pasta_dados/tabela_escolaridade.csv", index=False)
     return None
 
 if __name__ == "__main__":
     doctest.testmod()
+
+#gera_tabela_escolaridade(path_data="../../pasta_dados/", ini_ano=2018, fim_ano=2022)

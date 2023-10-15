@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-from ..pasta_funcoes.funcoes_limpeza import limpa_PESO, limpa_ALTURA, limpa_ANO_NASCIMENTO, limpa_SEXO
+from pasta_funcoes.funcoes_limpeza  import limpa_PESO, limpa_ALTURA, limpa_ANO_NASCIMENTO, limpa_SEXO
 import doctest
 
-def plot_grafico_histograma(path_data = "C:/Users/ramyr/LinguagensDeProgramação", ano1=2010, ano2=2014, ano3=2014, ano4=2022):
+def plot_grafico_histograma(path_data, ano1=2010, ano2=2014, ano3=2014, ano4=2022):
     """
     Plota o histograma com as densidades dos IMCs dentre 4 anos selecionados.
 
@@ -19,7 +19,7 @@ def plot_grafico_histograma(path_data = "C:/Users/ramyr/LinguagensDeProgramaçã
     
     Exemplos:
     Exemplo válido, em que os caminhos dos arquivos são passados da maneira correta e contém os dataframes desejados.
-    >>> plot_grafico_histograma(path_data= "C:/Users/ramyr/LinguagensDeProgramação", ano1 = 2010, ano2 = 2014, ano3 = 2018, ano4 = 2022)
+    >>> plot_grafico_histograma(path_data= "../pasta_dados/", ano1 = 2018, ano2 = 2019, ano3 = 2020, ano4 = 2021)
     2010
     count    320684.000000
     mean         22.648520
@@ -62,8 +62,8 @@ def plot_grafico_histograma(path_data = "C:/Users/ramyr/LinguagensDeProgramaçã
     Name: IMC, dtype: float64
     
     Exemplo inválido, em que o caminho do Dataframe não contém os dataframes desejados.
-    >>> plot_grafico_histograma(path_data="caminho_dataframes_sem_df_2010", ano1 = 2010, ano2 = 2014, ano3 = 2018, ano4 = 2022)
-    Erro de leitura no database do ano 2010
+    >>> plot_grafico_histograma(path_data="caminho_dataframes_sem_df_2010", ano1 = 2018, ano2 = 2019, ano3 = 2020, ano4 = 2021)
+    Erro de leitura no database do ano 2018
     
     """
     anos = [ano1, ano2, ano3, ano4]
@@ -73,15 +73,11 @@ def plot_grafico_histograma(path_data = "C:/Users/ramyr/LinguagensDeProgramaçã
         
         #Leitura com tratamento de erro
         try:
-            df = pd.read_csv(path_data + "\\sermil{}.csv".format(ano), usecols=["PESO", "ALTURA", "SEXO", "ANO_NASCIMENTO"])
+            df = pd.read_csv(path_data + "sermil{}.csv".format(ano), usecols=["PESO", "ALTURA", "SEXO", "ANO_NASCIMENTO"])
         except UnicodeDecodeError:
-            df = pd.read_csv(path_data + "\\sermil{}.csv".format(ano), usecols=["PESO", "ALTURA", "SEXO", "ANO_NASCIMENTO"], encoding="latin1")
+            df = pd.read_csv(path_data + "sermil{}.csv".format(ano), usecols=["PESO", "ALTURA", "SEXO", "ANO_NASCIMENTO"], encoding="latin1")
         except:
-<<<<<<< HEAD:grafico_imc_hist.py
             print("Erro de leitura no database do ano", ano)
-=======
-            print("Erro de leitura do database do ano", ano)
->>>>>>> b1463649388145b0e71fe02436dbc543c993e49b:pasta_graficos/grafico_imc_hist.py
             return
         
         #Limpeza dos valores nulos e filtro no público a ser analisado
@@ -118,3 +114,5 @@ def plot_grafico_histograma(path_data = "C:/Users/ramyr/LinguagensDeProgramaçã
 
 if __name__ == "__main__":
     doctest.testmod()
+
+#plot_grafico_histograma("../pasta_dados/", ano1=2018, ano2=2019, ano3=2020, ano4=2021)

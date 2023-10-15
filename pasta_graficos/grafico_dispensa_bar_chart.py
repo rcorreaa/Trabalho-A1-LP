@@ -1,13 +1,9 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import doctest
 from matplotlib import gridspec
-import sys
+import doctest
 
-# Caminho exemplo da 'pasta_dados'
-sys.path.append("C:/Users/samue/Repositorios_git/Trabalho_A1_LP/pasta_dados")
-
-def plot_grafico_barras(path_data, ini_ano=2018, fim_ano=2022, ax=None):
+def plot_grafico_barras(path_data, ini_ano=2018, fim_ano=2022):
     """
     Cria um gráfico de ranking que analisa a quantidade de pessoas alistadas que ficaram "Sem dispensa" e 
     "Com dispensa" junto com um stacked bar que mostra a proporção dessa análise em relação as regiões 
@@ -23,10 +19,10 @@ def plot_grafico_barras(path_data, ini_ano=2018, fim_ano=2022, ax=None):
 
     Exemplos:
     Exemplo válido para um caminho com os anos corretos
-    >>> plot_grafico_barras("C:/Users/samue/Repositorios_git/Trabalho_A1_LP/pasta_dados/", ini_ano=2018, fim_ano=2022)
+    >>> plot_grafico_barras("../pasta_dados/", ini_ano=2018, fim_ano=2022)
 
     Exemplo inválido para um intervalo de anos onde não há dados
-    >>> plot_grafico_barras("C:/Users/samue/Repositorios_git/Trabalho_A1_LP/pasta_dados/", ini_ano=2010, fim_ano=2018)
+    >>> plot_grafico_barras("../pasta_dados/", ini_ano=2010, fim_ano=2018)
     Erro de leitura no database do ano 2010
     """
 
@@ -133,4 +129,4 @@ def plot_grafico_barras(path_data, ini_ano=2018, fim_ano=2022, ax=None):
 if __name__ == "__main__":
     doctest.testmod()
 
-
+#plot_grafico_barras("../pasta_dados/")

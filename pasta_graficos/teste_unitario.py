@@ -1,17 +1,13 @@
 import unittest
 import pandas as pd
-import sys
-import os
 
-sys.path.append("C:/Users/samue/Repositorios_git/")
 df = pd.read_csv("C:/Users/samue/Repositorios_git/Trabalho_A1_LP/pasta_dados/tabela_escolaridade.csv")
 
-from Trabalho_A1_LP.pasta_funcoes.funcoes_limpeza import *
-from Trabalho_A1_LP.pasta_graficos.grafico_escolaridade_mapa import plot_grafico_mapa
-from Trabalho_A1_LP.pasta_graficos.grafico_dispensa_bar_chart import plot_grafico_barras
-from Trabalho_A1_LP.pasta_graficos.grafico_dispensa_stacked_bar import plot_grafico_stacked_bar
-from Trabalho_A1_LP.pasta_graficos.grafico_imc_hist import plot_grafico_histograma
-from Trabalho_A1_LP.pasta_graficos.grafico_imc_violin import plot_grafico_violin
+from pasta_funcoes.funcoes_limpeza import *
+from grafico_escolaridade_mapa import plot_grafico_mapa
+from grafico_dispensa_bar_chart import plot_grafico_barras
+from grafico_imc_hist import plot_grafico_histograma
+from grafico_imc_violin import plot_grafico_violin
 
 # Testes unitários para funcoes_limpeza:
 

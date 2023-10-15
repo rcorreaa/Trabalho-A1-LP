@@ -3,13 +3,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.colors import to_rgba
 import doctest
-import sys
-
-# Caminho exemplo da 'pasta_dados'
-sys.path.append("C:/Users/kaiky/OneDrive/Área de Trabalho/Trabalho-A1-LP/pasta_dados")
 
 # Insira o caminho da 'tabela_escolaridade.csv' e 'BR_UF_2021.zip' presentes na 'pasta_dados'
-def plot_grafico_mapa(path_data="C:/Users/kaiky/OneDrive/Área de Trabalho/Trabalho-A1-LP/pasta_dados/tabela_escolaridade.csv", path_geografia="C:/Users\kaiky/OneDrive/Área de Trabalho/Trabalho-A1-LP/pasta_dados/BR_UF_2021.zip"):
+def plot_grafico_mapa(path_data, path_geografia):
     """
     Plota o gráfico de mapa do nível de escolaridade por estado.
 
@@ -22,14 +18,14 @@ def plot_grafico_mapa(path_data="C:/Users/kaiky/OneDrive/Área de Trabalho/Traba
 
     Exemplos:
     Exemplo válido, em que os caminhos dos arquivos são passados da maneira correta
-    >>> plot_grafico_mapa() 
+    >>> plot_grafico_mapa(path_data="../pasta_dados/tabela_escolaridade.csv", path_geografia="../pasta_dados/BR_UF_2021.zip")
 
     Exemplo inválido, em que o caminho do Dataframe não contém o arquivo desejado
-    >>> plot_grafico_mapa(path_data="caminho_dataframes_errado")
+    >>> plot_grafico_mapa(path_data="caminho_dataframes_errado", path_geografia="../pasta_dados/BR_UF_2021.zip")
     O Diretório caminho_dataframes_errado não contém os arquivos de DataFrames necessários.
 
     Exemplo inválido, em que o caminho passado não contém o zip dos dados geográficos
-    >>> plot_grafico_mapa(path_geografia="caminho_brasil_errado")
+    >>> plot_grafico_mapa(path_data="../pasta_dados/tabela_escolaridade.csv", path_geografia="caminho_brasil_errado")
     Caminho do arquivo dos dados geoespaciais do Brasil inválido.
     """
     try:
@@ -77,8 +73,7 @@ def plot_grafico_mapa(path_data="C:/Users/kaiky/OneDrive/Área de Trabalho/Traba
     plt.show()
     return None
 
-plot_grafico_mapa()
-
 if __name__ == "__main__":
     doctest.testmod()
 
+#plot_grafico_mapa(path_data="../pasta_dados/tabela_escolaridade.csv", path_geografia="../pasta_dados/BR_UF_2021.zip")
