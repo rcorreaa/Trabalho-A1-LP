@@ -16,6 +16,9 @@ def plot_grafico_violin(path_data, ini_ano=2013, fim_ano=2022):
         None
 
     Exemplo:
+    Exemplo válido, em que os caminhos dos arquivos são passados da maneira correta e contém os dataframes desejados.
+    >>> plot_grafico_violin("../pasta_dados/", 2018, 2022)
+
     Exemplo Inválido, em que a função tenta buscar o ano de 2013 no path_data, porém ele é inexistente
     nesse diretório
     >>> plot_grafico_violin(path_data="Trabalho_A1_LP.pasta_errada", ini_ano=2013, fim_ano=2022)
@@ -50,9 +53,9 @@ def plot_grafico_violin(path_data, ini_ano=2013, fim_ano=2022):
         v_df.append(df)
 
         # Imprime algumas estatisticas de resumo
-        print(ano)
-        print(df.describe())
-        print()
+        #print(ano)
+        #print(df.describe())
+        #print()
 
     # define o estilo
     plt.style.use("seaborn-v0_8-notebook")
