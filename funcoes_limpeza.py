@@ -141,12 +141,9 @@ def limpa_SEXO(df):
     Exemplo inválido, o DataFrame não apresenta a coluna 'SEXO'
     >>> df = pd.DataFrame({"PESO": [pd.NA, 120, 40, 230]})
     >>> limpa_SEXO(df)
-    A coluna 'SEXO' não existe.
-       PESO
-    0  <NA>
-    1   120
-    2    40
-    3   230
+    Traceback (most recent call last):
+        ...
+    KeyError: 'SEXO'
     """
     # Criação de cópia do DataFrame, sem alterar o original
     df_tratado = df.copy()
@@ -182,12 +179,9 @@ def limpa_ANO_NASCIMENTO(df, ano):
     Exemplo inválido, o DataFrame não apresenta a coluna 'ANO_NASCIMENTO'
     >>> df = pd.DataFrame({"PESO": [pd.NA, 120, 40, 230]})
     >>> limpa_ANO_NASCIMENTO(df, 2019)
-    A coluna 'ANO_NASCIMENTO' não existe.
-       PESO
-    0  <NA>
-    1   120
-    2    40
-    3   230
+    Traceback (most recent call last):
+        ...
+    KeyError: 'ANO_NASCIMENTO'
     """
 
     df_tratado = df.copy()
@@ -225,11 +219,9 @@ def renomeia_ESCOLARIDADE(df):
     Exemplo inválido, o DataFrame não apresenta a coluna 'ESCOLARIDADE'
     >>> df = pd.DataFrame({"OUTRA_COLUNA": [1, 2, 3]})
     >>> renomeia_ESCOLARIDADE(df)
-    Coluna 'ESCOLARIDADE' não existente no DataFrame.
-       OUTRA_COLUNA
-    0             1
-    1             2
-    2             3
+    Traceback (most recent call last):
+        ...
+    KeyError: 'ESCOLARIDADE'
     """
 
     def aux_renomeia(registro_ESCOLARIDADE):
@@ -362,8 +354,8 @@ def gera_tabela_escolaridade(path_data="", ini_ano=2018, fim_ano=2022):
         ini_ano(int): ano de inicio. 2018 por padrão
         fim_ano(int): ano do final. 2022 por padrão
 
-    Returns: 
-        None        
+    Returns:
+        None
 
     Exemplos:
     Exemplo válido, realizando o download do arquivo csv obtido
