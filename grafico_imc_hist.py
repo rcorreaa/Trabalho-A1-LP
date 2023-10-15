@@ -60,3 +60,4 @@ def distribuicao_IMC(path_data, ano1=2010, ano2=2014, ano3=2014, ano4=2022):
     
     #Exibe o gráfico
     plt.show()
+    return None

@@ -11,6 +11,7 @@ def plot_grafico_imc_violin(path_data, ini_ano=2013, fim_ano=2022):
         path_data(string): diretorio dos arquivos dos arquivos .csv
         ini_ano(int): ano de inicio. 2013 por padrão
         fim_ano(int): ano do final. 2022 por padrão
+    
     Returns:
         None
     """
@@ -69,5 +70,6 @@ def plot_grafico_imc_violin(path_data, ini_ano=2013, fim_ano=2022):
         ax.set_ylabel('IMC')
 
     plt.show()
+    return None
 
 plot_grafico_imc_violin("../lp/data/")

@@ -2,6 +2,7 @@ import unittest
 import pandas as pd
 import funcoes_limpeza as fl
 import os
+from grafico_escolaridade_mapa import plot_grafico_mapa
 
 # Testes unitários para funcoes_limpeza:
 class TestLimpaPESO(unittest.TestCase):
@@ -28,6 +29,7 @@ class TestLimpaPESO(unittest.TestCase):
         with self.assertRaises(TypeError):
             fl.limpa_PESO(df)
 
+
 class TestLimpaALTURA(unittest.TestCase):
     
     def test_dados_validos(self):
@@ -52,6 +54,7 @@ class TestLimpaALTURA(unittest.TestCase):
         with self.assertRaises(TypeError):
             fl.limpa_ALTURA(df)
 
+
 class TestLimpaSEXO(unittest.TestCase):
     def test_dados_validos(self):
         df = pd.DataFrame({"SEXO": ["M", "M", "F", "M"]})
@@ -64,6 +67,7 @@ class TestLimpaSEXO(unittest.TestCase):
         with self.assertRaises(KeyError):
             fl.limpa_SEXO(df)
 
+
 class TestLimpaANO_NASCIMENTO(unittest.TestCase):
     def test_idade_correta(self):
         df = pd.DataFrame({"ANO_NASCIMENTO": [2004, 2003, 2005, 2000]})
@@ -75,6 +79,7 @@ class TestLimpaANO_NASCIMENTO(unittest.TestCase):
         df = pd.DataFrame({"PESO": [pd.NA, 120, 40, 230]})
         with self.assertRaises(KeyError):
             fl.limpa_ANO_NASCIMENTO(df, 2019)
+
 
 class TestRenomeiaESCOLARIDADE(unittest.TestCase):
     def test_renomeia_categorias(self):
@@ -94,6 +99,7 @@ class TestRenomeiaESCOLARIDADE(unittest.TestCase):
         esperado = pd.DataFrame({"ESCOLARIDADE": ["Ensino Médio Completo", "Ensino Fundamental Completo", "Doutorado Completo"]})
         self.assertTrue(resultado.equals(esperado))
 
+
 class TestExcluiColunas(unittest.TestCase):
     def test_exclui_colunas(self):
         df = pd.DataFrame({"coluna_1": [1, 2, 3], "coluna_2": [4, 5, 6]})
@@ -105,6 +111,7 @@ class TestExcluiColunas(unittest.TestCase):
         df = pd.DataFrame({"coluna_1": [1, 2, 3], "coluna_2": [4, 5, 6]})
         resultado = fl.exclui_colunas(df, ["coluna_3"])
         self.assertTrue(resultado.equals(df))        
+
 
 class TestNivelESCOLARIDADE(unittest.TestCase):
     def test_nivel_escolaridade(self):
@@ -118,6 +125,7 @@ class TestNivelESCOLARIDADE(unittest.TestCase):
         resultado = fl.nivel_ESCOLARIDADE(df)
         self.assertTrue(resultado.equals(df))
 
+
 class TestGeraTabelaEscolaridade(unittest.TestCase):
     def test_gera_tabela_escolaridade(self):
         # Executa a função para gerar a tabela de escolaridade
@@ -130,6 +138,11 @@ class TestGeraTabelaEscolaridade(unittest.TestCase):
         df = pd.read_csv("tabela_escolaridade.csv")
         self.assertIn("UF_RESIDENCIA", df.columns)
         self.assertIn("NIVEL_ESCOLARIDADE", df.columns)
+
+
+
+# Testes unitários para as funções de gráficos:
+
 
 
 '''

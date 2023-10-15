@@ -361,6 +361,9 @@ def gera_tabela_escolaridade(path_data="", ini_ano=2018, fim_ano=2022):
         ini_ano(int): ano de inicio. 2018 por padrão
         fim_ano(int): ano do final. 2022 por padrão
 
+    Returns: 
+        None        
+
     Exemplos:
     Exemplo válido, realizando o download do arquivo csv obtido
     >>> gera_tabela_escolaridade(path_data="", ini_ano=2018, fim_ano=2022)
@@ -413,3 +416,4 @@ def gera_tabela_escolaridade(path_data="", ini_ano=2018, fim_ano=2022):
 
     # Geração do arquivo CSV utilizado para confecção da análise
     media_escolaridade_estados.to_csv("tabela_escolaridade.csv", index=False)
+    return None
