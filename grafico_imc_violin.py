@@ -72,4 +72,4 @@ def plot_grafico_violin(path_data, ini_ano=2013, fim_ano=2022):
     plt.show()
     return None
 
-plot_grafico_imc_violin("../lp/data/")
+plot_grafico_violin("../lp/data/")
