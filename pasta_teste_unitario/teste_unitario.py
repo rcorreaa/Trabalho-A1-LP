@@ -3,14 +3,8 @@ import pandas as pd
 import sys
 import os
 
-# Obtém o diretório atual do script
-current_dir = os.path.dirname(os.path.abspath(__file__))
-
-# Obtém o diretório do diretório pai
-parent_dir = os.path.dirname(current_dir)
-
-# Adiciona o diretório pai ao sys.path
-sys.path.append(parent_dir)
+sys.path.append("C:/Users/samue/Repositorios_git/")
+df = pd.read_csv("C:/Users/samue/Repositorios_git/Trabalho_A1_LP/pasta_dados/tabela_escolaridade.csv")
 
 from Trabalho_A1_LP.pasta_funcoes.funcoes_limpeza import *
 from Trabalho_A1_LP.pasta_graficos.grafico_escolaridade_mapa import plot_grafico_mapa
@@ -148,10 +142,10 @@ class TestGeraTabelaEscolaridade(unittest.TestCase):
         gera_tabela_escolaridade()
 
         # Verifica se o arquivo CSV foi gerado
-        self.assertTrue(os.path.isfile("tabela_escolaridade.csv"))
+        self.assertTrue(os.path.isfile("C:/Users/samue/Repositorios_git/Trabalho_A1_LP/pasta_dados/tabela_escolaridade.csv"))
 
         # Verifica se o arquivo CSV possui os cabeçalhos esperados
-        df = pd.read_csv("tabela_escolaridade.csv")
+        df = pd.read_csv("C:/Users/samue/Repositorios_git/Trabalho_A1_LP/pasta_dados/tabela_escolaridade.csv")
         self.assertIn("UF_RESIDENCIA", df.columns)
         self.assertIn("NIVEL_ESCOLARIDADE", df.columns)
 
