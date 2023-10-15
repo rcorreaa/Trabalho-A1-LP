@@ -3,9 +3,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.colors import to_rgba
 import doctest
+import sys
 
+# Caminho exemplo da 'pasta_dados'
+sys.path.append("C:/Users/kaiky/OneDrive/Área de Trabalho/Trabalho-A1-LP/pasta_dados")
 
-def plot_grafico_mapa(path_data="tabela_escolaridade.csv", path_geografia="BR_UF_2021.zip"):
+# Insira o caminho da 'tabela_escolaridade.csv' e 'BR_UF_2021.zip' presentes na 'pasta_dados'
+def plot_grafico_mapa(path_data="C:/Users/kaiky/OneDrive/Área de Trabalho/Trabalho-A1-LP/pasta_dados/tabela_escolaridade.csv", path_geografia="C:/Users\kaiky/OneDrive/Área de Trabalho/Trabalho-A1-LP/pasta_dados/BR_UF_2021.zip"):
     """
     Plota o gráfico de mapa do nível de escolaridade por estado.
 
@@ -18,7 +22,7 @@ def plot_grafico_mapa(path_data="tabela_escolaridade.csv", path_geografia="BR_UF
 
     Exemplos:
     Exemplo válido, em que os caminhos dos arquivos são passados da maneira correta
-    >>> plot_grafico_mapa(path_data="tabela_escolaridade.csv", path_geografia="BR_UF_2021.zip")
+    >>> plot_grafico_mapa() 
 
     Exemplo inválido, em que o caminho do Dataframe não contém o arquivo desejado
     >>> plot_grafico_mapa(path_data="caminho_dataframes_errado")
@@ -75,3 +79,4 @@ def plot_grafico_mapa(path_data="tabela_escolaridade.csv", path_geografia="BR_UF
 
 if __name__ == "__main__":
     doctest.testmod()
+
