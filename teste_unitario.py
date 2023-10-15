@@ -3,8 +3,13 @@ import pandas as pd
 import funcoes_limpeza as fl
 import os
 from grafico_escolaridade_mapa import plot_grafico_mapa
+from grafico_dispensa_bar_chart import plot_grafico_barras
+from grafico_dispensa_stacked_bar import plot_grafico_stacked_bar
+from grafico_imc_hist import plot_grafico_histograma
+from grafico_imc_violin import plot_grafico_violin
 
 # Testes unitários para funcoes_limpeza:
+
 class TestLimpaPESO(unittest.TestCase):
 
     def test_dados_validos(self):
@@ -140,10 +145,27 @@ class TestGeraTabelaEscolaridade(unittest.TestCase):
         self.assertIn("NIVEL_ESCOLARIDADE", df.columns)
 
 
-
 # Testes unitários para as funções de gráficos:
 
+class TestPlotGraficoMapa(unittest.TestCase):
 
+    def test_caminho_correto(self):
+        # Verifica se a função executa sem erros quando os caminhos corretos são fornecidos
+        path_data = "tabela_escolaridade.csv"
+        path_geografia = "BR_UF_2021.zip"
+        self.assertIsNone(plot_grafico_mapa(path_data, path_geografia))
+
+    def test_caminho_dataframes_errado(self):
+        # Verifica se a função lida corretamente com caminhos de DataFrames errados
+        path_data = "caminho_dataframes_errado"
+        path_geografia = "BR_UF_2021.zip"
+        self.assertIsNone(plot_grafico_mapa(path_data, path_geografia))
+
+    def test_caminho_geografia_errado(self):
+        # Verifica se a função lida corretamente com caminhos de geografia errados
+        path_data = "tabela_escolaridade.csv"
+        path_geografia = "caminho_brasil_errado"
+        self.assertIsNone(plot_grafico_mapa(path_data, path_geografia))
 
 '''
 print("Resultado:")

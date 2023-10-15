@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from funcoes_limpeza import limpa_PESO, limpa_ALTURA, limpa_ANO_NASCIMENTO, limpa_SEXO
 
-def distribuicao_IMC(path_data, ano1=2010, ano2=2014, ano3=2014, ano4=2022):
+def plot_grafico_histograma(path_data, ano1=2010, ano2=2014, ano3=2014, ano4=2022):
     """
     Plota o histograma com as densidades dos IMCs dentre 4 anos selecionados.
 
