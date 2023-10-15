@@ -1,7 +1,7 @@
+import os
 import unittest
 import pandas as pd
 import funcoes_limpeza as fl
-import os
 from grafico_escolaridade_mapa import plot_grafico_mapa
 from grafico_dispensa_bar_chart import plot_grafico_barras
 from grafico_dispensa_stacked_bar import plot_grafico_stacked_bar

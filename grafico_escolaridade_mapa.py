@@ -2,6 +2,7 @@ import geopandas as gpd
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.colors import to_rgba
+import doctest
 
 
 def plot_grafico_mapa(path_data="tabela_escolaridade.csv", path_geografia="BR_UF_2021.zip"):
@@ -71,3 +72,6 @@ def plot_grafico_mapa(path_data="tabela_escolaridade.csv", path_geografia="BR_UF
 
     plt.show()
     return None
+
+if __name__ == "__main__":
+    doctest.testmod()

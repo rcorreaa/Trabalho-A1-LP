@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import doctest
 
 def plot_grafico_stacked_bar(path_data, ini_ano=2018, fim_ano=2022, ax=None):
     """
@@ -87,5 +88,8 @@ def plot_grafico_stacked_bar(path_data, ini_ano=2018, fim_ano=2022, ax=None):
     plt.legend()
     plt.show()
     return None
+
+if __name__ == "__main__":
+    doctest.testmod()
 
 plot_grafico_stacked_bar("C:\\Users\\samue\\OneDrive\\Documentos\\Dados\\")

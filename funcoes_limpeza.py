@@ -1,4 +1,5 @@
 import pandas as pd
+import doctest
 
 def limpa_PESO(df):
     """
@@ -417,3 +418,6 @@ def gera_tabela_escolaridade(path_data="", ini_ano=2018, fim_ano=2022):
     # Geração do arquivo CSV utilizado para confecção da análise
     media_escolaridade_estados.to_csv("tabela_escolaridade.csv", index=False)
     return None
+
+if __name__ == "__main__":
+    doctest.testmod()
