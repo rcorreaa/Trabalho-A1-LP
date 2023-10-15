@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-from funcoes_limpeza import limpa_PESO, limpa_ALTURA, limpa_ANO_NASCIMENTO, limpa_SEXO
+from ..pasta_funcoes.funcoes_limpeza import limpa_PESO, limpa_ALTURA, limpa_ANO_NASCIMENTO, limpa_SEXO
 import doctest
 
 def plot_grafico_histograma(path_data = "C:/Users/ramyr/LinguagensDeProgramação", ano1=2010, ano2=2014, ano3=2014, ano4=2022):
@@ -77,7 +77,11 @@ def plot_grafico_histograma(path_data = "C:/Users/ramyr/LinguagensDeProgramaçã
         except UnicodeDecodeError:
             df = pd.read_csv(path_data + "\\sermil{}.csv".format(ano), usecols=["PESO", "ALTURA", "SEXO", "ANO_NASCIMENTO"], encoding="latin1")
         except:
+<<<<<<< HEAD:grafico_imc_hist.py
             print("Erro de leitura no database do ano", ano)
+=======
+            print("Erro de leitura do database do ano", ano)
+>>>>>>> b1463649388145b0e71fe02436dbc543c993e49b:pasta_graficos/grafico_imc_hist.py
             return
         
         #Limpeza dos valores nulos e filtro no público a ser analisado

@@ -3,22 +3,26 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.colors import to_rgba
 import doctest
+import sys
 
+# Caminho exemplo da 'pasta_dados'
+sys.path.append("C:/Users/kaiky/OneDrive/Área de Trabalho/Trabalho-A1-LP/pasta_dados")
 
-def plot_grafico_mapa(path_data="tabela_escolaridade.csv", path_geografia="BR_UF_2021.zip"):
+# Insira o caminho da 'tabela_escolaridade.csv' e 'BR_UF_2021.zip' presentes na 'pasta_dados'
+def plot_grafico_mapa(path_data="C:/Users/kaiky/OneDrive/Área de Trabalho/Trabalho-A1-LP/pasta_dados/tabela_escolaridade.csv", path_geografia="C:/Users\kaiky/OneDrive/Área de Trabalho/Trabalho-A1-LP/pasta_dados/BR_UF_2021.zip"):
     """
     Plota o gráfico de mapa do nível de escolaridade por estado.
 
     Parameters:
         path_data(string): diretório dos arquivos .csv
-        pathgeografia(string): diretório do arquivo .zip dos dados geográficos do Brasil
+        path_geografia(string): diretório do arquivo .zip dos dados geográficos do Brasil
     
     Returns:
         None
 
     Exemplos:
     Exemplo válido, em que os caminhos dos arquivos são passados da maneira correta
-    >>> plot_grafico_mapa(path_data="tabela_escolaridade.csv", path_geografia="BR_UF_2021.zip")
+    >>> plot_grafico_mapa() 
 
     Exemplo inválido, em que o caminho do Dataframe não contém o arquivo desejado
     >>> plot_grafico_mapa(path_data="caminho_dataframes_errado")
@@ -56,7 +60,7 @@ def plot_grafico_mapa(path_data="tabela_escolaridade.csv", path_geografia="BR_UF
     # Personalização do mapa
     janela, graf_mapa = plt.subplots(1, 1, figsize=(10, 10))
     brasil.plot(ax=graf_mapa, color=df_mapa["COR_GRADIENTE"], edgecolor="black", linewidth=0.7)
-    graf_mapa.set_title("Nível de Escolaridade por Estado", fontdict={"fontsize": "15", "fontname": "Arial"})
+    graf_mapa.set_title("Nível de Escolaridade por Estado", fontdict={"fontsize": "15", "fontname": "Arial","fontweight": "bold"})
 
     # Rótulos nos eixos
     graf_mapa.set_xlabel("Latitude", fontdict={"fontsize": "12", "fontname": "Arial"})
@@ -73,5 +77,8 @@ def plot_grafico_mapa(path_data="tabela_escolaridade.csv", path_geografia="BR_UF
     plt.show()
     return None
 
+plot_grafico_mapa()
+
 if __name__ == "__main__":
     doctest.testmod()
+
