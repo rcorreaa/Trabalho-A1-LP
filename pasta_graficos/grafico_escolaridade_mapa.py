@@ -60,7 +60,7 @@ def plot_grafico_mapa(path_data="C:/Users/kaiky/OneDrive/Área de Trabalho/Traba
     # Personalização do mapa
     janela, graf_mapa = plt.subplots(1, 1, figsize=(10, 10))
     brasil.plot(ax=graf_mapa, color=df_mapa["COR_GRADIENTE"], edgecolor="black", linewidth=0.7)
-    graf_mapa.set_title("Nível de Escolaridade por Estado", fontdict={"fontsize": "15", "fontname": "Arial"})
+    graf_mapa.set_title("Nível de Escolaridade por Estado", fontdict={"fontsize": "15", "fontname": "Arial","fontweight": "bold"})
 
     # Rótulos nos eixos
     graf_mapa.set_xlabel("Latitude", fontdict={"fontsize": "12", "fontname": "Arial"})
@@ -76,6 +76,8 @@ def plot_grafico_mapa(path_data="C:/Users/kaiky/OneDrive/Área de Trabalho/Traba
 
     plt.show()
     return None
+
+plot_grafico_mapa()
 
 if __name__ == "__main__":
     doctest.testmod()
