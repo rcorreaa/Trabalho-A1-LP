@@ -3,6 +3,10 @@ import matplotlib.pyplot as plt
 from matplotlib import gridspec
 import doctest
 
+"""
+Módulo da visualiação do Gráfico de Barras feito pelo integrante Samuel. 
+"""
+
 def plot_grafico_barras(path_data, ini_ano=2018, fim_ano=2022):
     """
     Cria um gráfico de ranking que analisa a quantidade de pessoas alistadas que ficaram "Sem dispensa" e 
