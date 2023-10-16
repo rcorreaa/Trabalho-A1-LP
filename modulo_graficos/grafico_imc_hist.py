@@ -71,7 +71,8 @@ def plot_grafico_histograma(path_data, ini_ano=2018, fim_ano=2022):
     plt.legend(handles=legenda_personalizada)
     
     # Exibe o gráfico
-    plt.show()
+    plt.savefig("../visualizacoes/histograma_imc.png", format="png")
+    #plt.show()
     return None
 
 if __name__ == "__main__":

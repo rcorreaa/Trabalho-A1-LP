@@ -92,7 +92,8 @@ def plot_grafico_mapa(path_data, path_geografia):
     graf_mapa.set_xticks([-70, -60, -50, -40, -30])
     graf_mapa.set_yticks([-30, -20, -10, 0])
 
-    plt.show()
+    plt.savefig("../visualizacoes/mapa_escolaridade.png", format="png")
+    #plt.show()
     return None
 
 if __name__ == "__main__":

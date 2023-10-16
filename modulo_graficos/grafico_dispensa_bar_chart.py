@@ -90,7 +90,7 @@ def plot_grafico_barras(path_data, ini_ano=2018, fim_ano=2022):
     proporcoes = somas.unstack().div(soma_total, axis=0).reset_index()
     proporcoes.columns = ["REGIAO", "Com dispensa", "Sem dispensa"]
 
-    fig = plt.figure(figsize=(14, 6))
+    fig = plt.figure(figsize=(14, 8))
 
     # Definindo a primeira coluna com o dobro da largura da segunda
     gs = gridspec.GridSpec(1, 2, width_ratios=[2, 1], wspace=0.5)  
@@ -132,15 +132,13 @@ def plot_grafico_barras(path_data, ini_ano=2018, fim_ano=2022):
 
     ax1.bar_label(bar1, fmt='%.2f%%', label_type="center", fontsize=10)
     ax1.bar_label(bar2, fmt='%.2f%%', label_type="center", fontsize=10)
-    ax1.set_yticklabels(proporcoes["REGIAO"], fontsize=10)
     
     ax1.set_title("Proporção de alistados com e sem dispensas por Região", 
                   fontdict={"fontsize": "15", "fontname": "Arial", "fontweight": "bold"})
     ax1.legend()
 
-    # Ajuste o layout para melhor visualização
-    plt.tight_layout()
-    plt.show()
+    plt.savefig("../visualizacoes/bar_dispensa.png", format="png")
+    #plt.show()
     return None
 
 if __name__ == "__main__":
