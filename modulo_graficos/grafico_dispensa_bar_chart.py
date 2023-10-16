@@ -27,10 +27,10 @@ def plot_grafico_barras(path_data, ini_ano=2018, fim_ano=2022):
 
     Exemplos:
     Exemplo válido para um caminho com os anos corretos
-    >>> plot_grafico_barras("../data/", ini_ano=2018, fim_ano=2022)
+    >>> plot_grafico_barras("data/", ini_ano=2018, fim_ano=2022)
 
     Exemplo inválido para um intervalo de anos onde não há dados
-    >>> plot_grafico_barras("../data/", ini_ano=2010, fim_ano=2018)
+    >>> plot_grafico_barras("data/", ini_ano=2010, fim_ano=2018)
     Erro de leitura no database do ano 2010
     """
 

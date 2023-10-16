@@ -27,14 +27,14 @@ def plot_grafico_mapa(path_data, path_geografia):
 
     Exemplos:
     Exemplo válido, em que os caminhos dos arquivos são passados da maneira correta
-    >>> plot_grafico_mapa(path_data="../data/tabela_escolaridade.csv", path_geografia="../data/BR_UF_2021.zip")
+    >>> plot_grafico_mapa(path_data="data/tabela_escolaridade.csv", path_geografia="data/BR_UF_2021.zip")
 
     Exemplo inválido, em que o caminho do Dataframe não contém o arquivo desejado
-    >>> plot_grafico_mapa(path_data="caminho_dataframes_errado", path_geografia="../data/BR_UF_2021.zip")
+    >>> plot_grafico_mapa(path_data="caminho_dataframes_errado", path_geografia="data/BR_UF_2021.zip")
     O Diretório caminho_dataframes_errado não contém os arquivos de DataFrames necessários.
 
     Exemplo inválido, em que o caminho passado não contém o zip dos dados geográficos
-    >>> plot_grafico_mapa(path_data="../data/tabela_escolaridade.csv", path_geografia="caminho_brasil_errado")
+    >>> plot_grafico_mapa(path_data="data/tabela_escolaridade.csv", path_geografia="caminho_brasil_errado")
     Caminho do arquivo dos dados geoespaciais do Brasil inválido.
     """
     try:
@@ -99,4 +99,4 @@ def plot_grafico_mapa(path_data, path_geografia):
 if __name__ == "__main__":
     doctest.testmod()
 
-#plot_grafico_mapa(path_data="../data/tabela_escolaridade.csv", path_geografia="../data/BR_UF_2021.zip")
+#plot_grafico_mapa(path_data="data/tabela_escolaridade.csv", path_geografia="data/BR_UF_2021.zip")

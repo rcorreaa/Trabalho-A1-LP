@@ -4,8 +4,12 @@ Módulo da visualização do Gráfico de Violino feito pelo integrante Anderson.
 
 import pandas as pd
 import matplotlib.pyplot as plt
-from modulo_graficos.utilitarios.utils import limpa_PESO, limpa_ALTURA, limpa_SEXO, limpa_ANO_NASCIMENTO
 import doctest
+
+if __name__=="__main__":
+    from utilitarios.utils import limpa_PESO, limpa_ALTURA, limpa_SEXO, limpa_ANO_NASCIMENTO
+else:
+    from modulo_graficos.utilitarios.utils import limpa_PESO, limpa_ALTURA, limpa_SEXO, limpa_ANO_NASCIMENTO
 
 #import os
 #root_path = os.path.dirname(__file__)
@@ -25,7 +29,7 @@ def plot_grafico_violin(path_data, ini_ano=2013, fim_ano=2022):
 
     Exemplo:
     Exemplo válido, em que os caminhos dos arquivos são passados da maneira correta e contém os dataframes desejados.
-    >>> plot_grafico_violin("../data/", 2018, 2022)
+    >>> plot_grafico_violin("data/", 2018, 2022)
 
     Exemplo Inválido, em que a função tenta buscar o ano de 2013 no path_data, porém ele é inexistente
     nesse diretório
@@ -90,4 +94,4 @@ def plot_grafico_violin(path_data, ini_ano=2013, fim_ano=2022):
 if __name__ == "__main__":
     doctest.testmod()
 
-# plot_grafico_violin("../data/", 2018, 2022)
+#plot_grafico_violin("data/", 2018, 2022)
