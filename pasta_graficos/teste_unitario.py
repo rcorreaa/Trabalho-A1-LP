@@ -1,3 +1,7 @@
+"""
+Módulo responsável por realizar os testes unitários das funções presentes no módulo "funcoes_limpeza".
+"""
+
 import os
 import io
 import sys
@@ -5,12 +9,8 @@ import unittest
 import pandas as pd
 from pasta_funcoes.funcoes_limpeza import *
 
-"""
-Módulo responsável por realizar os testes unitários das funções presentes no módulo "funcoes_limpeza".
-"""
 
-# Testes unitários para funcoes_limpeza:
-
+# Testes Unitários para a função "limpa_PESO"
 class TestLimpaPESO(unittest.TestCase):
 
     def test_dados_validos(self):
@@ -35,7 +35,7 @@ class TestLimpaPESO(unittest.TestCase):
         with self.assertRaises(TypeError):
             limpa_PESO(df)
 
-
+# Testes Unitários para a função "limpa_ALTURA":
 class TestLimpaALTURA(unittest.TestCase):
     
     def test_dados_validos(self):
@@ -60,7 +60,7 @@ class TestLimpaALTURA(unittest.TestCase):
         with self.assertRaises(TypeError):
             limpa_ALTURA(df)
 
-
+# Testes Unitários para a função "limpa_SEXO"
 class TestLimpaSEXO(unittest.TestCase):
     def test_dados_validos(self):
         df = pd.DataFrame({"SEXO": ["M", "M", "F", "M"]})
@@ -73,7 +73,7 @@ class TestLimpaSEXO(unittest.TestCase):
         with self.assertRaises(KeyError):
             limpa_SEXO(df)
 
-
+# Testes Unitários para a função "limpa_ANO_NASCIMENTO"
 class TestLimpaANO_NASCIMENTO(unittest.TestCase):
     def test_idade_correta(self):
         df = pd.DataFrame({"ANO_NASCIMENTO": [2004, 2003, 2005, 2000]})
@@ -86,7 +86,7 @@ class TestLimpaANO_NASCIMENTO(unittest.TestCase):
         with self.assertRaises(KeyError):
             limpa_ANO_NASCIMENTO(df, 2019)
 
-
+# Testes Unitários para a função "renomeia_ESCOLARIDADE"
 class TestRenomeiaESCOLARIDADE(unittest.TestCase):
     def test_renomeia_categorias(self):
         df = pd.DataFrame({"ESCOLARIDADE": ["Ensino Médio Completo", "Ensino Superior", "Mestrado", "Ensino Fundamental", "Doutorado"]})
@@ -105,7 +105,7 @@ class TestRenomeiaESCOLARIDADE(unittest.TestCase):
         esperado = pd.DataFrame({"ESCOLARIDADE": ["Ensino Médio Completo", "Ensino Fundamental Completo", "Doutorado Completo"]})
         self.assertTrue(resultado.equals(esperado))
 
-
+# Testes Unitários para a função "exclui_colunas"
 class TestExcluiColunas(unittest.TestCase):
     def test_exclui_colunas(self):
         df = pd.DataFrame({"coluna_1": [1, 2, 3], "coluna_2": [4, 5, 6]})
@@ -118,7 +118,7 @@ class TestExcluiColunas(unittest.TestCase):
         resultado = exclui_colunas(df, ["coluna_3"])
         self.assertTrue(resultado.equals(df))        
 
-
+# Testes Unitários para a função "nivel_ESCOLARIDADE"
 class TestNivelESCOLARIDADE(unittest.TestCase):
     def test_nivel_escolaridade(self):
         df = pd.DataFrame({"ESCOLARIDADE": ["Ensino Médio", "Alfabetizado"]})
@@ -131,7 +131,7 @@ class TestNivelESCOLARIDADE(unittest.TestCase):
         resultado = nivel_ESCOLARIDADE(df)
         self.assertTrue(resultado.equals(df))
 
-
+# Testes Unitários para a função "gera_tabela_escolaridade"
 class TestGeraTabelaEscolaridade(unittest.TestCase):
     def test_exemplo_valido(self):
         path_data = "../../pasta_dados/"

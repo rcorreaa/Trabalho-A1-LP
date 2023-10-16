@@ -1,11 +1,11 @@
+"""
+Módulo da visualização do Gráfico de Barras feito pelo integrante Samuel. 
+"""
+
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib import gridspec
 import doctest
-
-"""
-Módulo da visualização do Gráfico de Barras feito pelo integrante Samuel. 
-"""
 
 def plot_grafico_barras(path_data, ini_ano=2018, fim_ano=2022):
     """

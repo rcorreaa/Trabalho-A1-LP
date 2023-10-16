@@ -1,10 +1,10 @@
-import pandas as pd
-import doctest
-
 """
 O módulo 'funcoes_limpeza' tem como objetivo gerar objetos da biblioteca Pandas com a finalidade de realizar limpeza na base de dados do 
 Alistamento Militar do Brasil e facilitar a integração dos gráficos e análise dos processos.
 """
+
+import pandas as pd
+import doctest
 
 def limpa_PESO(df):
     """
@@ -419,4 +419,4 @@ def gera_tabela_escolaridade(path_data, ini_ano=2018, fim_ano=2022, path_save=".
 if __name__ == "__main__":
     doctest.testmod()
 
-#gera_tabela_escolaridade(path_data="../../pasta_dados/", ini_ano=2018, fim_ano=2022)
+# gera_tabela_escolaridade(path_data="../../pasta_dados/", ini_ano=2018, fim_ano=2022)

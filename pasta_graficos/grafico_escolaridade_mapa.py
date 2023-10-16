@@ -1,13 +1,13 @@
+"""
+Módulo da visualização do Gráfico de Mapa feito pelo integrante Kaiky. 
+"""
+
 import geopandas as gpd
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.colors import to_rgba
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import doctest
-
-"""
-Módulo da visualização do Gráfico de Mapa feito pelo integrante Kaiky. 
-"""
 
 # Insira o caminho da 'tabela_escolaridade.csv' e 'BR_UF_2021.zip' presentes na 'pasta_dados'
 def plot_grafico_mapa(path_data, path_geografia):
