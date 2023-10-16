@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>teste_unitario module &mdash; Trabalho_A1_LP 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=d45e8c67"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="modulo_graficos.utilitarios package" href="modulo_graficos.utilitarios.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Trabalho_A1_LP
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Trabalho_A1_LP</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modulo_graficos.html">modulo_graficos package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">teste_unitario module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#teste_unitario.TestExcluiColunas"><code class="docutils literal notranslate"><span class="pre">TestExcluiColunas</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#teste_unitario.TestExcluiColunas.test_coluna_inexistente"><code class="docutils literal notranslate"><span class="pre">TestExcluiColunas.test_coluna_inexistente()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#teste_unitario.TestExcluiColunas.test_exclui_colunas"><code class="docutils literal notranslate"><span class="pre">TestExcluiColunas.test_exclui_colunas()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#teste_unitario.TestGeraTabelaEscolaridade"><code class="docutils literal notranslate"><span class="pre">TestGeraTabelaEscolaridade</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#teste_unitario.TestGeraTabelaEscolaridade.test_exemplo_invalido"><code class="docutils literal notranslate"><span class="pre">TestGeraTabelaEscolaridade.test_exemplo_invalido()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#teste_unitario.TestGeraTabelaEscolaridade.test_exemplo_valido"><code class="docutils literal notranslate"><span class="pre">TestGeraTabelaEscolaridade.test_exemplo_valido()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#teste_unitario.TestLimpaALTURA"><code class="docutils literal notranslate"><span class="pre">TestLimpaALTURA</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#teste_unitario.TestLimpaALTURA.test_coluna_inexistente"><code class="docutils literal notranslate"><span class="pre">TestLimpaALTURA.test_coluna_inexistente()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#teste_unitario.TestLimpaALTURA.test_dados_nulos"><code class="docutils literal notranslate"><span class="pre">TestLimpaALTURA.test_dados_nulos()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#teste_unitario.TestLimpaALTURA.test_dados_validos"><code class="docutils literal notranslate"><span class="pre">TestLimpaALTURA.test_dados_validos()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#teste_unitario.TestLimpaALTURA.test_valores_nao_numericos"><code class="docutils literal notranslate"><span class="pre">TestLimpaALTURA.test_valores_nao_numericos()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#teste_unitario.TestLimpaANO_NASCIMENTO"><code class="docutils literal notranslate"><span class="pre">TestLimpaANO_NASCIMENTO</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#teste_unitario.TestLimpaANO_NASCIMENTO.test_coluna_inexistente"><code class="docutils literal notranslate"><span class="pre">TestLimpaANO_NASCIMENTO.test_coluna_inexistente()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#teste_unitario.TestLimpaANO_NASCIMENTO.test_idade_correta"><code class="docutils literal notranslate"><span class="pre">TestLimpaANO_NASCIMENTO.test_idade_correta()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#teste_unitario.TestLimpaPESO"><code class="docutils literal notranslate"><span class="pre">TestLimpaPESO</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#teste_unitario.TestLimpaPESO.test_coluna_inexistente"><code class="docutils literal notranslate"><span class="pre">TestLimpaPESO.test_coluna_inexistente()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#teste_unitario.TestLimpaPESO.test_dados_nulos"><code class="docutils literal notranslate"><span class="pre">TestLimpaPESO.test_dados_nulos()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#teste_unitario.TestLimpaPESO.test_dados_validos"><code class="docutils literal notranslate"><span class="pre">TestLimpaPESO.test_dados_validos()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#teste_unitario.TestLimpaPESO.test_valores_nao_numericos"><code class="docutils literal notranslate"><span class="pre">TestLimpaPESO.test_valores_nao_numericos()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#teste_unitario.TestLimpaSEXO"><code class="docutils literal notranslate"><span class="pre">TestLimpaSEXO</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#teste_unitario.TestLimpaSEXO.test_coluna_inexistente"><code class="docutils literal notranslate"><span class="pre">TestLimpaSEXO.test_coluna_inexistente()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#teste_unitario.TestLimpaSEXO.test_dados_validos"><code class="docutils literal notranslate"><span class="pre">TestLimpaSEXO.test_dados_validos()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#teste_unitario.TestNivelESCOLARIDADE"><code class="docutils literal notranslate"><span class="pre">TestNivelESCOLARIDADE</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#teste_unitario.TestNivelESCOLARIDADE.test_coluna_inexistente"><code class="docutils literal notranslate"><span class="pre">TestNivelESCOLARIDADE.test_coluna_inexistente()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#teste_unitario.TestNivelESCOLARIDADE.test_nivel_escolaridade"><code class="docutils literal notranslate"><span class="pre">TestNivelESCOLARIDADE.test_nivel_escolaridade()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#teste_unitario.TestRenomeiaESCOLARIDADE"><code class="docutils literal notranslate"><span class="pre">TestRenomeiaESCOLARIDADE</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#teste_unitario.TestRenomeiaESCOLARIDADE.test_coluna_completa"><code class="docutils literal notranslate"><span class="pre">TestRenomeiaESCOLARIDADE.test_coluna_completa()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#teste_unitario.TestRenomeiaESCOLARIDADE.test_coluna_inexistente"><code class="docutils literal notranslate"><span class="pre">TestRenomeiaESCOLARIDADE.test_coluna_inexistente()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#teste_unitario.TestRenomeiaESCOLARIDADE.test_renomeia_categorias"><code class="docutils literal notranslate"><span class="pre">TestRenomeiaESCOLARIDADE.test_renomeia_categorias()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Trabalho_A1_LP</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">Trabalho_A1_LP</a></li>
+      <li class="breadcrumb-item active">teste_unitario module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/teste_unitario.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-teste_unitario">
+<span id="teste-unitario-module"></span><h1>teste_unitario module<a class="headerlink" href="#module-teste_unitario" title="Link to this heading"></a></h1>
+<p>Módulo responsável por realizar os testes unitários das funções presentes no módulo “funcoes_limpeza”.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="teste_unitario.TestExcluiColunas">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teste_unitario.</span></span><span class="sig-name descname"><span class="pre">TestExcluiColunas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestExcluiColunas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestExcluiColunas" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="teste_unitario.TestExcluiColunas.test_coluna_inexistente">
+<span class="sig-name descname"><span class="pre">test_coluna_inexistente</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestExcluiColunas.test_coluna_inexistente"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestExcluiColunas.test_coluna_inexistente" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teste_unitario.TestExcluiColunas.test_exclui_colunas">
+<span class="sig-name descname"><span class="pre">test_exclui_colunas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestExcluiColunas.test_exclui_colunas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestExcluiColunas.test_exclui_colunas" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="teste_unitario.TestGeraTabelaEscolaridade">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teste_unitario.</span></span><span class="sig-name descname"><span class="pre">TestGeraTabelaEscolaridade</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestGeraTabelaEscolaridade"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestGeraTabelaEscolaridade" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="teste_unitario.TestGeraTabelaEscolaridade.test_exemplo_invalido">
+<span class="sig-name descname"><span class="pre">test_exemplo_invalido</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestGeraTabelaEscolaridade.test_exemplo_invalido"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestGeraTabelaEscolaridade.test_exemplo_invalido" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teste_unitario.TestGeraTabelaEscolaridade.test_exemplo_valido">
+<span class="sig-name descname"><span class="pre">test_exemplo_valido</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestGeraTabelaEscolaridade.test_exemplo_valido"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestGeraTabelaEscolaridade.test_exemplo_valido" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="teste_unitario.TestLimpaALTURA">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teste_unitario.</span></span><span class="sig-name descname"><span class="pre">TestLimpaALTURA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestLimpaALTURA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestLimpaALTURA" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="teste_unitario.TestLimpaALTURA.test_coluna_inexistente">
+<span class="sig-name descname"><span class="pre">test_coluna_inexistente</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestLimpaALTURA.test_coluna_inexistente"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestLimpaALTURA.test_coluna_inexistente" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teste_unitario.TestLimpaALTURA.test_dados_nulos">
+<span class="sig-name descname"><span class="pre">test_dados_nulos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestLimpaALTURA.test_dados_nulos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestLimpaALTURA.test_dados_nulos" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teste_unitario.TestLimpaALTURA.test_dados_validos">
+<span class="sig-name descname"><span class="pre">test_dados_validos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestLimpaALTURA.test_dados_validos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestLimpaALTURA.test_dados_validos" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teste_unitario.TestLimpaALTURA.test_valores_nao_numericos">
+<span class="sig-name descname"><span class="pre">test_valores_nao_numericos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestLimpaALTURA.test_valores_nao_numericos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestLimpaALTURA.test_valores_nao_numericos" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="teste_unitario.TestLimpaANO_NASCIMENTO">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teste_unitario.</span></span><span class="sig-name descname"><span class="pre">TestLimpaANO_NASCIMENTO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestLimpaANO_NASCIMENTO"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestLimpaANO_NASCIMENTO" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="teste_unitario.TestLimpaANO_NASCIMENTO.test_coluna_inexistente">
+<span class="sig-name descname"><span class="pre">test_coluna_inexistente</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestLimpaANO_NASCIMENTO.test_coluna_inexistente"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestLimpaANO_NASCIMENTO.test_coluna_inexistente" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teste_unitario.TestLimpaANO_NASCIMENTO.test_idade_correta">
+<span class="sig-name descname"><span class="pre">test_idade_correta</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestLimpaANO_NASCIMENTO.test_idade_correta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestLimpaANO_NASCIMENTO.test_idade_correta" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="teste_unitario.TestLimpaPESO">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teste_unitario.</span></span><span class="sig-name descname"><span class="pre">TestLimpaPESO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestLimpaPESO"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestLimpaPESO" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="teste_unitario.TestLimpaPESO.test_coluna_inexistente">
+<span class="sig-name descname"><span class="pre">test_coluna_inexistente</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestLimpaPESO.test_coluna_inexistente"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestLimpaPESO.test_coluna_inexistente" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teste_unitario.TestLimpaPESO.test_dados_nulos">
+<span class="sig-name descname"><span class="pre">test_dados_nulos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestLimpaPESO.test_dados_nulos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestLimpaPESO.test_dados_nulos" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teste_unitario.TestLimpaPESO.test_dados_validos">
+<span class="sig-name descname"><span class="pre">test_dados_validos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestLimpaPESO.test_dados_validos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestLimpaPESO.test_dados_validos" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teste_unitario.TestLimpaPESO.test_valores_nao_numericos">
+<span class="sig-name descname"><span class="pre">test_valores_nao_numericos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestLimpaPESO.test_valores_nao_numericos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestLimpaPESO.test_valores_nao_numericos" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="teste_unitario.TestLimpaSEXO">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teste_unitario.</span></span><span class="sig-name descname"><span class="pre">TestLimpaSEXO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestLimpaSEXO"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestLimpaSEXO" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="teste_unitario.TestLimpaSEXO.test_coluna_inexistente">
+<span class="sig-name descname"><span class="pre">test_coluna_inexistente</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestLimpaSEXO.test_coluna_inexistente"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestLimpaSEXO.test_coluna_inexistente" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teste_unitario.TestLimpaSEXO.test_dados_validos">
+<span class="sig-name descname"><span class="pre">test_dados_validos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestLimpaSEXO.test_dados_validos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestLimpaSEXO.test_dados_validos" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="teste_unitario.TestNivelESCOLARIDADE">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teste_unitario.</span></span><span class="sig-name descname"><span class="pre">TestNivelESCOLARIDADE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestNivelESCOLARIDADE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestNivelESCOLARIDADE" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="teste_unitario.TestNivelESCOLARIDADE.test_coluna_inexistente">
+<span class="sig-name descname"><span class="pre">test_coluna_inexistente</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestNivelESCOLARIDADE.test_coluna_inexistente"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestNivelESCOLARIDADE.test_coluna_inexistente" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teste_unitario.TestNivelESCOLARIDADE.test_nivel_escolaridade">
+<span class="sig-name descname"><span class="pre">test_nivel_escolaridade</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestNivelESCOLARIDADE.test_nivel_escolaridade"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestNivelESCOLARIDADE.test_nivel_escolaridade" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="teste_unitario.TestRenomeiaESCOLARIDADE">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">teste_unitario.</span></span><span class="sig-name descname"><span class="pre">TestRenomeiaESCOLARIDADE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestRenomeiaESCOLARIDADE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestRenomeiaESCOLARIDADE" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="teste_unitario.TestRenomeiaESCOLARIDADE.test_coluna_completa">
+<span class="sig-name descname"><span class="pre">test_coluna_completa</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestRenomeiaESCOLARIDADE.test_coluna_completa"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestRenomeiaESCOLARIDADE.test_coluna_completa" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teste_unitario.TestRenomeiaESCOLARIDADE.test_coluna_inexistente">
+<span class="sig-name descname"><span class="pre">test_coluna_inexistente</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestRenomeiaESCOLARIDADE.test_coluna_inexistente"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestRenomeiaESCOLARIDADE.test_coluna_inexistente" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="teste_unitario.TestRenomeiaESCOLARIDADE.test_renomeia_categorias">
+<span class="sig-name descname"><span class="pre">test_renomeia_categorias</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/teste_unitario.html#TestRenomeiaESCOLARIDADE.test_renomeia_categorias"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#teste_unitario.TestRenomeiaESCOLARIDADE.test_renomeia_categorias" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modulo_graficos.utilitarios.html" class="btn btn-neutral float-left" title="modulo_graficos.utilitarios package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Anderson, Kaiky, Ramyro, Samuel..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

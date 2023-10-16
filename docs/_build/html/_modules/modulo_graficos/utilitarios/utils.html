@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>modulo_graficos.utilitarios.utils &mdash; Trabalho_A1_LP 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=d45e8c67"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Trabalho_A1_LP
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">Trabalho_A1_LP</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Trabalho_A1_LP</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">modulo_graficos.utilitarios.utils</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for modulo_graficos.utilitarios.utils</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">O módulo &#39;funcoes_limpeza&#39; tem como objetivo gerar objetos da biblioteca Pandas com a finalidade de realizar limpeza na base de dados do </span>
+<span class="sd">Alistamento Militar do Brasil e facilitar a integração dos gráficos e análise dos processos.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">doctest</span>
+
+<div class="viewcode-block" id="limpa_PESO">
+<a class="viewcode-back" href="../../../modulo_graficos.utilitarios.html#modulo_graficos.utilitarios.utils.limpa_PESO">[docs]</a>
+<span class="k">def</span> <span class="nf">limpa_PESO</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Realiza a remoção de linhas do DataFrame de acordo com a coluna &#39;PESO&#39;,</span>
+<span class="sd">    permanecendo apenas dados não nulos e em uma faixa de valor entre 40 e 200 kilos.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        df(dataframe): DataFrame a ser processado.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        df_tratado(dataframe): DataFrame com linhas indesejadas removidas.</span>
+
+<span class="sd">    Exemplos:</span>
+<span class="sd">    Exemplo válido, com a coluna &#39;PESO&#39; presente, e os dados são todos númericos</span>
+<span class="sd">    &gt;&gt;&gt; df = pd.DataFrame({&quot;PESO&quot;: [100, 101, 210, 35]})</span>
+<span class="sd">    &gt;&gt;&gt; limpa_PESO(df)</span>
+<span class="sd">       PESO</span>
+<span class="sd">    0   100</span>
+<span class="sd">    1   101</span>
+
+<span class="sd">    Exemplo válido, com a coluna &#39;PESO&#39; presente, e os dados prontos para serem convertidos para números</span>
+<span class="sd">    &gt;&gt;&gt; df = pd.DataFrame({&quot;PESO&quot;: [pd.NA, &quot;120&quot;, &quot;40&quot;, &quot;230&quot;]})</span>
+<span class="sd">    &gt;&gt;&gt; limpa_PESO(df)</span>
+<span class="sd">        PESO</span>
+<span class="sd">    1  120.0</span>
+<span class="sd">    2   40.0</span>
+
+<span class="sd">    Exemplo inválido, o DataFrame não apresenta a coluna &#39;PESO&#39;</span>
+<span class="sd">    &gt;&gt;&gt; df = pd.DataFrame({&quot;ALTURA&quot;: [180, 179, 210, 167]})</span>
+<span class="sd">    &gt;&gt;&gt; limpa_PESO(df)</span>
+<span class="sd">    Traceback (most recent call last):</span>
+<span class="sd">        ...</span>
+<span class="sd">    KeyError: [&#39;PESO&#39;]</span>
+
+<span class="sd">    Exemplo inválido, a coluna &#39;PESO&#39; do DataFrame apresenta valores não numéricos</span>
+<span class="sd">    &gt;&gt;&gt; df = pd.DataFrame({&quot;PESO&quot;: [200, &quot;120 kg&quot;, 40, 230]})</span>
+<span class="sd">    &gt;&gt;&gt; limpa_PESO(df)</span>
+<span class="sd">    Traceback (most recent call last):</span>
+<span class="sd">           ...</span>
+<span class="sd">    TypeError: &#39;&gt;=&#39; not supported between instances of &#39;str&#39; and &#39;int&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Criação de cópia do DataFrame, sem alterar o original</span>
+    <span class="n">df_tratado</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Conversão da coluna PESO para o tipo numérico</span>
+        <span class="n">df_tratado</span><span class="p">[</span><span class="s2">&quot;PESO&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df_tratado</span><span class="p">[</span><span class="s2">&quot;PESO&quot;</span><span class="p">])</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A coluna &#39;PESO&#39; não está presente no DataFrame.&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Impossível converter a coluna &#39;PESO&#39; para o tipo numérico.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Limpeza da coluna &#39;PESO&#39;</span>
+    <span class="n">df_tratado</span> <span class="o">=</span> <span class="n">df_tratado</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;PESO&quot;</span><span class="p">])</span>
+    <span class="n">df_tratado</span> <span class="o">=</span> <span class="n">df_tratado</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_tratado</span><span class="p">[</span><span class="s2">&quot;PESO&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">40</span><span class="p">]</span>
+    <span class="n">df_tratado</span> <span class="o">=</span> <span class="n">df_tratado</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_tratado</span><span class="p">[</span><span class="s2">&quot;PESO&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">200</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">df_tratado</span></div>
+
+
+
+<div class="viewcode-block" id="limpa_ALTURA">
+<a class="viewcode-back" href="../../../modulo_graficos.utilitarios.html#modulo_graficos.utilitarios.utils.limpa_ALTURA">[docs]</a>
+<span class="k">def</span> <span class="nf">limpa_ALTURA</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Realiza a remoção de linhas do DataFrame de acordo com a coluna &#39;ALTURA&#39;,</span>
+<span class="sd">    permanecendo apenas dados não nulos e em uma faixa de valor entre 140 e 220 centímetros.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        df(dataframe): DataFrame a ser processado.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        df_tratado(dataframe): DataFrame com linhas indesejadas removidas.</span>
+
+<span class="sd">    Exemplos:</span>
+<span class="sd">    Exemplo válido, com a coluna &#39;ALTURA&#39; presente, e os dados são todos númericos</span>
+<span class="sd">    &gt;&gt;&gt; df = pd.DataFrame({&quot;ALTURA&quot;: [180, 121, 210, 200]})</span>
+<span class="sd">    &gt;&gt;&gt; limpa_ALTURA(df)</span>
+<span class="sd">       ALTURA</span>
+<span class="sd">    0     180</span>
+<span class="sd">    2     210</span>
+<span class="sd">    3     200</span>
+
+<span class="sd">    Exemplo válido, com a coluna &#39;ALTURA&#39; presente, e os dados prontos para serem convertidos para números</span>
+<span class="sd">    &gt;&gt;&gt; df = pd.DataFrame({&quot;ALTURA&quot;: [pd.NA, &quot;120&quot;, &quot;150&quot;, &quot;180&quot;]})</span>
+<span class="sd">    &gt;&gt;&gt; limpa_ALTURA(df)</span>
+<span class="sd">       ALTURA</span>
+<span class="sd">    2   150.0</span>
+<span class="sd">    3   180.0</span>
+
+<span class="sd">    Exemplo inválido, o DataFrame não apresenta a coluna &#39;ALTURA&#39;</span>
+<span class="sd">    &gt;&gt;&gt; df = pd.DataFrame({&quot;PESO&quot;: [180, 179, 210, 167]})</span>
+<span class="sd">    &gt;&gt;&gt; limpa_ALTURA(df)</span>
+<span class="sd">    Traceback (most recent call last):</span>
+<span class="sd">        ...</span>
+<span class="sd">    KeyError: [&#39;ALTURA&#39;]</span>
+
+<span class="sd">    Exemplo inválido, a coluna &#39;PESO&#39; do DataFrame apresenta valores não numéricos</span>
+<span class="sd">    &gt;&gt;&gt; df = pd.DataFrame({&quot;ALTURA&quot;: [200, &quot;179 cm&quot;, 140, 230]})</span>
+<span class="sd">    &gt;&gt;&gt; limpa_ALTURA(df)</span>
+<span class="sd">    Traceback (most recent call last):</span>
+<span class="sd">        ...</span>
+<span class="sd">    TypeError: &#39;&gt;=&#39; not supported between instances of &#39;str&#39; and &#39;int&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Criação de cópia do DataFrame, sem alterar o original</span>
+
+    <span class="n">df_tratado</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Conversão da coluna ALTURA para o tipo numérico</span>
+        <span class="n">df_tratado</span><span class="p">[</span><span class="s2">&quot;ALTURA&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df_tratado</span><span class="p">[</span><span class="s2">&quot;ALTURA&quot;</span><span class="p">])</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A coluna &#39;ALTURA&#39; não está presente no DataFrame.&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Impossível converter a coluna &#39;ALTURA&#39; para o tipo numérico.&quot;</span><span class="p">)</span>
+    <span class="c1"># Limpeza da coluna &#39;ALTURA&#39;</span>
+    <span class="n">df_tratado</span> <span class="o">=</span> <span class="n">df_tratado</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ALTURA&#39;</span><span class="p">])</span>
+    <span class="n">df_tratado</span> <span class="o">=</span> <span class="n">df_tratado</span><span class="p">[(</span><span class="n">df_tratado</span><span class="p">[</span><span class="s1">&#39;ALTURA&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">140</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_tratado</span><span class="p">[</span><span class="s1">&#39;ALTURA&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">220</span><span class="p">)]</span>
+
+    <span class="k">return</span> <span class="n">df_tratado</span></div>
+
+
+
+<div class="viewcode-block" id="limpa_SEXO">
+<a class="viewcode-back" href="../../../modulo_graficos.utilitarios.html#modulo_graficos.utilitarios.utils.limpa_SEXO">[docs]</a>
+<span class="k">def</span> <span class="nf">limpa_SEXO</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Permanece apenas os valores &#39;M&#39; da coluna SEXO do DataFrame.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        df(dataframe): DataFrame a ser processado.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        df_tratado(dataframe): DataFrame com linhas indesejadas removidas.</span>
+
+<span class="sd">    Exemplos:</span>
+<span class="sd">    Exemplo válido, com a coluna &#39;SEXO&#39; presente, e os dados são se apresentam da forma correta</span>
+<span class="sd">    &gt;&gt;&gt; df = pd.DataFrame({&quot;SEXO&quot;: [&quot;M&quot;, &quot;M&quot;, &quot;F&quot;,&quot;M&quot;]})</span>
+<span class="sd">    &gt;&gt;&gt; limpa_SEXO(df)</span>
+<span class="sd">      SEXO</span>
+<span class="sd">    0    M</span>
+<span class="sd">    1    M</span>
+<span class="sd">    3    M</span>
+
+<span class="sd">    Exemplo inválido, o DataFrame não apresenta a coluna &#39;SEXO&#39;</span>
+<span class="sd">    &gt;&gt;&gt; df = pd.DataFrame({&quot;PESO&quot;: [pd.NA, 120, 40, 230]})</span>
+<span class="sd">    &gt;&gt;&gt; limpa_SEXO(df)</span>
+<span class="sd">    Traceback (most recent call last):</span>
+<span class="sd">        ...</span>
+<span class="sd">    KeyError: &#39;SEXO&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Criação de cópia do DataFrame, sem alterar o original</span>
+    <span class="n">df_tratado</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Excluindo valores &quot;F&quot; da coluna SEXO</span>
+        <span class="n">df_tratado</span> <span class="o">=</span> <span class="n">df_tratado</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;SEXO&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;M&quot;</span><span class="p">]</span>
+    <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">erro_sexo</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">erro_sexo</span>
+
+    <span class="k">return</span> <span class="n">df_tratado</span></div>
+
+
+
+<div class="viewcode-block" id="limpa_ANO_NASCIMENTO">
+<a class="viewcode-back" href="../../../modulo_graficos.utilitarios.html#modulo_graficos.utilitarios.utils.limpa_ANO_NASCIMENTO">[docs]</a>
+<span class="k">def</span> <span class="nf">limpa_ANO_NASCIMENTO</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">ano</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Remove as linhas de pessoas com mais de 19 anos do DataFrame.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        df(dataframe): DataFrame a ser processado.</span>
+<span class="sd">        ano: ano do dataframe</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        df_tratado(dataframe): DataFrame sem as linhas especificadas.</span>
+
+<span class="sd">    Exemplos:</span>
+<span class="sd">    Exemplo válido, com a coluna &#39;ALTURA&#39; presente, e os dados são todos númericos</span>
+<span class="sd">    &gt;&gt;&gt; df = pd.DataFrame({&quot;ANO_NASCIMENTO&quot;: [2004, 2003, 2005, 2000]})</span>
+<span class="sd">    &gt;&gt;&gt; limpa_ANO_NASCIMENTO(df, 2022)</span>
+<span class="sd">       ANO_NASCIMENTO</span>
+<span class="sd">    0            2004</span>
+<span class="sd">    1            2003</span>
+
+<span class="sd">    Exemplo inválido, o DataFrame não apresenta a coluna &#39;ANO_NASCIMENTO&#39;</span>
+<span class="sd">    &gt;&gt;&gt; df = pd.DataFrame({&quot;PESO&quot;: [pd.NA, 120, 40, 230]})</span>
+<span class="sd">    &gt;&gt;&gt; limpa_ANO_NASCIMENTO(df, 2019)</span>
+<span class="sd">    Traceback (most recent call last):</span>
+<span class="sd">        ...</span>
+<span class="sd">    KeyError: &#39;ANO_NASCIMENTO&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">df_tratado</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Filtrando indivíduos com a idade correta de alistamento.</span>
+        <span class="n">df_tratado</span> <span class="o">=</span> <span class="n">df_tratado</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;ANO_NASCIMENTO&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">ano</span> <span class="o">-</span> <span class="mi">18</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;ANO_NASCIMENTO&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">ano</span> <span class="o">-</span> <span class="mi">19</span><span class="p">)]</span>
+    <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">erro_ano</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">erro_ano</span>
+
+    <span class="k">return</span> <span class="n">df_tratado</span></div>
+
+
+
+<div class="viewcode-block" id="renomeia_ESCOLARIDADE">
+<a class="viewcode-back" href="../../../modulo_graficos.utilitarios.html#modulo_graficos.utilitarios.utils.renomeia_ESCOLARIDADE">[docs]</a>
+<span class="k">def</span> <span class="nf">renomeia_ESCOLARIDADE</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Renomeia as categorias da coluna ESCOLARIDADE, a fim de agrupar.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        df(dataframe): DataFrame a ser processado.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        df_tratado(dataframe): DataFrame com a coluna atualizada.</span>
+
+<span class="sd">    Exemplos:</span>
+<span class="sd">    Exemplo válido, com a coluna &#39;ESCOLARIDADE&#39;, e dados prontos para serem processados</span>
+<span class="sd">    &gt;&gt;&gt; df = pd.DataFrame({&quot;ESCOLARIDADE&quot;: [&quot;Ensino Médio Completo&quot;, &quot;Ensino Superior&quot;, &quot;Mestrado&quot;, &quot;Ensino Fundamental&quot;, &quot;Doutorado&quot;]})</span>
+<span class="sd">    &gt;&gt;&gt; renomeia_ESCOLARIDADE(df)</span>
+<span class="sd">                ESCOLARIDADE</span>
+<span class="sd">    0  Ensino Médio Completo</span>
+<span class="sd">    1        Ensino Superior</span>
+<span class="sd">    2          Pós-graduação</span>
+<span class="sd">    3     Ensino Fundamental</span>
+<span class="sd">    4          Pós-graduação</span>
+
+<span class="sd">    Exemplo inválido, o DataFrame não apresenta a coluna &#39;ESCOLARIDADE&#39;</span>
+<span class="sd">    &gt;&gt;&gt; df = pd.DataFrame({&quot;OUTRA_COLUNA&quot;: [1, 2, 3]})</span>
+<span class="sd">    &gt;&gt;&gt; renomeia_ESCOLARIDADE(df)</span>
+<span class="sd">    Traceback (most recent call last):</span>
+<span class="sd">        ...</span>
+<span class="sd">    KeyError: &#39;ESCOLARIDADE&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">aux_renomeia</span><span class="p">(</span><span class="n">registro_ESCOLARIDADE</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">registro_ESCOLARIDADE</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;Completo&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">registro_ESCOLARIDADE</span>
+        <span class="k">elif</span> <span class="n">registro_ESCOLARIDADE</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;Ensino Médio&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Ensino Médio&quot;</span>
+        <span class="k">elif</span> <span class="n">registro_ESCOLARIDADE</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;Ensino Fundamental&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Ensino Fundamental&quot;</span>
+        <span class="k">elif</span> <span class="n">registro_ESCOLARIDADE</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;Ensino Superior&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Ensino Superior&quot;</span>
+        <span class="k">elif</span> <span class="n">registro_ESCOLARIDADE</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;Pós&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">registro_ESCOLARIDADE</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
+                <span class="s2">&quot;Mestrado&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">registro_ESCOLARIDADE</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;Doutorado&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Pós-graduação&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">registro_ESCOLARIDADE</span>
+
+    <span class="n">df_tratado</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">df_tratado</span><span class="p">[</span><span class="s2">&quot;ESCOLARIDADE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_tratado</span><span class="p">[</span><span class="s2">&quot;ESCOLARIDADE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+            <span class="k">lambda</span> <span class="n">registro_ESCOLARIDADE</span><span class="p">:</span> <span class="n">aux_renomeia</span><span class="p">(</span><span class="n">registro_ESCOLARIDADE</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">erro_coluna</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">erro_coluna</span>
+
+    <span class="k">return</span> <span class="n">df_tratado</span></div>
+
+
+
+<div class="viewcode-block" id="exclui_colunas">
+<a class="viewcode-back" href="../../../modulo_graficos.utilitarios.html#modulo_graficos.utilitarios.utils.exclui_colunas">[docs]</a>
+<span class="k">def</span> <span class="nf">exclui_colunas</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cols_del</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;CABECA&quot;</span><span class="p">,</span> <span class="s2">&quot;CALCADO&quot;</span><span class="p">,</span> <span class="s2">&quot;CINTURA&quot;</span><span class="p">,</span> <span class="s2">&quot;JSM&quot;</span><span class="p">,</span> <span class="s2">&quot;MUN_NASCIMENTO&quot;</span><span class="p">,</span> <span class="s2">&quot;UF_NASCIMENTO&quot;</span><span class="p">,</span> <span class="s2">&quot;RELIGIAO&quot;</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Remove colunas desnecessárias do DataFrame passado. Por padrão são as colunas:</span>
+<span class="sd">    (&quot;CABECA&quot;, &quot;CALCADO&quot;, &quot;CINTURA&quot;, &quot;JSM&quot;, &quot;MUN_NASCIMENTO&quot;, &quot;UF_NASCIMENTO&quot;, &quot;RELIGIAO&quot;).</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        df(dataframe): DataFrame a ser processado.</span>
+<span class="sd">        cols_del(list): Lista de colunas a serem deletadas. (Opcional)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        df_tratado(dataframe): DataFrame sem as colunas especificadas.</span>
+
+<span class="sd">    Exemplos:</span>
+<span class="sd">    Exemplo válido, excluindo a coluna &#39;coluna_1&#39; existente no DataFrame</span>
+<span class="sd">    &gt;&gt;&gt; df = pd.DataFrame({&quot;coluna_1&quot;:[1,2,3],&quot;coluna_2&quot;:[4,5,6]})</span>
+<span class="sd">    &gt;&gt;&gt; exclui_colunas(df, [&quot;coluna_1&quot;])</span>
+<span class="sd">       coluna_2</span>
+<span class="sd">    0         4</span>
+<span class="sd">    1         5</span>
+<span class="sd">    2         6</span>
+
+<span class="sd">    Exemplo inválido, a função não exclui &#39;coluna_3&#39; por não estar presente no DataFrame</span>
+<span class="sd">    &gt;&gt;&gt; df = pd.DataFrame({&quot;coluna_1&quot;:[1,2,3],&quot;coluna_2&quot;:[4,5,6]})</span>
+<span class="sd">    &gt;&gt;&gt; exclui_colunas(df, [&quot;coluna_3&quot;])</span>
+<span class="sd">    Coluna coluna_3 não existente no DataFrame.</span>
+<span class="sd">       coluna_1  coluna_2</span>
+<span class="sd">    0         1         4</span>
+<span class="sd">    1         2         5</span>
+<span class="sd">    2         3         6</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Criação de cópia do DataFrame, sem alterar o original</span>
+    <span class="n">df_tratado</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">coluna</span> <span class="ow">in</span> <span class="n">cols_del</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Exclusão de colunas desnecessárias sem alteração no DataFrame original</span>
+            <span class="n">df_tratado</span> <span class="o">=</span> <span class="n">df_tratado</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">coluna</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Coluna </span><span class="si">{</span><span class="n">coluna</span><span class="si">}</span><span class="s2"> não existente no DataFrame.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df_tratado</span></div>
+
+
+
+<div class="viewcode-block" id="nivel_ESCOLARIDADE">
+<a class="viewcode-back" href="../../../modulo_graficos.utilitarios.html#modulo_graficos.utilitarios.utils.nivel_ESCOLARIDADE">[docs]</a>
+<span class="k">def</span> <span class="nf">nivel_ESCOLARIDADE</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Cria a coluna NIVEL_ESCOLARIDADE a fim de medir em valor quantitativo o</span>
+<span class="sd">    nível de escolaridade dos indivíduos.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        df(dataframe): DataFrame a ser processado.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        df_tratado(dataframe): DataFrame com a coluna NIVEL_ESCOLARIDADE adicionada.</span>
+
+<span class="sd">    Exemplos:</span>
+<span class="sd">    Exemplo válido, com a coluna &#39;ESCOLARIDADE&#39; presente no DataFrame e dados de &#39;NIVEL_ESCOLARIDADE&#39; prontos para serem criados</span>
+<span class="sd">    &gt;&gt;&gt; df = pd.DataFrame({&quot;ESCOLARIDADE&quot;:[&quot;Ensino Médio&quot;, &quot;Alfabetizado&quot;]})</span>
+<span class="sd">    &gt;&gt;&gt; nivel_ESCOLARIDADE(df)</span>
+<span class="sd">       ESCOLARIDADE  NIVEL_ESCOLARIDADE</span>
+<span class="sd">    0  Ensino Médio                   5</span>
+<span class="sd">    1  Alfabetizado                   1</span>
+
+<span class="sd">    Exemplo inválido, não se aplica a funcionadade por não existir a coluna &#39;ESCOLARIDADE&#39;</span>
+<span class="sd">    &gt;&gt;&gt; df = pd.DataFrame({&quot;PESO&quot;:[100, 85, 115, 79], &quot;ALTURA&quot;:[180, 169, 120, 240]})</span>
+<span class="sd">    &gt;&gt;&gt; nivel_ESCOLARIDADE(df)</span>
+<span class="sd">    A coluna &#39;ESCOLARIDADE&#39; não foi encontrada no DataFrame.</span>
+<span class="sd">       PESO  ALTURA</span>
+<span class="sd">    0   100     180</span>
+<span class="sd">    1    85     169</span>
+<span class="sd">    2   115     120</span>
+<span class="sd">    3    79     240</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Criação de cópia do DataFrame, sem alterar o original</span>
+    <span class="n">df_tratado</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="n">grau_escolaridade</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;Analfabeto&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;Alfabetizado&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;Ensino Fundamental&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">&quot;Ensino Fundamental Completo&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="s2">&quot;Ensino Médio&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s2">&quot;Ensino Médio Completo&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+        <span class="s2">&quot;Ensino Superior&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+        <span class="s2">&quot;Ensino Superior Completo&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+        <span class="s2">&quot;Pós-graduação&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">}</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Atribuindo valores de nível de escolaridade de acordo com a formação dos indivíduos</span>
+        <span class="n">df_tratado</span><span class="p">[</span><span class="s2">&quot;NIVEL_ESCOLARIDADE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_tratado</span><span class="p">[</span><span class="s2">&quot;ESCOLARIDADE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">grau_escolaridade</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">coluna</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A coluna </span><span class="si">{</span><span class="n">coluna</span><span class="si">}</span><span class="s2"> não foi encontrada no DataFrame.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df_tratado</span></div>
+
+
+
+<div class="viewcode-block" id="gera_tabela_escolaridade">
+<a class="viewcode-back" href="../../../modulo_graficos.utilitarios.html#modulo_graficos.utilitarios.utils.gera_tabela_escolaridade">[docs]</a>
+<span class="k">def</span> <span class="nf">gera_tabela_escolaridade</span><span class="p">(</span><span class="n">path_data</span><span class="p">,</span> <span class="n">ini_ano</span><span class="o">=</span><span class="mi">2018</span><span class="p">,</span> <span class="n">fim_ano</span><span class="o">=</span><span class="mi">2022</span><span class="p">,</span> <span class="n">path_save</span><span class="o">=</span><span class="s2">&quot;data/tabela_escolaridade.csv&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A função tem por objetivo gerar um arquivo csv dos dados da média dos estados de</span>
+<span class="sd">    escolaridade do Brasil do período passado. Por padrão, de 2018 até 2022.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        path_data(string): diretório dos arquivos dos arquivos .csv</span>
+<span class="sd">        ini_ano(int): ano de inicio. 2018 por padrão</span>
+<span class="sd">        fim_ano(int): ano do final. 2022 por padrão</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    Exemplos:</span>
+<span class="sd">    Exemplo válido, realizando o download do arquivo csv obtido</span>
+<span class="sd">    &gt;&gt;&gt; gera_tabela_escolaridade(path_data=&quot;data/&quot;, ini_ano=2018, fim_ano=2022)</span>
+
+<span class="sd">    Exemplo inválido, o ano 1997 não está disponível para análise</span>
+<span class="sd">    &gt;&gt;&gt; gera_tabela_escolaridade(path_data=&quot;data/&quot;, ini_ano=1997, fim_ano=2004)</span>
+<span class="sd">    Erro de leitura no database do ano 1997</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Lista a ser preenchida dos DataFrames utilizados</span>
+    <span class="n">lista_df</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">ano</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ini_ano</span><span class="p">,</span> <span class="n">fim_ano</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># Leitura do database com tratamento de erro</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_data</span> <span class="o">+</span> <span class="s2">&quot;sermil</span><span class="si">{}</span><span class="s2">.csv&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ano</span><span class="p">),</span> <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;UF_RESIDENCIA&quot;</span><span class="p">,</span> <span class="s2">&quot;ESCOLARIDADE&quot;</span><span class="p">])</span>
+        <span class="k">except</span> <span class="ne">UnicodeDecodeError</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_data</span> <span class="o">+</span> <span class="s2">&quot;sermil</span><span class="si">{}</span><span class="s2">.csv&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ano</span><span class="p">),</span> <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;UF_RESIDENCIA&quot;</span><span class="p">,</span> <span class="s2">&quot;ESCOLARIDADE&quot;</span><span class="p">],</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;latin1&quot;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Erro de leitura no database do ano&quot;</span><span class="p">,</span> <span class="n">ano</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Agrupando dados da coluna de escolaridade e criando coluna de nível de escolaridade</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">renomeia_ESCOLARIDADE</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">nivel_ESCOLARIDADE</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+        <span class="n">lista_df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+    <span class="c1"># Junção dos DataFrames verticalmente</span>
+    <span class="n">df_concatenado</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">lista_df</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Remoção da coluna de escolaridade</span>
+    <span class="n">df_concatenado</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;ESCOLARIDADE&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Média de escolaridade por estado</span>
+    <span class="n">media_escolaridade_estados</span> <span class="o">=</span> <span class="n">df_concatenado</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;UF_RESIDENCIA&quot;</span><span class="p">)[</span><span class="s2">&quot;NIVEL_ESCOLARIDADE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+    <span class="c1"># Remoção do estado &#39;KK&#39; e resetação de índices</span>
+    <span class="n">media_escolaridade_estados</span> <span class="o">=</span> <span class="n">media_escolaridade_estados</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">media_escolaridade_estados</span><span class="p">[</span><span class="s2">&quot;UF_RESIDENCIA&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;KK&quot;</span><span class="p">]</span>
+    <span class="n">media_escolaridade_estados</span> <span class="o">=</span> <span class="n">media_escolaridade_estados</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Mudança de escala no nível de escolaridade</span>
+    <span class="n">media_escolaridade_estados</span><span class="p">[</span><span class="s2">&quot;NIVEL_ESCOLARIDADE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.5</span><span class="o">**</span><span class="n">media_escolaridade_estados</span><span class="p">[</span><span class="s2">&quot;NIVEL_ESCOLARIDADE&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Extração de máximo e mínimo do DataFrame</span>
+    <span class="n">escolaridade_maxima</span> <span class="o">=</span> <span class="n">media_escolaridade_estados</span><span class="p">[</span><span class="s2">&quot;NIVEL_ESCOLARIDADE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">escolaridade_minima</span> <span class="o">=</span> <span class="n">media_escolaridade_estados</span><span class="p">[</span><span class="s2">&quot;NIVEL_ESCOLARIDADE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+
+    <span class="c1"># Normalização do nível de escolaridade na escala de 0 a 100</span>
+    <span class="n">media_escolaridade_estados</span><span class="p">[</span><span class="s2">&quot;NIVEL_ESCOLARIDADE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">media_escolaridade_estados</span><span class="p">[</span><span class="s2">&quot;NIVEL_ESCOLARIDADE&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">escolaridade_minima</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">escolaridade_maxima</span><span class="o">-</span><span class="n">escolaridade_minima</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
+
+    <span class="c1"># Geração do arquivo CSV utilizado para confecção da análise</span>
+    <span class="n">media_escolaridade_estados</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path_save</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+
+<span class="c1">#gera_tabela_escolaridade(path_data=&quot;../../data/&quot;, ini_ano=2018, fim_ano=2022)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Anderson, Kaiky, Ramyro, Samuel..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
