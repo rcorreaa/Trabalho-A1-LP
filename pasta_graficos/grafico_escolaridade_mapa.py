@@ -2,9 +2,9 @@
 Módulo da visualização do Gráfico de Mapa feito pelo integrante Kaiky. 
 """
 
-import sys, os
+import os
 root_path = os.path.dirname(__file__)
-sys.path.append(root_path)
+os.chdir(root_path)
 
 import geopandas as gpd
 import pandas as pd

@@ -2,9 +2,9 @@
 Módulo da visualização do Gráfico de Barras feito pelo integrante Samuel. 
 """
 
-import sys, os
+import os
 root_path = os.path.dirname(__file__)
-sys.path.append(root_path)
+os.chdir(root_path)
 
 import pandas as pd
 import matplotlib.pyplot as plt

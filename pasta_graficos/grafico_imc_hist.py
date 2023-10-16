@@ -2,9 +2,9 @@
 Módulo da visualização do Gráfico de Histograma feito pelo integrante Ramyro. 
 """
 
-import sys, os
+import os
 root_path = os.path.dirname(__file__)
-sys.path.append(root_path)
+os.chdir(root_path)
 
 import matplotlib.pyplot as plt
 import pandas as pd
