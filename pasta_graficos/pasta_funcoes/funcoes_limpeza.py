@@ -1,6 +1,11 @@
 import pandas as pd
 import doctest
 
+"""
+O módulo 'funcoes_limpeza' tem como objetivo gerar objetos da biblioteca Pandas com a finalidade de realizar limpeza na base de dados do 
+Alistamento Militar do Brasil e facilitar a integração dos gráficos e análise dos processos.
+"""
+
 def limpa_PESO(df):
     """
     Realiza a remoção de linhas do DataFrame de acordo com a coluna 'PESO',
