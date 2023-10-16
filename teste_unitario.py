@@ -7,7 +7,7 @@ import io
 import sys
 import unittest
 import pandas as pd
-from pasta_graficos.utilitarios.utils import *
+from modulo_graficos.utilitarios.utils import *
 
 # Testes Unitários para a função "limpa_PESO"
 class TestLimpaPESO(unittest.TestCase):
@@ -133,7 +133,7 @@ class TestNivelESCOLARIDADE(unittest.TestCase):
 # Testes Unitários para a função "gera_tabela_escolaridade"
 class TestGeraTabelaEscolaridade(unittest.TestCase):
     def test_exemplo_valido(self):
-        path_data = "../../pasta_dados/"
+        path_data = "../../data/"
         ini_ano = 2018
         fim_ano = 2022
         path_save = "caminho_para_arquivo_de_teste.csv"
@@ -145,7 +145,7 @@ class TestGeraTabelaEscolaridade(unittest.TestCase):
         os.remove(path_save)  
     
     def test_exemplo_invalido(self):
-        path_data = "../../pasta_dados/"
+        path_data = "../../data/"
         ini_ano = 1997
         fim_ano = 2004
         path_save = "caminho_para_arquivo_de_teste.csv"

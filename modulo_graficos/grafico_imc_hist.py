@@ -25,7 +25,7 @@ def plot_grafico_histograma(path_data, ini_ano=2018, fim_ano=2022):
     
     Exemplos:
     Exemplo válido, em que os caminhos dos arquivos são passados da maneira correta e contém os dataframes desejados.
-    >>> plot_grafico_histograma("../pasta_dados/", 2018, 2022)
+    >>> plot_grafico_histograma("../data/", 2018, 2022)
     
     Exemplo inválido, em que o caminho do Dataframe não contém os dataframes desejados.
     >>> plot_grafico_histograma("caminho_errado/", 2018, 2022)
@@ -77,4 +77,4 @@ def plot_grafico_histograma(path_data, ini_ano=2018, fim_ano=2022):
 if __name__ == "__main__":
     doctest.testmod()
 
-#plot_grafico_histograma("../pasta_dados/", 2018, 2022)
+#plot_grafico_histograma("../data/", 2018, 2022)

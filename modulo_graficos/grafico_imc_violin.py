@@ -25,7 +25,7 @@ def plot_grafico_violin(path_data, ini_ano=2013, fim_ano=2022):
 
     Exemplo:
     Exemplo válido, em que os caminhos dos arquivos são passados da maneira correta e contém os dataframes desejados.
-    >>> plot_grafico_violin("../pasta_dados/", 2018, 2022)
+    >>> plot_grafico_violin("../data/", 2018, 2022)
 
     Exemplo Inválido, em que a função tenta buscar o ano de 2013 no path_data, porém ele é inexistente
     nesse diretório
@@ -89,4 +89,4 @@ def plot_grafico_violin(path_data, ini_ano=2013, fim_ano=2022):
 if __name__ == "__main__":
     doctest.testmod()
 
-# plot_grafico_violin("../pasta_dados/", 2018, 2022)
+# plot_grafico_violin("../data/", 2018, 2022)
