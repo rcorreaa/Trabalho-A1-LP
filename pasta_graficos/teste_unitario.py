@@ -3,12 +3,11 @@ import io
 import sys
 import unittest
 import pandas as pd
-import  matplotlib as plt
 from pasta_funcoes.funcoes_limpeza import *
-from grafico_escolaridade_mapa import plot_grafico_mapa
-from grafico_dispensa_bar_chart import plot_grafico_barras
-from grafico_imc_hist import plot_grafico_histograma
-from grafico_imc_violin import plot_grafico_violin
+
+"""
+Módulo responsável por realizar os testes unitários das funções presentes no módulo "funcoes_limpeza".
+"""
 
 # Testes unitários para funcoes_limpeza:
 
@@ -163,133 +162,7 @@ class TestGeraTabelaEscolaridade(unittest.TestCase):
 
         # Verifica se a mensagem de erro esperada está na saída capturada
         self.assertIn("Erro de leitura no database do ano", output)
-
-
-# Testes unitários para as funções de gráficos:
-
-class TestPlotGraficoMapa(unittest.TestCase):
-
-    def test_caminho_correto(self):
-        # Verifica se a função executa sem erros quando os caminhos corretos são fornecidos
-        path_data = "tabela_escolaridade.csv"
-        path_geografia = "BR_UF_2021.zip"
-        self.assertIsNone(plot_grafico_mapa(path_data, path_geografia))
-
-    def test_caminho_dataframes_errado(self):
-        # Verifica se a função lida corretamente com caminhos de DataFrames errados
-        path_data = "caminho_dataframes_errado"
-        path_geografia = "BR_UF_2021.zip"
-        self.assertIsNone(plot_grafico_mapa(path_data, path_geografia))
-
-    def test_caminho_geografia_errado(self):
-        # Verifica se a função lida corretamente com caminhos de geografia errados
-        path_data = "tabela_escolaridade.csv"
-        path_geografia = "caminho_brasil_errado"
-        self.assertIsNone(plot_grafico_mapa(path_data, path_geografia))
-
-
-class TestPlotGraficoBarras(unittest.TestCase):
-    def test_exemplo_valido(self):
-        path_data = "../pasta_dados/"
-        ini_ano = 2018
-        fim_ano = 2022
-
-        plot_grafico_barras(path_data, ini_ano, fim_ano)
-
-        # Verifica se o gráfico foi criado
-        self.assertTrue(plt.gcf() is not None)
-
-    def test_exemplo_invalido(self):
-        path_data = "../pasta_dados/"
-        ini_ano = 2010
-        fim_ano = 2018
-
-        # Captura a saída padrão (stdout) para verificar se a função imprime a mensagem de erro
-        captured_output = io.StringIO()
-        sys.stdout = captured_output
-
-        plot_grafico_barras(path_data, ini_ano, fim_ano)
-
-        # Restaura a saída padrão
-        sys.stdout = sys.__stdout__
-
-        # Obtém a saída capturada
-        output = captured_output.getvalue().strip()
-
-        # Verifica se a mensagem de erro esperada está na saída capturada
-        self.assertIn("Erro de leitura no database do ano", output)
-
-
-class TestPlotGraficoViolin(unittest.TestCase):
-    def test_exemplo_valido(self):
-        path_data = "../pasta_dados/"
-        ini_ano = 2013
-        fim_ano = 2022
-
-        plot_grafico_violin(path_data, ini_ano, fim_ano)
-
-        # Verifica se a figura do gráfico foi criada
-        self.assertTrue(plt.gcf() is not None) 
-
-    def test_exemplo_invalido(self):
-        path_data = "Trabalho_A1_LP.pasta_errada"
-        ini_ano = 2013
-        fim_ano = 2022
-
-        # Captura a saída padrão (stdout) para verificar se a função imprime a mensagem de erro
-        captured_output = io.StringIO()
-        sys.stdout = captured_output
-
-        plot_grafico_violin(path_data, ini_ano, fim_ano)
-
-        # Restaura a saída padrão
-        sys.stdout = sys.__stdout__
-
-        # Obtém a saída capturada
-        output = captured_output.getvalue().strip()
-
-        # Verifica se a mensagem de erro esperada está na saída capturada
-        self.assertIn("Erro de leitura no database do ano", output)        
-
-
-class TestPlotGraficoHistograma(unittest.TestCase):
-    def test_exemplo_valido(self):
-        path_data = "../pasta_dados/"
-        ano1 = 2018
-        ano2 = 2019
-        ano3 = 2020
-        ano4 = 2021
-
-        plot_grafico_histograma(path_data, ano1, ano2, ano3, ano4)
-
-        # Verifica se os gráficos de histograma foram gerados corretamente
-        fig, axs = plt.subplots(2, 2) 
-        # Verifica se os subplots foram criados
-        self.assertIsNotNone(axs)  
-
-    def test_exemplo_invalido(self):
-        path_data = "caminho_dataframes_sem_df_2010"
-        ano1 = 2018
-        ano2 = 2019
-        ano3 = 2020
-        ano4 = 2021
-
-        # Captura a saída padrão (stdout) para verificar se a função imprime a mensagem de erro
-        captured_output = io.StringIO()
-        sys.stdout = captured_output
-
-        # Chama a função que você está testando
-        plot_grafico_histograma(path_data, ano1, ano2, ano3, ano4)
-
-        # Restaura a saída padrão
-        sys.stdout = sys.__stdout__
-
-        # Obtém a saída capturada
-        output = captured_output.getvalue().strip()
-
-        # Verifica se a mensagem de erro esperada está na saída capturada
-        self.assertIn("Erro de leitura no database do ano", output)        
-
+        
 
 if __name__ == '__main__':
     unittest.main()

@@ -4,7 +4,7 @@ from pasta_funcoes.funcoes_limpeza  import limpa_PESO, limpa_ALTURA, limpa_ANO_N
 import doctest
 
 """
-Módulo da visualiação do Gráfico de Histograma feito pelo integrante Ramyro. 
+Módulo da visualização do Gráfico de Histograma feito pelo integrante Ramyro. 
 """
 
 def plot_grafico_histograma(path_data, ano1=2010, ano2=2014, ano3=2014, ano4=2022):
@@ -71,11 +71,11 @@ def plot_grafico_histograma(path_data, ano1=2010, ano2=2014, ano3=2014, ano4=202
     
     """
     anos = [ano1, ano2, ano3, ano4]
-    cores = ['b', 'g', 'y', 'r']
+    cores = ["b", "g", "y", "r"]
 
     for i, ano in enumerate(anos):
         
-        #Leitura com tratamento de erro
+        # Leitura com tratamento de erro
         try:
             df = pd.read_csv(path_data + "sermil{}.csv".format(ano), usecols=["PESO", "ALTURA", "SEXO", "ANO_NASCIMENTO"])
         except UnicodeDecodeError:
@@ -84,39 +84,39 @@ def plot_grafico_histograma(path_data, ano1=2010, ano2=2014, ano3=2014, ano4=202
             print("Erro de leitura no database do ano", ano)
             return
         
-        #Limpeza dos valores nulos e filtro no público a ser analisado
+        # Limpeza dos valores nulos e filtro no público a ser analisado
         df = limpa_SEXO(df)
         df = limpa_PESO(df)
         df = limpa_ALTURA(df)
         df = limpa_ANO_NASCIMENTO(df, ano)
         
-        #Criação da coluna IMC com base na coluna PESO e ALTURA
+        # Criação da coluna IMC com base na coluna PESO e ALTURA
         df["IMC"] = 10000 * df["PESO"] / df["ALTURA"] ** 2
        
-        #Imprime algumas estatísticas de resumo
+        # Imprime algumas estatísticas de resumo
         print(ano)
         print(df["IMC"].describe())
         
-        #Plota o histograma de densidade com os parâmetros desejados
+        # Plota o histograma de densidade com os parâmetros desejados
         plt.hist(df["IMC"], bins=50, density=True, histtype="step", alpha=0.6, color=cores[i], label=str(ano))
 
-    #Personaliza o plot
+    # Personaliza o plot
     plt.subplot().set_facecolor("#373737")
     plt.xlim(0, 50)
-    plt.xlabel("IMC")
-    plt.ylabel("Densidade")
-    plt.title("Distribuição do IMC ao longo dos anos")
+    plt.xlabel("IMC", fontdict={"fontsize": "12", "fontname": "Arial"})
+    plt.ylabel("Densidade", fontdict={"fontsize": "12", "fontname": "Arial"})
+    plt.title("Distribuição do IMC ao longo dos anos", fontdict = {"fontsize": "15", "fontname": "Arial", "fontweight": "bold"})
     plt.grid(True, color="black")
     
-    #Personaliza a legenda
+    # Personaliza a legenda
     legenda_personalizada = [plt.Line2D([0], [0], color=cores[i], lw=2, label=str(ano)) for i, ano in enumerate(anos)]
     plt.legend(handles=legenda_personalizada)
     
-    #Exibe o gráfico
+    # Exibe o gráfico
     plt.show()
     return None
 
 if __name__ == "__main__":
     doctest.testmod()
 
-#plot_grafico_histograma("../pasta_dados/", ano1=2018, ano2=2019, ano3=2020, ano4=2021)
+# plot_grafico_histograma("../pasta_dados/", ano1=2018, ano2=2019, ano3=2020, ano4=2021)

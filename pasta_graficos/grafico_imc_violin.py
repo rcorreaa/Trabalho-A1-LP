@@ -4,7 +4,7 @@ from pasta_funcoes.funcoes_limpeza import limpa_PESO, limpa_ALTURA, limpa_SEXO, 
 import doctest
 
 """
-Módulo da visualiação do Gráfico de Violino feito pelo integrante Anderson. 
+Módulo da visualização do Gráfico de Violino feito pelo integrante Anderson. 
 """
 
 def plot_grafico_violin(path_data, ini_ano=2013, fim_ano=2022):
@@ -29,10 +29,10 @@ def plot_grafico_violin(path_data, ini_ano=2013, fim_ano=2022):
     Erro de leitura no database do ano 2013
     """
 
-    v_df = []
+    lista_df = []
 
     for ano in range(ini_ano, fim_ano + 1):
-        # leitura do database com tratamento de erro
+        # Leitura do database com tratamento de erro
         try:
             df = pd.read_csv(path_data + "sermil{}.csv".format(ano),
                              usecols=["PESO", "ALTURA", "SEXO", "ANO_NASCIMENTO"])
@@ -43,46 +43,46 @@ def plot_grafico_violin(path_data, ini_ano=2013, fim_ano=2022):
             print("Erro de leitura no database do ano", ano)
             return
 
-        # limpeza de valores nulos e filtro no publico alvo
+        # Limpeza de valores nulos e filtro no publico alvo
         df = limpa_PESO(df)
         df = limpa_ALTURA(df)
         df = limpa_SEXO(df)
         df = limpa_ANO_NASCIMENTO(df, ano)
 
-        # calculo do imc com base na culuna PESO e ALTURA
+        # Calculo do imc com base na culuna PESO e ALTURA
         df["IMC"] = df["PESO"] / ((df["ALTURA"] / 100) ** 2)
         df = df["IMC"]
 
-        # adicionado a serie filtrada em um array
-        v_df.append(df)
+        # Adicionado a serie filtrada em um array
+        lista_df.append(df)
 
         # Imprime algumas estatisticas de resumo
         #print(ano)
         #print(df.describe())
         #print()
 
-    # define o estilo
+    # Define o estilo
     plt.style.use("seaborn-v0_8-notebook")
 
     fig, axs = plt.subplots(nrows=1, ncols=2, figsize=(14, 6))
 
-    # plot violin
-    axs[0].violinplot(v_df, showmedians=True)
+    # Plot violin
+    axs[0].violinplot(lista_df, showmedians=True)
 
-    # plot boxplot
-    axs[1].boxplot(v_df, sym="")
+    # Plot boxplot
+    axs[1].boxplot(lista_df, sym="")
 
-    # personalizacao do plot
-    axs[0].set_title('Violin plot do IMC por ano')
-    axs[1].set_title('Boxplot do IMC por ano')
+    # Personalizacao do plot
+    axs[0].set_title("Violin plot do IMC por ano", fontdict={"fontsize": "15", "fontname": "Arial", "fontweight": "bold"})
+    axs[1].set_title("Boxplot do IMC por ano", fontdict={"fontsize": "15", "fontname": "Arial", "fontweight": "bold"})
 
     for ax in axs:
         ax.yaxis.grid(True)
 
-        ax.set_xticks([y + 1 for y in range(len(v_df))], labels=[ano for ano in range(ini_ano, fim_ano + 1)])
+        ax.set_xticks([y + 1 for y in range(len(lista_df))], labels=[ano for ano in range(ini_ano, fim_ano + 1)])
 
-        ax.set_xlabel('Ano')
-        ax.set_ylabel('IMC')
+        ax.set_xlabel("Ano", fontdict={"fontsize": "12", "fontname": "Arial"})
+        ax.set_ylabel("IMC", fontdict={"fontsize": "12", "fontname": "Arial"})
 
     plt.show()
     return None
@@ -90,4 +90,4 @@ def plot_grafico_violin(path_data, ini_ano=2013, fim_ano=2022):
 if __name__ == "__main__":
     doctest.testmod()
 
-#plot_grafico_violin("../pasta_dados/", 2018, 2022)
+# plot_grafico_violin("../pasta_dados/", 2018, 2022)

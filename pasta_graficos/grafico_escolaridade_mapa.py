@@ -6,7 +6,7 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 import doctest
 
 """
-Módulo da visualiação do Gráfico de Mapa feito pelo integrante Kaiky. 
+Módulo da visualização do Gráfico de Mapa feito pelo integrante Kaiky. 
 """
 
 # Insira o caminho da 'tabela_escolaridade.csv' e 'BR_UF_2021.zip' presentes na 'pasta_dados'
@@ -94,4 +94,4 @@ def plot_grafico_mapa(path_data, path_geografia):
 if __name__ == "__main__":
     doctest.testmod()
 
-#plot_grafico_mapa(path_data="../pasta_dados/tabela_escolaridade.csv", path_geografia="../pasta_dados/BR_UF_2021.zip")
+# plot_grafico_mapa(path_data="../pasta_dados/tabela_escolaridade.csv", path_geografia="../pasta_dados/BR_UF_2021.zip")

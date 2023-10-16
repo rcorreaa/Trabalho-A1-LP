@@ -4,7 +4,7 @@ from matplotlib import gridspec
 import doctest
 
 """
-Módulo da visualiação do Gráfico de Barras feito pelo integrante Samuel. 
+Módulo da visualização do Gráfico de Barras feito pelo integrante Samuel. 
 """
 
 def plot_grafico_barras(path_data, ini_ano=2018, fim_ano=2022):
@@ -30,7 +30,7 @@ def plot_grafico_barras(path_data, ini_ano=2018, fim_ano=2022):
     Erro de leitura no database do ano 2010
     """
 
-    v_df = []
+    lista_df = []
     for ano in range(ini_ano, fim_ano+1):
         # Leitura do database com tratamento de erro
         try:
@@ -39,10 +39,10 @@ def plot_grafico_barras(path_data, ini_ano=2018, fim_ano=2022):
             print(f"Erro de leitura no database do ano {ano}")
             return
 
-        v_df.append(df)
+        lista_df.append(df)
         
     # Juntando todos os DataFrames
-    df_completo = pd.concat(v_df, ignore_index=True) 
+    df_completo = pd.concat(lista_df, ignore_index=True) 
 
     # Criando dicionário para mapear os estados
     mapeamento_regioes = {
@@ -87,10 +87,14 @@ def plot_grafico_barras(path_data, ini_ano=2018, fim_ano=2022):
     proporcoes.columns = ["REGIAO", "Com dispensa", "Sem dispensa"]
 
     fig = plt.figure(figsize=(16, 6))
-    gs = gridspec.GridSpec(1, 2, width_ratios=[2, 1])  # 2 colunas e a primeira com o dobro da largura
+
+    # Definindo a primeira coluna com o dobro da largura da segunda
+    gs = gridspec.GridSpec(1, 2, width_ratios=[2, 1])  
 
     # Visualização 1: Gráfico de barras lado a lado
-    ax0 = plt.subplot(gs[0])  # Célula da primeira coluna
+
+    # Célula da primeira coluna
+    ax0 = plt.subplot(gs[0])  
     cores = ["#A50030", "#1A3071"]
     bar_width = 0.35
     posicao = range(len(df_organizado.index))
@@ -103,14 +107,17 @@ def plot_grafico_barras(path_data, ini_ano=2018, fim_ano=2022):
     ax0.bar([i + bar_width for i in posicao], df_organizado["Sem dispensa"], 
             width=bar_width, label="Sem dispensa", color=cores[1], edgecolor="black")
 
-    ax0.set_ylabel("Contagem por milhão")
-    ax0.set_title("Quantidade de alistados com e sem dispensas por Região")
+    ax0.set_ylabel("Contagem por milhão", fontdict={"fontsize": "12", "fontname": "Arial"})
+    ax0.set_title("Quantidade de alistados com e sem dispensas por Região", 
+                  fontdict={"fontsize": "15", "fontname": "Arial", "fontweight": "bold"})
     ax0.set_xticks([i + bar_width / 2 for i in posicao])
     ax0.set_xticklabels(df_organizado.index)
     ax0.legend()
 
     # Visualização 2: Gráfico de barras empilhadas horizontal
-    ax1 = plt.subplot(gs[1])  # Célula da segunda coluna
+    
+    # Célula da segunda coluna
+    ax1 = plt.subplot(gs[1])  
     cores = ["#A50030", "#1A3071"]
 
     proporcoes["Com_dispensa_percent"] = proporcoes["Com dispensa"] * 100
@@ -122,7 +129,8 @@ def plot_grafico_barras(path_data, ini_ano=2018, fim_ano=2022):
     ax1.bar_label(bar1, fmt='%.2f%%', label_type="center", fontsize=10)
     ax1.bar_label(bar2, fmt='%.2f%%', label_type="center", fontsize=10)
 
-    ax1.set_title("Proporção de alistados com e sem dispensas por Região")
+    ax1.set_title("Proporção de alistados com e sem dispensas por Região", 
+                  fontdict={"fontsize": "15", "fontname": "Arial", "fontweight": "bold"})
     ax1.legend()
 
     # Ajuste o layout para melhor visualização
@@ -133,4 +141,4 @@ def plot_grafico_barras(path_data, ini_ano=2018, fim_ano=2022):
 if __name__ == "__main__":
     doctest.testmod()
 
-#plot_grafico_barras("../pasta_dados/")
+# plot_grafico_barras("../pasta_dados/")
