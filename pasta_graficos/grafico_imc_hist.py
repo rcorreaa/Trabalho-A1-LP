@@ -4,7 +4,7 @@ Módulo da visualização do Gráfico de Histograma feito pelo integrante Ramyro
 
 import matplotlib.pyplot as plt
 import pandas as pd
-from pasta_funcoes.funcoes_limpeza  import limpa_PESO, limpa_ALTURA, limpa_ANO_NASCIMENTO, limpa_SEXO
+from utilitarios.utils  import limpa_PESO, limpa_ALTURA, limpa_ANO_NASCIMENTO, limpa_SEXO
 import doctest
 
 import os

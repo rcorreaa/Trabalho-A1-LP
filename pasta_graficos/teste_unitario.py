@@ -7,7 +7,7 @@ import io
 import sys
 import unittest
 import pandas as pd
-from pasta_funcoes.funcoes_limpeza import *
+from utilitarios.utils import *
 
 
 # Testes Unitários para a função "limpa_PESO"

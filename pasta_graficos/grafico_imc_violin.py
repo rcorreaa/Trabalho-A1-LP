@@ -4,7 +4,7 @@ Módulo da visualização do Gráfico de Violino feito pelo integrante Anderson.
 
 import pandas as pd
 import matplotlib.pyplot as plt
-from pasta_funcoes.funcoes_limpeza import limpa_PESO, limpa_ALTURA, limpa_SEXO, limpa_ANO_NASCIMENTO
+from utilitarios.utils import limpa_PESO, limpa_ALTURA, limpa_SEXO, limpa_ANO_NASCIMENTO
 import doctest
 
 import os
