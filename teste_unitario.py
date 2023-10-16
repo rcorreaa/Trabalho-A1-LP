@@ -7,8 +7,7 @@ import io
 import sys
 import unittest
 import pandas as pd
-from utilitarios.utils import *
-
+from pasta_graficos.utilitarios.utils import *
 
 # Testes Unitários para a função "limpa_PESO"
 class TestLimpaPESO(unittest.TestCase):
