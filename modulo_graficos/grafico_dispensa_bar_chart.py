@@ -2,10 +2,6 @@
 Módulo da visualização do Gráfico de Barras feito pelo integrante Samuel. 
 """
 
-#import os
-#root_path = os.path.dirname(__file__)
-#os.chdir(root_path)
-
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib import gridspec

@@ -11,10 +11,6 @@ if __name__=="__main__":
 else:
     from modulo_graficos.utilitarios.utils import limpa_PESO, limpa_ALTURA, limpa_SEXO, limpa_ANO_NASCIMENTO
 
-#import os
-#root_path = os.path.dirname(__file__)
-#os.chdir(root_path)
-
 def plot_grafico_violin(path_data, ini_ano=2013, fim_ano=2022):
     """
     Plota o grafico de violino do imc entre os anos ini_ano e fim_ano.

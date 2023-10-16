@@ -2,10 +2,6 @@
 Módulo da visualização do Gráfico de Mapa feito pelo integrante Kaiky. 
 """
 
-#import os
-#root_path = os.path.dirname(__file__)
-#os.chdir(root_path)
-
 import geopandas as gpd
 import pandas as pd
 import matplotlib.pyplot as plt
