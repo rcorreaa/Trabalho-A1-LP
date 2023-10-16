@@ -4,12 +4,12 @@ Módulo da visualização do Gráfico de Histograma feito pelo integrante Ramyro
 
 import matplotlib.pyplot as plt
 import pandas as pd
-from utilitarios.utils  import limpa_PESO, limpa_ALTURA, limpa_ANO_NASCIMENTO, limpa_SEXO
+from modulo_graficos.utilitarios.utils  import limpa_PESO, limpa_ALTURA, limpa_ANO_NASCIMENTO, limpa_SEXO
 import doctest
 
-import os
-root_path = os.path.dirname(__file__)
-os.chdir(root_path)
+#import os
+#root_path = os.path.dirname(__file__)
+#os.chdir(root_path)
 
 def plot_grafico_histograma(path_data, ini_ano=2018, fim_ano=2022):
     """
@@ -71,7 +71,7 @@ def plot_grafico_histograma(path_data, ini_ano=2018, fim_ano=2022):
     plt.legend(handles=legenda_personalizada)
     
     # Exibe o gráfico
-    plt.savefig("../visualizacoes/histograma_imc.png", format="png")
+    plt.savefig("visualizacoes/histograma_imc.png", format="png")
     #plt.show()
     return None
 

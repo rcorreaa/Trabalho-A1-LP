@@ -2,9 +2,9 @@
 Módulo da visualização do Gráfico de Mapa feito pelo integrante Kaiky. 
 """
 
-import os
-root_path = os.path.dirname(__file__)
-os.chdir(root_path)
+#import os
+#root_path = os.path.dirname(__file__)
+#os.chdir(root_path)
 
 import geopandas as gpd
 import pandas as pd
@@ -92,11 +92,11 @@ def plot_grafico_mapa(path_data, path_geografia):
     graf_mapa.set_xticks([-70, -60, -50, -40, -30])
     graf_mapa.set_yticks([-30, -20, -10, 0])
 
-    plt.savefig("../visualizacoes/mapa_escolaridade.png", format="png")
+    plt.savefig("visualizacoes/mapa_escolaridade.png", format="png")
     #plt.show()
     return None
 
 if __name__ == "__main__":
     doctest.testmod()
 
-# plot_grafico_mapa(path_data="../data/tabela_escolaridade.csv", path_geografia="../data/BR_UF_2021.zip")
+#plot_grafico_mapa(path_data="../data/tabela_escolaridade.csv", path_geografia="../data/BR_UF_2021.zip")

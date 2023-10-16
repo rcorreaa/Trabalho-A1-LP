@@ -2,9 +2,9 @@
 Módulo da visualização do Gráfico de Barras feito pelo integrante Samuel. 
 """
 
-import os
-root_path = os.path.dirname(__file__)
-os.chdir(root_path)
+#import os
+#root_path = os.path.dirname(__file__)
+#os.chdir(root_path)
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -137,7 +137,7 @@ def plot_grafico_barras(path_data, ini_ano=2018, fim_ano=2022):
                   fontdict={"fontsize": "15", "fontname": "Arial", "fontweight": "bold"})
     ax1.legend()
 
-    plt.savefig("../visualizacoes/bar_dispensa.png", format="png")
+    plt.savefig("visualizacoes/bar_dispensa.png", format="png")
     #plt.show()
     return None
 

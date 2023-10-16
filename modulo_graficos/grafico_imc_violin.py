@@ -4,12 +4,12 @@ Módulo da visualização do Gráfico de Violino feito pelo integrante Anderson.
 
 import pandas as pd
 import matplotlib.pyplot as plt
-from utilitarios.utils import limpa_PESO, limpa_ALTURA, limpa_SEXO, limpa_ANO_NASCIMENTO
+from modulo_graficos.utilitarios.utils import limpa_PESO, limpa_ALTURA, limpa_SEXO, limpa_ANO_NASCIMENTO
 import doctest
 
-import os
-root_path = os.path.dirname(__file__)
-os.chdir(root_path)
+#import os
+#root_path = os.path.dirname(__file__)
+#os.chdir(root_path)
 
 def plot_grafico_violin(path_data, ini_ano=2013, fim_ano=2022):
     """
@@ -83,7 +83,7 @@ def plot_grafico_violin(path_data, ini_ano=2013, fim_ano=2022):
         ax.set_xlabel("Ano", fontdict={"fontsize": "12", "fontname": "Arial"})
         ax.set_ylabel("IMC", fontdict={"fontsize": "12", "fontname": "Arial"})
 
-    plt.savefig("../visualizacoes/violin_imc.png", format="png")
+    plt.savefig("visualizacoes/violin_imc.png", format="png")
     #plt.show()
     return None
 

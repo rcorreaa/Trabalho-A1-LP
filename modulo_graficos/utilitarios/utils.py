@@ -3,9 +3,9 @@ O módulo 'funcoes_limpeza' tem como objetivo gerar objetos da biblioteca Pandas
 Alistamento Militar do Brasil e facilitar a integração dos gráficos e análise dos processos.
 """
 
-import os
-root_path = os.path.dirname(__file__)
-os.chdir(root_path)
+#import os
+#root_path = os.path.dirname(__file__)
+#os.chdir(root_path)
 
 import pandas as pd
 import doctest
@@ -420,7 +420,7 @@ def gera_tabela_escolaridade(path_data, ini_ano=2018, fim_ano=2022, path_save=".
     media_escolaridade_estados.to_csv(path_save, index=False)
     return None
 
-if __name__ == "__main__":
-    doctest.testmod()
+#if __name__ == "__main__":
+#    doctest.testmod()
 
 #gera_tabela_escolaridade(path_data="../../data/", ini_ano=2018, fim_ano=2022)
