@@ -2,14 +2,14 @@
 Módulo da visualização do Gráfico de Violino feito pelo integrante Anderson. 
 """
 
-import os
-root_path = os.path.dirname(__file__)
-os.chdir(root_path)
-
 import pandas as pd
 import matplotlib.pyplot as plt
 from pasta_funcoes.funcoes_limpeza import limpa_PESO, limpa_ALTURA, limpa_SEXO, limpa_ANO_NASCIMENTO
 import doctest
+
+import os
+root_path = os.path.dirname(__file__)
+os.chdir(root_path)
 
 def plot_grafico_violin(path_data, ini_ano=2013, fim_ano=2022):
     """
