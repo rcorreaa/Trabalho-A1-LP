@@ -11,31 +11,29 @@ import os
 root_path = os.path.dirname(__file__)
 os.chdir(root_path)
 
-def plot_grafico_histograma(path_data, ano1=2010, ano2=2014, ano3=2014, ano4=2022):
+def plot_grafico_histograma(path_data, ini_ano=2018, fim_ano=2022):
     """
-    Plota o histograma com as densidades dos IMCs dentre 4 anos selecionados.
+    Plota o histograma com as densidades dos IMCs entre os anos "ini_ano" e "fim_ano".
 
     Parameters:
         path_data(string): diretório dos arquivos dos arquivos .csv
-        ano1: ano a ser analisado. 2010 por padrão
-        ano2: ano a ser analisado. 2014 por padrão
-        ano3: ano a ser analisado. 2018 por padrão
-        ano4: ano a ser analisado. 2022 por padrão
+        ini_ano(int): ano inicial a ser analisado. 2018 por padrão
+        fim_ano(int): ano final a ser analisado. 2022 por padrão
         
     Returns:
         None
     
     Exemplos:
     Exemplo válido, em que os caminhos dos arquivos são passados da maneira correta e contém os dataframes desejados.
-    >>> plot_grafico_histograma(path_data= "../pasta_dados/", ano1 = 2018, ano2 = 2019, ano3 = 2020, ano4 = 2021)
+    >>> plot_grafico_histograma("../pasta_dados/", 2018, 2022)
     
     Exemplo inválido, em que o caminho do Dataframe não contém os dataframes desejados.
-    >>> plot_grafico_histograma(path_data="caminho_dataframes_sem_df_2010", ano1 = 2018, ano2 = 2019, ano3 = 2020, ano4 = 2021)
+    >>> plot_grafico_histograma("caminho_errado/", 2018, 2022)
     Erro de leitura no database do ano 2018
     
     """
-    anos = [ano1, ano2, ano3, ano4]
-    cores = ["b", "g", "y", "r"]
+    anos = [ano for ano in range(ini_ano, fim_ano+1)]
+    cores = ["black", "green", "yellow", "red", "pink"]
 
     for i, ano in enumerate(anos):
         
@@ -79,4 +77,4 @@ def plot_grafico_histograma(path_data, ano1=2010, ano2=2014, ano3=2014, ano4=202
 if __name__ == "__main__":
     doctest.testmod()
 
-# plot_grafico_histograma("../pasta_dados/", ano1=2018, ano2=2019, ano3=2020, ano4=2021)
+#plot_grafico_histograma("../pasta_dados/", 2018, 2022)
