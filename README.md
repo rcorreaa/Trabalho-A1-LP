@@ -1,8 +1,8 @@
-# Trabalho_A1_LP
+# Trabalho A1 LP: Projeto de visualização/exploração de dados.
 
 Este projeto foi desenvolvido com base nos conjuntos de dados disponíveis no site de [Dados Abertos do Governo Federal](https://dados.gov.br/dados/conjuntos-dados/servico-militar).
 
-## INFO DataBase
+## INFO DataBase:
 Dados dos cidadãos brasileiros residentes no Brasil e no exterior que se alistaram no Serviço Militar Obrigatório de 2007 a 2022 e relação das Juntas de Serviço Militar (JSM). Estão incluídas em todas as tabelas de dados do Serviço Militar as seguintes informações: ano de nascimento, peso, altura, tamanho da cabeça, número do calçado, tamanho da cintura, religião, município, UF e país de nascimento, estado civil, sexo, escolaridade, ano de alistamento, se foi dispensado ou não, zona residencial, município, UF e país de residência, junta, município e UF.
 
 Visualização dos dados do Serviço Militar Obrigatório dos anos de 2018 a 2022, fornecidos pelo governo federal.
@@ -18,7 +18,7 @@ Visualização dos dados do Serviço Militar Obrigatório dos anos de 2018 a 202
 1. Instalar os pacotes necessários: `pip install -r requeriments.txt` 
 2. Descompactar apenas os arquivos `database_sermil_2018_2020.zip` e `database_sermil_2018_2020.zip` no diretório `dados/`.
 3. Executar o arquivo `main.py`. As visualizações serão geradas no diretório `visualizacoes/`.
-
+4. Abrir a documentação sphinx: `docs/build/html/index.html`.
 ## Visualizações:
 
 - Histograma IMC:
