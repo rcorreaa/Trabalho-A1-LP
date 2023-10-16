@@ -3,6 +3,10 @@ import matplotlib.pyplot as plt
 from pasta_funcoes.funcoes_limpeza import limpa_PESO, limpa_ALTURA, limpa_SEXO, limpa_ANO_NASCIMENTO
 import doctest
 
+"""
+Módulo da visualiação do Gráfico de Violino feito pelo integrante Anderson. 
+"""
+
 def plot_grafico_violin(path_data, ini_ano=2013, fim_ano=2022):
     """
     Plota o grafico de violino do imc entre os anos ini_ano e fim_ano.
