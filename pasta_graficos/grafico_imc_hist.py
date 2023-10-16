@@ -2,6 +2,10 @@
 Módulo da visualização do Gráfico de Histograma feito pelo integrante Ramyro. 
 """
 
+import sys, os
+root_path = os.path.dirname(__file__)
+sys.path.append(root_path)
+
 import matplotlib.pyplot as plt
 import pandas as pd
 from pasta_funcoes.funcoes_limpeza  import limpa_PESO, limpa_ALTURA, limpa_ANO_NASCIMENTO, limpa_SEXO
@@ -24,46 +28,6 @@ def plot_grafico_histograma(path_data, ano1=2010, ano2=2014, ano3=2014, ano4=202
     Exemplos:
     Exemplo válido, em que os caminhos dos arquivos são passados da maneira correta e contém os dataframes desejados.
     >>> plot_grafico_histograma(path_data= "../pasta_dados/", ano1 = 2018, ano2 = 2019, ano3 = 2020, ano4 = 2021)
-    2010
-    count    320684.000000
-    mean         22.648520
-    std           3.374236
-    min          11.317338
-    25%          20.415225
-    50%          22.145329
-    75%          24.280264
-    max          86.224490
-    Name: IMC, dtype: float64
-    2014
-    count    329817.000000
-    mean         23.050449
-    std           3.687635
-    min          10.738543
-    25%          20.549887
-    50%          22.491349
-    75%          24.857955
-    max          93.877551
-    Name: IMC, dtype: float64
-    2018
-    count    283923.000000
-    mean         23.065879
-    std           3.918558
-    min          10.306888
-    25%          20.571429
-    50%          22.309356
-    75%          24.691358
-    max          91.836735
-    Name: IMC, dtype: float64
-    2022
-    count    278007.000000
-    mean         22.985457
-    std           4.307939
-    min          11.680010
-    25%          20.069204
-    50%          22.038567
-    75%          24.784258
-    max          83.999799
-    Name: IMC, dtype: float64
     
     Exemplo inválido, em que o caminho do Dataframe não contém os dataframes desejados.
     >>> plot_grafico_histograma(path_data="caminho_dataframes_sem_df_2010", ano1 = 2018, ano2 = 2019, ano3 = 2020, ano4 = 2021)
@@ -92,10 +56,6 @@ def plot_grafico_histograma(path_data, ano1=2010, ano2=2014, ano3=2014, ano4=202
         
         # Criação da coluna IMC com base na coluna PESO e ALTURA
         df["IMC"] = 10000 * df["PESO"] / df["ALTURA"] ** 2
-       
-        # Imprime algumas estatísticas de resumo
-        print(ano)
-        print(df["IMC"].describe())
         
         # Plota o histograma de densidade com os parâmetros desejados
         plt.hist(df["IMC"], bins=50, density=True, histtype="step", alpha=0.6, color=cores[i], label=str(ano))

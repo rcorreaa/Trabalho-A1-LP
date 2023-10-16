@@ -2,6 +2,10 @@
 Módulo da visualização do Gráfico de Violino feito pelo integrante Anderson. 
 """
 
+import sys, os
+root_path = os.path.dirname(__file__)
+sys.path.append(root_path)
+
 import pandas as pd
 import matplotlib.pyplot as plt
 from pasta_funcoes.funcoes_limpeza import limpa_PESO, limpa_ALTURA, limpa_SEXO, limpa_ANO_NASCIMENTO
@@ -55,11 +59,6 @@ def plot_grafico_violin(path_data, ini_ano=2013, fim_ano=2022):
 
         # Adicionado a serie filtrada em um array
         lista_df.append(df)
-
-        # Imprime algumas estatisticas de resumo
-        #print(ano)
-        #print(df.describe())
-        #print()
 
     # Define o estilo
     plt.style.use("seaborn-v0_8-notebook")

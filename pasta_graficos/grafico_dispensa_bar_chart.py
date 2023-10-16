@@ -2,6 +2,10 @@
 Módulo da visualização do Gráfico de Barras feito pelo integrante Samuel. 
 """
 
+import sys, os
+root_path = os.path.dirname(__file__)
+sys.path.append(root_path)
+
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib import gridspec
@@ -141,4 +145,4 @@ def plot_grafico_barras(path_data, ini_ano=2018, fim_ano=2022):
 if __name__ == "__main__":
     doctest.testmod()
 
-# plot_grafico_barras("../pasta_dados/")
+#plot_grafico_barras("../pasta_dados/")

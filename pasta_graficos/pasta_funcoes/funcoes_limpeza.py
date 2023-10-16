@@ -3,6 +3,10 @@ O módulo 'funcoes_limpeza' tem como objetivo gerar objetos da biblioteca Pandas
 Alistamento Militar do Brasil e facilitar a integração dos gráficos e análise dos processos.
 """
 
+import sys, os
+root_path = os.path.dirname(__file__)
+sys.path.append(root_path)
+
 import pandas as pd
 import doctest
 
